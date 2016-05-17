@@ -1,0 +1,8 @@
+#!/bin/bash
+
+PID_FILE=/kb/deployment/services/shock_service/service.pid
+SHOCK_CONFIG=/kb/deployment/services/shock_service/conf/shock.cfg
+
+PID=`cat $PID_FILE`
+kill $PID 2>&1
+rm $PID_FILE

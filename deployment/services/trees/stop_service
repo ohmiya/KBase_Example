@@ -1,0 +1,3 @@
+#!/bin/sh
+./stop_perl_service
+/kb/deployment/services/trees/glassfish_administer_service.py --admin /kb/runtime/glassfish3/glassfish/bin/asadmin --domain KBaseTrees --domain-dir /kb/deployment/services/trees/glassfish_domain --port 7047

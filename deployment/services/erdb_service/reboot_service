@@ -1,0 +1,7 @@
+#!/bin/sh
+# auto-generated script to stop the service, redeploy service implementation, and start the servce
+./stop_service
+cd /kb/dev_container/modules/erdb_service
+make deploy-service-libs
+cd -
+./start_service

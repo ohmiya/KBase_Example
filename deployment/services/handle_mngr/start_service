@@ -1,0 +1,11 @@
+#!/bin/sh
+export KB_TOP=/kb/deployment
+export KB_RUNTIME=/kb/runtime
+export PATH=$KB_TOP/bin:$KB_RUNTIME/bin:$PATH
+export PERL5LIB=$KB_TOP/lib
+export KB_SERVICE_DIR=$KB_TOP/services/handle_mngr
+export KB_DEPLOYMENT_CONFIG=$KB_TOP/deployment.cfg
+
+pid_file=$KB_SERVICE_DIR/service.pid
+
+exec $KB_RUNTIME/bin/perl $KB_RUNTIME/bin/starman --listen :9001  $KB_TOP/lib/HandleMngr.psgi  --workers 20 

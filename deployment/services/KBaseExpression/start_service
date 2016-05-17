@@ -1,0 +1,11 @@
+#!/bin/sh
+echo starting KBaseExpression service.
+export PERL5LIB=$PERL5LIB:/kb/deployment/lib
+export KB_DEPLOYMENT_CONFIG=/kb/deployment/deployment.cfg
+export KB_SERVICE_NAME=KBaseExpression
+#uncomment to debug: export STARMAN_DEBUG=1
+/kb/runtime/bin/starman --listen :7075   \
+  --access-log /kb/deployment/services/KBaseExpression/log/access.log \
+   \
+  /kb/deployment/lib/KBaseExpression.psgi
+echo KBaseExpression service is listening on port 7075.

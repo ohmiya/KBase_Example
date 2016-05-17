@@ -1,0 +1,7 @@
+#!/bin/sh
+export KB_TOP=/kb/deployment
+export KB_RUNTIME=/kb/runtime
+export PATH=/kb/runtime/bin:/kb/deployment/bin:$PATH
+export PERL5LIB=/kb/deployment/lib
+export KB_DEPLOYMENT_CONFIG='/kb/deployment/deployment.cfg'
+/kb/runtime/bin/perl /kb/deployment/plbin/kmer-figfam-update-data.pl "$@"

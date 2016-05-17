@@ -1,0 +1,17 @@
+check process cdmi_api with pidfile /kb/deployment/services/cdmi_api/service.pid
+  start program = "/kb/deployment/services/cdmi_api/start_service" with timeout 60 seconds
+  stop  program = "/kb/deployment/services/cdmi_api/stop_service"
+  if failed port 7032 type tcp 
+     with timeout 15 seconds
+     then restart
+  if 3 restarts within 5 cycles then timeout
+  group cdmi_api_group
+
+check process cdmi_api_sphinx with pidfile /kb/deployment/services/cdmi_api/sphinx.pid
+  start program = "/kb/deployment/services/cdmi_api/start_sphinx" with timeout 60 seconds
+  stop  program = "/kb/deployment/services/cdmi_api/stop_sphinx"
+  if failed port 7038 type tcp 
+     with timeout 15 seconds
+     then restart
+  if 3 restarts within 5 cycles then timeout
+  group cdmi_api_group

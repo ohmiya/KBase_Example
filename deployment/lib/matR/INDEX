@@ -1,0 +1,55 @@
+Collections             About Metagenome Collections
+ExampleData             Metagenome Collection Example Datasets
+Identifiers             Process Resource Identifiers
+analysis-class          class '"analysis"'
+asFile                  Write Metagenome and Analysis Objects to File
+asFile-methods          methods for function 'asFile' in package 'matR'
+biom-class              class '"biom"'
+boxplot                 Boxplot of Collection Annotations
+boxplot-methods         methods for function 'boxplot' in package
+                        'matR'
+callRaw                 Issue Any API Call Without Checks
+coerce-methods          Conversion Between Collection, Matrix, and BIOM
+collection-class        class '"collection"'
+collection-methods      methods for function 'collection' in package
+                        'matR'
+demo2                   Step Through Tutorial Demos
+dependencies            Install Packages Needed for Full Functionality
+dist-methods            methods for function 'dist' in package 'matR'
+hazPackages             Report Present and Missing Package Dependencies
+heatmap                 Heatmap of Collection
+heatmap-class           class '"heatmap"'
+heatmap-methods         methods for function 'heatmap' in package
+                        'matR'
+mGet                    Access API Resources by ID
+mListAllIds             List All IDs for a Specified Resource Type
+matR-package            Metagenomics Analysis Tools for R
+metadata                Access Metadata of Collection
+metadata-class          class '"metadata"'
+metadata-methods        methods for function 'metadata' in package
+                        'matR'
+msession                Session Configuration Including Authentication
+normalize               Log-scale and Center Matrix
+parcoord                Parallel Coordinates Plot of Collection
+                        Annotations
+parcoord-methods        methods for function 'parcoord' in package
+                        'matR'
+pco                     Principal Coordinates Analysis of Collection
+pco-class               class '"pco"'
+pco-methods             methods for function 'pco' in package 'matR'
+randomize               Apply Function to Matrix Permutations for
+                        Randomization Tests
+readIds                 Read Metagenome IDs from File
+remove.singletons       Scrub Low-Abundance Entries from Matrix
+render                  Produce Graphic of Computed Analysis
+rownames-methods        methods for function 'rownames' in package
+                        'matR'
+selection-class         class '"selection"'
+selection-methods       methods for function 'selection' in package
+                        'matR'
+sigtest                 Significance Test of Collection Annotations
+                        Against Groupings
+sigtest-class           class '"sigtest"'
+sigtest-methods         methods for function 'sigtest' in package
+                        'matR'
+view.defaults           Data Attributes of Metagenome Collections

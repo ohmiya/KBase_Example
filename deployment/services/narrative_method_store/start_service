@@ -1,0 +1,8 @@
+export JAVA_HOME=/usr/lib/jvm/java-7-oracle/
+export PATH=$JAVA_HOME/bin:$PATH
+export CLASSPATH=
+if [ -z "$KB_DEPLOYMENT_CONFIG" ]
+then
+    export KB_DEPLOYMENT_CONFIG=/kb/deployment/deployment.cfg
+fi
+/kb/deployment/services/narrative_method_store/glassfish_administer_service.py --admin /kb/runtime/glassfish3/glassfish/bin/asadmin --domain NarrativeMethodStore --domain-dir /kb/deployment/services/narrative_method_store/glassfish_domain --war /kb/deployment/services/narrative_method_store/NarrativeMethodStoreService.war --port 7125 --threads 20 --Xms 1000 --Xmx 1500 --properties KB_DEPLOYMENT_CONFIG=$KB_DEPLOYMENT_CONFIG

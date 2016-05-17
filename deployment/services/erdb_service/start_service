@@ -1,0 +1,14 @@
+#!/bin/sh
+echo starting erdb_service service.
+export PERL5LIB=$PERL5LIB:/kb/deployment/lib
+if [ -z "$KB_DEPLOYMENT_CONFIG" ]
+then
+    export KB_DEPLOYMENT_CONFIG=/kb/deployment/deployment.cfg
+fi
+export KB_SERVICE_NAME=erdb
+#uncomment to debug: export STARMAN_DEBUG=1
+/kb/runtime/bin/starman --listen :7099   \
+  --access-log /kb/deployment/services/erdb_service/log/access.log \
+   \
+  /kb/deployment/lib/ERDB_Service.psgi
+echo erdb_service service is listening on port 7099.

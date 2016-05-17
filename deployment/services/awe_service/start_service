@@ -1,0 +1,8 @@
+#!/bin/bash
+
+AWE_DIR=/kb/deployment/services/awe_service
+PID_FILE=$AWE_DIR/service.pid
+AWE_CONFIG=/kb/deployment/services/awe_service/conf/awe.cfg
+
+echo "/kb/deployment/bin/awe-server -conf $AWE_CONFIG"
+/kb/deployment/bin/awe-server -conf $AWE_CONFIG

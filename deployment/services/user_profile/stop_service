@@ -1,0 +1,4 @@
+export JAVA_HOME=/usr/lib/jvm/java-7-oracle/
+export PATH=$JAVA_HOME/bin:$PATH
+export CLASSPATH=
+/kb/deployment/services/user_profile/glassfish_administer_service.py --admin /kb/runtime/glassfish3/glassfish/bin/asadmin --domain UserProfile --domain-dir /kb/deployment/services/user_profile/glassfish_domain --port 7126

@@ -1,0 +1,6 @@
+#!/bin/sh
+./start_perl_service
+if [ -z "$KB_DEPLOYMENT_CONFIG" ]; then
+    export KB_DEPLOYMENT_CONFIG=/kb/deployment/deployment.cfg
+fi
+/kb/deployment/services/trees/glassfish_administer_service.py --admin /kb/runtime/glassfish3/glassfish/bin/asadmin --domain KBaseTrees --domain-dir /kb/deployment/services/trees/glassfish_domain --war /kb/deployment/services/trees/KBaseTreesService.war --port 7047 --threads 20 --Xms 1000 --Xmx 4000 --noparallelgc --properties KB_DEPLOYMENT_CONFIG=$KB_DEPLOYMENT_CONFIG

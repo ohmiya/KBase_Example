@@ -1,0 +1,17 @@
+#!/bin/sh
+export KB_TOP=/kb/deployment
+export KB_RUNTIME=/kb/runtime
+export PATH=$KB_TOP/bin:$KB_RUNTIME/bin:$PATH
+export PERL5LIB=$KB_TOP/lib
+export KB_SERVICE_DIR=$KB_TOP/services/ontology_service
+
+pid_file=$KB_SERVICE_DIR/service.pid
+
+if [ ! -f $pid_file ] ; then
+	echo "No pid file $pid_file found for service ontology_service" 1>&2
+	exit 1
+fi
+
+pid=`cat $pid_file`
+
+kill $pid

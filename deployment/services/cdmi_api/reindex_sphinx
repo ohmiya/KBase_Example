@@ -1,0 +1,9 @@
+#!/bin/sh
+export KB_TOP=/kb/deployment
+export KB_RUNTIME=/kb/runtime
+export PATH=$KB_TOP/bin:$KB_RUNTIME/bin:$PATH
+export PERL5LIB=$KB_TOP/lib
+export KB_SERVICE_DIR=$KB_TOP/services/cdmi_api
+export CDMIDBD=$KB_TOP/lib/KSaplingDBD.xml
+
+exec $KB_RUNTIME/bin/indexer -c $KB_SERVICE_DIR/sphinx.conf --all --rotate

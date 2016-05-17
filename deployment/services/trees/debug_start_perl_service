@@ -1,0 +1,7 @@
+#!/bin/sh
+export PERL5LIB=$PERL5LIB:/kb/deployment/lib
+export STARMAN_DEBUG=1
+export TREE_DEPLOYMENT_CONFIG=/kb/deployment/services/trees/deploy.cfg
+export TREE_DEPLOYMENT_SERVICE_NAME=trees
+/kb/runtime/bin/starman --listen :7121 --workers 1 \
+    /kb/deployment/lib/Tree.psgi

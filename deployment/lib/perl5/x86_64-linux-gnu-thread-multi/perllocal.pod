@@ -1,0 +1,66 @@
+=head2 Thu Sep  3 16:42:12 2015: C<Module> L<Test::NoWarnings|Test::NoWarnings>
+
+=over 4
+
+=item *
+
+C<installed into: /kb/deployment/lib/perl5>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 1.04>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Thu Sep  3 16:42:17 2015: C<Module> L<Test::Deep|Test::Deep>
+
+=over 4
+
+=item *
+
+C<installed into: /kb/deployment/lib/perl5>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.117>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Thu Sep  3 16:42:20 2015: C<Module> L<Bash::Completion|Bash::Completion>
+
+=over 4
+
+=item *
+
+C<installed into: /kb/deployment/lib/perl5>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.008>
+
+=item *
+
+C<EXE_FILES: bin/bash-complete bin/setup-bash-complete>
+
+=back
+

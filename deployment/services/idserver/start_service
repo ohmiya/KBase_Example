@@ -1,0 +1,23 @@
+#!/bin/sh
+export KB_TOP=/kb/deployment
+export KB_RUNTIME=/kb/runtime
+export PATH=$KB_TOP/bin:$KB_RUNTIME/bin:$PATH
+export PERL5LIB=$KB_TOP/lib
+export KB_SERVICE_DIR=$KB_TOP/services/idserver
+export KB_SERVICE_NAME=idserver
+export KB_DEPLOYMENT_CONFIG=/kb/deployment/deployment.cfg
+
+pid_file=$KB_SERVICE_DIR/service.pid
+
+#exec $KB_RUNTIME/bin/perl $KB_RUNTIME/bin/starman --listen :7031  $KB_TOP/lib/IDServer.psgi
+
+
+starman_params="--listen :7031  $workers $max_requests"
+
+starman_params="$starman_params "
+starman_params="$starman_params --access-log $KB_SERVICE_DIR/access.log"
+
+starman_params="$starman_params "
+
+exec $KB_RUNTIME/bin/perl $KB_RUNTIME/bin/starman $starman_params $KB_TOP/lib/IDServer.psgi
+

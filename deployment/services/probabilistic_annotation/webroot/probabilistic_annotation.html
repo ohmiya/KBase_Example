@@ -1,0 +1,906 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>probabilistic_annotation</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:root@localhost" />
+</head>
+
+<body style="background-color: white">
+
+
+
+<ul id="index">
+  <li><a href="#NAME">NAME</a></li>
+  <li><a href="#DESCRIPTION">DESCRIPTION</a>
+    <ul>
+      <li><a href="#version">version</a></li>
+      <li><a href="#annotate">annotate</a></li>
+      <li><a href="#calculate">calculate</a></li>
+      <li><a href="#get_rxnprobs">get_rxnprobs</a></li>
+      <li><a href="#get_probanno">get_probanno</a></li>
+    </ul>
+  </li>
+  <li><a href="#TYPES">TYPES</a>
+    <ul>
+      <li><a href="#bool">bool</a></li>
+      <li><a href="#probanno_id">probanno_id</a></li>
+      <li><a href="#job_id">job_id</a></li>
+      <li><a href="#template_id">template_id</a></li>
+      <li><a href="#rxnprobs_id">rxnprobs_id</a></li>
+      <li><a href="#genome_id">genome_id</a></li>
+      <li><a href="#feature_id">feature_id</a></li>
+      <li><a href="#workspace_id">workspace_id</a></li>
+      <li><a href="#object_type">object_type</a></li>
+      <li><a href="#reaction_id">reaction_id</a></li>
+      <li><a href="#object_id">object_id</a></li>
+      <li><a href="#username">username</a></li>
+      <li><a href="#timestamp">timestamp</a></li>
+      <li><a href="#workspace_ref">workspace_ref</a></li>
+      <li><a href="#object_metadata">object_metadata</a></li>
+      <li><a href="#function_probability">function_probability</a></li>
+      <li><a href="#ProbAnno">ProbAnno</a></li>
+      <li><a href="#reaction_probability">reaction_probability</a></li>
+      <li><a href="#RxnProbs">RxnProbs</a></li>
+      <li><a href="#AnnotateParams">AnnotateParams</a></li>
+      <li><a href="#CalculateParams">CalculateParams</a></li>
+      <li><a href="#GetRxnprobsParams">GetRxnprobsParams</a></li>
+      <li><a href="#reaction_probability_list">reaction_probability_list</a></li>
+      <li><a href="#GetProbannoParams">GetProbannoParams</a></li>
+      <li><a href="#roleset_probabilities">roleset_probabilities</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="NAME">NAME</h1>
+
+<p>Bio::KBase::probabilistic_annotation::Client</p>
+
+<h1 id="DESCRIPTION">DESCRIPTION</h1>
+
+<p>The purpose of the Probabilistic Annotation service is to provide users with alternative annotations for genes, each attached to a likelihood score, and to translate these likelihood scores into likelihood scores for the existence of reactions in metabolic models. With the Probabilistic Annotation service:</p>
+
+<p>- Users can quickly assess the quality of an annotation.</p>
+
+<p>- Reaction likelihood computations allow users to estimate the quality of metabolic networks generated using the automated reconstruction tools in other services.</p>
+
+<p>- Combining reaction likelihoods with gapfilling both directly incorporates available genetic evidence into the gapfilling process and provides putative gene annotations automatically, reducing the effort needed to search for evidence for gapfilled reactions.</p>
+
+<h2 id="version">version</h2>
+
+<pre><code>  $return = $obj-&gt;version()</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$return is a reference to a list containing 2 items:
+	0: (name) a string
+	1: (ver) a string</pre>
+
+</dd>
+<dt id="Description">Description</dt>
+<dd>
+
+<p>Return the name and version number of the probabilistic annotation service.</p>
+
+</dd>
+</dl>
+
+<h2 id="annotate">annotate</h2>
+
+<pre><code>  $jobid = $obj-&gt;annotate($input)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types1">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$input is an AnnotateParams
+$jobid is a job_id
+AnnotateParams is a reference to a hash where the following keys are defined:
+	genome has a value which is a genome_id
+	genome_workspace has a value which is a workspace_id
+	probanno has a value which is a probanno_id
+	probanno_workspace has a value which is a workspace_id
+	overwrite has a value which is a bool
+	verbose has a value which is a bool
+genome_id is a string
+workspace_id is a string
+probanno_id is a string
+bool is an int
+job_id is a string</pre>
+
+</dd>
+<dt id="Description1">Description</dt>
+<dd>
+
+<p>Generate alternative annotations for every gene in a genome together with their likelihoods. Results are stored in a ProbAnno object. Returns the job ID of the submitted job.</p>
+
+</dd>
+</dl>
+
+<h2 id="calculate">calculate</h2>
+
+<pre><code>  $output = $obj-&gt;calculate($input)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types2">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$input is a CalculateParams
+$output is an object_metadata
+CalculateParams is a reference to a hash where the following keys are defined:
+	probanno has a value which is a probanno_id
+	probanno_workspace has a value which is a workspace_id
+	template_model has a value which is a template_id
+	template_model_workspace has a value which is a workspace_id
+	rxnprobs has a value which is a rxnprobs_id
+	rxnprobs_workspace has a value which is a workspace_id
+	verbose has a value which is a bool
+probanno_id is a string
+workspace_id is a string
+template_id is a string
+rxnprobs_id is a string
+bool is an int
+object_metadata is a reference to a list containing 11 items:
+	0: (id) an object_id
+	1: (type) an object_type
+	2: (moddate) a timestamp
+	3: (instance) an int
+	4: (command) a string
+	5: (lastmodifier) a username
+	6: (owner) a username
+	7: (workspace) a workspace_id
+	8: (ref) a workspace_ref
+	9: (chsum) a string
+	10: (metadata) a reference to a hash where the key is a string and the value is a string
+object_id is a string
+object_type is a string
+timestamp is a string
+username is a string
+workspace_ref is a string</pre>
+
+</dd>
+<dt id="Description2">Description</dt>
+<dd>
+
+<p>Calculate reaction likelihoods from a probabilistic annotation and a template model. Results are stored in a RxnProbs object. Returns the metadata for the reaction probability object.</p>
+
+</dd>
+</dl>
+
+<h2 id="get_rxnprobs">get_rxnprobs</h2>
+
+<pre><code>  $output = $obj-&gt;get_rxnprobs($input)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types3">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$input is a GetRxnprobsParams
+$output is a reaction_probability_list
+GetRxnprobsParams is a reference to a hash where the following keys are defined:
+	rxnprobs has a value which is a rxnprobs_id
+	rxnprobs_workspace has a value which is a workspace_id
+	rxnprobs_version has a value which is an int
+	sort_field has a value which is a string
+rxnprobs_id is a string
+workspace_id is a string
+reaction_probability_list is a reference to a list where each element is a reaction_probability
+reaction_probability is a reference to a list containing 5 items:
+	0: (reaction) a reaction_id
+	1: (probability) a float
+	2: (type) a string
+	3: (complex_info) a string
+	4: (gene_list) a string
+reaction_id is a string</pre>
+
+</dd>
+<dt id="Description3">Description</dt>
+<dd>
+
+<p>Convert a reaction probability object into a human-readable table.</p>
+
+</dd>
+</dl>
+
+<h2 id="get_probanno">get_probanno</h2>
+
+<pre><code>  $output = $obj-&gt;get_probanno($input)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types4">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$input is a GetProbannoParams
+$output is a roleset_probabilities
+GetProbannoParams is a reference to a hash where the following keys are defined:
+	probanno has a value which is a probanno_id
+	probanno_workspace has a value which is a workspace_id
+	probanno_version has a value which is an int
+probanno_id is a string
+workspace_id is a string
+roleset_probabilities is a reference to a hash where the key is a feature_id and the value is a reference to a list where each element is a function_probability
+feature_id is a string
+function_probability is a reference to a list containing 2 items:
+	0: (annotation) a string
+	1: (probability) a float</pre>
+
+</dd>
+<dt id="Description4">Description</dt>
+<dd>
+
+<p>Convert a ProbAnno object into a human-readbale table.</p>
+
+</dd>
+</dl>
+
+<h1 id="TYPES">TYPES</h1>
+
+<h2 id="bool">bool</h2>
+
+<dl>
+
+<dt id="Description5">Description</dt>
+<dd>
+
+<p>*************************************************************************************</p>
+
+</dd>
+<dt id="Definition">Definition</dt>
+<dd>
+
+
+
+<pre>
+an int
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="probanno_id">probanno_id</h2>
+
+<dl>
+
+<dt id="Description6">Description</dt>
+<dd>
+
+<p>A string identifier for a probabilistic annotation object.</p>
+
+</dd>
+<dt id="Definition1">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="job_id">job_id</h2>
+
+<dl>
+
+<dt id="Description7">Description</dt>
+<dd>
+
+<p>A string identifier for a job object.</p>
+
+</dd>
+<dt id="Definition2">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="template_id">template_id</h2>
+
+<dl>
+
+<dt id="Description8">Description</dt>
+<dd>
+
+<p>A string identifier for a template model object.</p>
+
+</dd>
+<dt id="Definition3">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="rxnprobs_id">rxnprobs_id</h2>
+
+<dl>
+
+<dt id="Description9">Description</dt>
+<dd>
+
+<p>A string identifier for a reaction probabilities object.</p>
+
+</dd>
+<dt id="Definition4">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="genome_id">genome_id</h2>
+
+<dl>
+
+<dt id="Description10">Description</dt>
+<dd>
+
+<p>A string identifier for a genome.</p>
+
+</dd>
+<dt id="Definition5">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="feature_id">feature_id</h2>
+
+<dl>
+
+<dt id="Description11">Description</dt>
+<dd>
+
+<p>A string identifier for a feature.</p>
+
+</dd>
+<dt id="Definition6">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="workspace_id">workspace_id</h2>
+
+<dl>
+
+<dt id="Description12">Description</dt>
+<dd>
+
+<p>A string identifier for a workspace. Any string consisting of alphanumeric characters and &quot;-&quot; is acceptable.</p>
+
+</dd>
+<dt id="Definition7">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="object_type">object_type</h2>
+
+<dl>
+
+<dt id="Description13">Description</dt>
+<dd>
+
+<p>A string indicating the type of an object stored in a workspace.</p>
+
+</dd>
+<dt id="Definition8">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="reaction_id">reaction_id</h2>
+
+<dl>
+
+<dt id="Description14">Description</dt>
+<dd>
+
+<p>A string identifier for a reaction object.</p>
+
+</dd>
+<dt id="Definition9">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="object_id">object_id</h2>
+
+<dl>
+
+<dt id="Description15">Description</dt>
+<dd>
+
+<p>ID of an object stored in the workspace.</p>
+
+</dd>
+<dt id="Definition10">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="username">username</h2>
+
+<dl>
+
+<dt id="Description16">Description</dt>
+<dd>
+
+<p>Login name of KBase user account to which permissions for workspaces are mapped</p>
+
+</dd>
+<dt id="Definition11">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="timestamp">timestamp</h2>
+
+<dl>
+
+<dt id="Description17">Description</dt>
+<dd>
+
+<p>Exact time for workspace operations. e.g. 2012-12-17T23:24:06</p>
+
+</dd>
+<dt id="Definition12">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="workspace_ref">workspace_ref</h2>
+
+<dl>
+
+<dt id="Description18">Description</dt>
+<dd>
+
+<p>A permanent reference to an object in a workspace.</p>
+
+</dd>
+<dt id="Definition13">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="object_metadata">object_metadata</h2>
+
+<dl>
+
+<dt id="Description19">Description</dt>
+<dd>
+
+<p>Meta data associated with an object stored in a workspace.</p>
+
+<pre><code>        object_id id - ID of the object assigned by the user or retreived from the IDserver (e.g. kb|g.0)
+        object_type type - type of the object (e.g. Genome)
+        timestamp moddate - date when the object was modified by the user (e.g. 2012-12-17T23:24:06)
+        int instance - instance of the object, which is equal to the number of times the user has overwritten the object
+        timestamp date_created - time at which the alignment was built/loaded in seconds since the epoch
+        string command - name of the command last used to modify or create the object
+        username lastmodifier - name of the user who last modified the object
+        username owner - name of the user who owns (who created) this object
+        workspace_id workspace - ID of the workspace in which the object is currently stored
+        workspace_ref ref - a 36 character ID that provides permanent undeniable access to this specific instance of this object
+        string chsum - checksum of the associated data object
+        mapping&lt;string,string&gt; metadata - custom metadata entered for data object during save operation</code></pre>
+
+</dd>
+<dt id="Definition14">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a list containing 11 items:
+0: (id) an object_id
+1: (type) an object_type
+2: (moddate) a timestamp
+3: (instance) an int
+4: (command) a string
+5: (lastmodifier) a username
+6: (owner) a username
+7: (workspace) a workspace_id
+8: (ref) a workspace_ref
+9: (chsum) a string
+10: (metadata) a reference to a hash where the key is a string and the value is a string</pre>
+
+</dd>
+</dl>
+
+<h2 id="function_probability">function_probability</h2>
+
+<dl>
+
+<dt id="Description20">Description</dt>
+<dd>
+
+<p>A function_probability is a (annotation, probability) pair associated with a gene An annotation is a &quot;///&quot;-delimited list of roles that could be associated with that gene.</p>
+
+</dd>
+<dt id="Definition15">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a list containing 2 items:
+0: (annotation) a string
+1: (probability) a float</pre>
+
+</dd>
+</dl>
+
+<h2 id="ProbAnno">ProbAnno</h2>
+
+<dl>
+
+<dt id="Description21">Description</dt>
+<dd>
+
+<p>Object to carry alternative functions and probabilities for genes in a genome</p>
+
+<pre><code>        probanno_id id - ID of the probabilistic annotation object    
+        genome_id genome - ID of the genome the probabilistic annotation was built for
+        workspace_id genome_workspace - ID of the workspace containing genome
+        mapping&lt;feature_id, list&lt;function_probability&gt;&gt; roleset_probabilities - mapping of features to list of alternative function_probability objects
+        list&lt;feature_id&gt; skipped_features - list of features in genome with no probability</code></pre>
+
+</dd>
+<dt id="Definition16">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+id has a value which is a probanno_id
+genome has a value which is a genome_id
+genome_workspace has a value which is a workspace_id
+roleset_probabilities has a value which is a reference to a hash where the key is a feature_id and the value is a reference to a list where each element is a function_probability
+skipped_features has a value which is a reference to a list where each element is a feature_id</pre>
+
+</dd>
+</dl>
+
+<h2 id="reaction_probability">reaction_probability</h2>
+
+<dl>
+
+<dt id="Description22">Description</dt>
+<dd>
+
+<p>Data structure to hold probability of a reaction</p>
+
+<pre><code>        reaction_id reaction - ID of the reaction
+        float probability - Probability of the reaction
+        string type - Type of complexes (&quot;HASCOMPLEXES&quot; or &quot;NOCOMPLEXES&quot;)
+        string complex_info - Detailed information on complexes
+        string gene_list - List of genes most likely to be attached to reaction</code></pre>
+
+</dd>
+<dt id="Definition17">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a list containing 5 items:
+0: (reaction) a reaction_id
+1: (probability) a float
+2: (type) a string
+3: (complex_info) a string
+4: (gene_list) a string</pre>
+
+</dd>
+</dl>
+
+<h2 id="RxnProbs">RxnProbs</h2>
+
+<dl>
+
+<dt id="Description23">Description</dt>
+<dd>
+
+<p>Object to hold reaction probabilities for a genome.</p>
+
+<pre><code>        genome_id genome - ID of the genome the reaction probabilities was built for
+        list&lt;reaction_probability&gt; reaction_probabilities - list of reaction probabilities</code></pre>
+
+</dd>
+<dt id="Definition18">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+id has a value which is a rxnprobs_id
+template_model has a value which is a template_id
+template_workspace has a value which is a workspace_id
+genome has a value which is a genome_id
+genome_workspace has a value which is a workspace_id
+probanno has a value which is a probanno_id
+probanno_workspace has a value which is a workspace_id
+reaction_probabilities has a value which is a reference to a list where each element is a reaction_probability</pre>
+
+</dd>
+</dl>
+
+<h2 id="AnnotateParams">AnnotateParams</h2>
+
+<dl>
+
+<dt id="Description24">Description</dt>
+<dd>
+
+<p>Input parameters for the &quot;annotate&quot; function.</p>
+
+<pre><code>       genome_id genome - ID of Genome object
+       workspace_id genome_workspace - ID of workspace where Genome object is stored
+       probanno_id probanno - ID of ProbAnno object
+       workspace_id probanno_workspace - ID workspace where ProbAnno object is saved
+       bool overwrite - True to overwrite existing ProbAnno object with same name
+           bool verbose - True to print verbose messages</code></pre>
+
+</dd>
+<dt id="Definition19">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+genome has a value which is a genome_id
+genome_workspace has a value which is a workspace_id
+probanno has a value which is a probanno_id
+probanno_workspace has a value which is a workspace_id
+overwrite has a value which is a bool
+verbose has a value which is a bool</pre>
+
+</dd>
+</dl>
+
+<h2 id="CalculateParams">CalculateParams</h2>
+
+<dl>
+
+<dt id="Description25">Description</dt>
+<dd>
+
+<p>Input parameters for the &quot;calculate&quot; function.</p>
+
+<pre><code>            probanno_id probanno - ID of ProbAnno object
+            workspace_id probanno_workspace - ID of workspace where ProbAnno object is stored
+            bool verbose - True to print verbose messages</code></pre>
+
+</dd>
+<dt id="Definition20">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+probanno has a value which is a probanno_id
+probanno_workspace has a value which is a workspace_id
+template_model has a value which is a template_id
+template_model_workspace has a value which is a workspace_id
+rxnprobs has a value which is a rxnprobs_id
+rxnprobs_workspace has a value which is a workspace_id
+verbose has a value which is a bool</pre>
+
+</dd>
+</dl>
+
+<h2 id="GetRxnprobsParams">GetRxnprobsParams</h2>
+
+<dl>
+
+<dt id="Description26">Description</dt>
+<dd>
+
+<p>Inputs for get_rxnprobs function.</p>
+
+<pre><code>        rxnprobs_id rxnprobs- ID for RxnProbs object in the workspace
+        workspace_id rxnprobs_workspace - ID for workspace in which RxnProbs object is held
+        int rxnprobs_version - Version number of RxnProbs object
+        string sort_field - Output is sorted using this field as the key</code></pre>
+
+</dd>
+<dt id="Definition21">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+rxnprobs has a value which is a rxnprobs_id
+rxnprobs_workspace has a value which is a workspace_id
+rxnprobs_version has a value which is an int
+sort_field has a value which is a string</pre>
+
+</dd>
+</dl>
+
+<h2 id="reaction_probability_list">reaction_probability_list</h2>
+
+<dl>
+
+<dt id="Description27">Description</dt>
+<dd>
+
+<p>Output for get_rxnprobs function. It is a list of tuples convenient for output as a table.</p>
+
+</dd>
+<dt id="Definition22">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a list where each element is a reaction_probability
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="GetProbannoParams">GetProbannoParams</h2>
+
+<dl>
+
+<dt id="Description28">Description</dt>
+<dd>
+
+<p>Inputs for get_probanno function.</p>
+
+<pre><code>        probanno_id probanno - ID for ProbAnno object
+        workspace_id probanno_workspace - ID for workspace in which ProbAnno object is held
+        int probanno_version - Version number of ProbAnno object</code></pre>
+
+</dd>
+<dt id="Definition23">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+probanno has a value which is a probanno_id
+probanno_workspace has a value which is a workspace_id
+probanno_version has a value which is an int</pre>
+
+</dd>
+</dl>
+
+<h2 id="roleset_probabilities">roleset_probabilities</h2>
+
+<dl>
+
+<dt id="Description29">Description</dt>
+<dd>
+
+<p>Output for get_probanno function. It is a mapping from a feature (gene) ID to a list of (annotation, likelihood) tuples. Annotations are roles separated by a &quot;///&quot; delimiter</p>
+
+</dd>
+<dt id="Definition24">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the key is a feature_id and the value is a reference to a list where each element is a function_probability
+</pre>
+
+</dd>
+</dl>
+
+
+</body>
+
+</html>
+
+

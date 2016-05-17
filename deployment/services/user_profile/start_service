@@ -1,0 +1,8 @@
+export JAVA_HOME=/usr/lib/jvm/java-7-oracle/
+export PATH=$JAVA_HOME/bin:$PATH
+export CLASSPATH=
+if [ -z "$KB_DEPLOYMENT_CONFIG" ]
+then
+    export KB_DEPLOYMENT_CONFIG=/kb/deployment/deployment.cfg
+fi
+/kb/deployment/services/user_profile/glassfish_administer_service.py --admin /kb/runtime/glassfish3/glassfish/bin/asadmin --domain UserProfile --domain-dir /kb/deployment/services/user_profile/glassfish_domain --war /kb/deployment/services/user_profile/UserProfileService.war --port 7126 --threads 20 --Xms 384 --Xmx 512 --properties KB_DEPLOYMENT_CONFIG=$KB_DEPLOYMENT_CONFIG

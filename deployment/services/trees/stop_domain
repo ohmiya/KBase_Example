@@ -1,0 +1,2 @@
+#!/bin/sh
+/kb/runtime/glassfish3/glassfish/bin/asadmin stop-domain --domaindir /kb/deployment/services/trees/glassfish_domain KBaseTrees

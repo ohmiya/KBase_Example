@@ -1,0 +1,2 @@
+#!/bin/sh
+/usr/bin/pod2man $@ || exit 0

@@ -1,0 +1,13 @@
+#!/bin/sh
+echo starting translation server.
+export PERL5LIB=$PERL5LIB:/kb/deployment/lib
+export KB_DEPLOYMENT_CONFIG=/kb/deployment/deployment.cfg
+export SERVICE=translation
+#uncomment to debug: export STARMAN_DEBUG=1
+/kb/runtime/bin/starman --listen :3306   \
+  --access-log /kb/deployment/services/translation/log/access.log \
+   \
+  /kb/deployment/lib/MOTranslationService.psgi
+echo translation server is listening on port 3306.
+export KB_DEPLOYMENT_CONFIG=/kb/deployment/deployment.cfg
+export SERVICE=translation

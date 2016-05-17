@@ -1,0 +1,29 @@
+set daemon 60
+
+set logfile /kb/deployment/services/awe_service/monit.log
+set idfile /kb/deployment/services/awe_service/monit.id
+set pidfile /kb/deployment/services/awe_service/monit.pid
+set statefile /kb/deployment/services/awe_service/monit.state
+
+set httpd port 2812
+	allow 140.221.0.0/16
+	allow 130.202.0.0/16
+	allow 10.0.8.0/24
+	allow localhost
+
+
+check process awe_service with pidfile /kb/deployment/services/awe_service/service.pid
+  start program = "/kb/deployment/services/awe_service/start_service" with timeout 60 seconds
+  stop  program = "/kb/deployment/services/awe_service/stop_service"
+  if 3 restarts within 5 cycles then timeout
+  group awe_service_group
+
+
+
+check process awe_client_1 with pidfile /kb/deployment/services/awe_service/client-1.pid
+  start program = "/kb/deployment/services/awe_service/start_aweclient 1" with timeout 60 seconds
+  stop  program = "/kb/deployment/services/awe_service/stop_aweclient 1"
+  if 3 restarts within 5 cycles then timeout
+  group awe_service_group
+
+

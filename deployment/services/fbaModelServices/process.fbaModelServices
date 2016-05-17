@@ -1,0 +1,8 @@
+check process fbaModelServices with pidfile /kb/deployment/services/fbaModelServices/service.pid
+  start program = "/kb/deployment/services/fbaModelServices/start_service" with timeout 60 seconds
+  stop  program = "/kb/deployment/services/fbaModelServices/stop_service"
+  if failed port 7036 type tcp 
+     with timeout 15 seconds
+     then restart
+  if 3 restarts within 5 cycles then timeout
+  group fbaModelServices_group

@@ -1,0 +1,30 @@
+#!/bin/sh
+export KB_TOP=/kb/deployment
+export KB_RUNTIME=/kb/runtime
+export PATH=$KB_TOP/bin:$KB_RUNTIME/bin:$KB_TOP/services/genome_annotation/bin:$KB_TOP/services/cdmi_api/bin:$PATH
+export PERL5LIB=$KB_TOP/lib
+export KB_SERVICE_NAME="genome_annotation"
+export KB_SERVICE_DIR="$KB_TOP/services/genome_annotation"
+export KB_DEPLOYMENT_CONFIG="$KB_TOP/deployment.cfg"
+#
+# For phispy
+export R_LIBS="$KB_TOP/lib"
+
+if [ -f $KB_SERVICE_DIR/setenv.sh ] ; then
+  . $KB_SERVICE_DIR/setenv.sh
+fi
+
+
+pid_file=$KB_SERVICE_DIR/service.pid
+
+
+
+starman_params="--listen :7050  $workers $max_requests"
+
+starman_params="$starman_params "
+starman_params="$starman_params --access-log $KB_SERVICE_DIR/access.log"
+
+starman_params="$starman_params "
+
+exec $KB_RUNTIME/bin/perl $KB_RUNTIME/bin/starman $starman_params $KB_TOP/lib/GenomeAnnotation.psgi
+

@@ -1,0 +1,17 @@
+#!/bin/sh
+export KB_TOP=/kb/deployment
+export KB_RUNTIME=/kb/runtime
+export PATH=$KB_TOP/bin:$KB_RUNTIME/bin:$PATH
+export PERL5LIB=$KB_TOP/lib
+export KB_SERVICE_DIR=$KB_TOP/services/narrative_job_service
+
+PID_FILE=$KB_SERVICE_DIR/service.pid
+
+if [ ! -f $PID_FILE ]; then
+    echo "No pid file $PID_FILE found for service NarrativeJobService" 1>&2
+	exit 1
+fi
+
+PID=`cat $PID_FILE`
+echo "terminating process ID $PID"
+kill -TERM $PID

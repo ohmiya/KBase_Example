@@ -1,0 +1,11 @@
+#!/bin/sh
+export KB_TOP=/kb/deployment
+export KB_RUNTIME=/kb/runtime
+export PATH=$KB_TOP/bin:$KB_RUNTIME/bin:$PATH
+export PERL5LIB=$KB_TOP/lib
+export KB_SERVICE_DIR=$KB_TOP/services/cdmi_api
+export CDMIDBD=$KB_TOP/lib/KSaplingDBD.xml
+
+pid_file=$KB_SERVICE_DIR/sphinx.pid
+
+exec $KB_RUNTIME/bin/searchd -c $KB_SERVICE_DIR/sphinx.conf 

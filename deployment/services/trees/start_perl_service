@@ -1,0 +1,15 @@
+#!/bin/sh
+echo starting trees service.
+export PERL5LIB=$PERL5LIB:/kb/deployment/lib
+export FILE_TYPE_DEF_FILE=
+export TREE_DEPLOYMENT_CONFIG=/kb/deployment/services/trees/deploy.cfg
+export TREE_DEPLOYMENT_SERVICE_NAME=trees
+if [ -z  ]; then
+    export KB_DEPLOYMENT_CONFIG=/kb/deployment/deployment.cfg
+    export TREE_DEPLOYMENT_CONFIG=/kb/deployment/deployment.cfg
+fi
+/kb/runtime/bin/starman --listen :7121 --pid /kb/deployment/services/trees/service.pid  --workers 4 --daemonize \
+  --access-log /kb/deployment/services/trees/log/access.log \
+  --error-log /kb/deployment/services/trees/log/error.log \
+  /kb/deployment/lib/Tree.psgi
+echo KBaseTrees service is listening on port 7121.

@@ -1,0 +1,135 @@
+########################################################################
+# ModelSEED::MS::DB::ComplexRole - This is the moose object corresponding to the ComplexRole object
+# Authors: Christopher Henry, Scott Devoid, Paul Frybarger
+# Contact email: chenry@mcs.anl.gov
+# Development location: Mathematics and Computer Science Division, Argonne National Lab
+########################################################################
+package ModelSEED::MS::DB::ComplexRole;
+use ModelSEED::MS::BaseObject;
+use Moose;
+use namespace::autoclean;
+extends 'ModelSEED::MS::BaseObject';
+
+
+# PARENT:
+has parent => (is => 'rw', isa => 'ModelSEED::MS::Complex', weak_ref => 1, type => 'parent', metaclass => 'Typed');
+
+
+# ATTRIBUTES:
+has role_uuid => (is => 'rw', isa => 'ModelSEED::uuid', printOrder => '0', required => 1, type => 'attribute', metaclass => 'Typed');
+has optional => (is => 'rw', isa => 'Int', printOrder => '0', default => '0', type => 'attribute', metaclass => 'Typed');
+has type => (is => 'rw', isa => 'Str', printOrder => '0', default => 'G', type => 'attribute', metaclass => 'Typed');
+has triggering => (is => 'rw', isa => 'Int', printOrder => '0', default => '1', type => 'attribute', metaclass => 'Typed');
+
+
+# LINKS:
+has role => (is => 'rw', type => 'link(Mapping,roles,role_uuid)', metaclass => 'Typed', lazy => 1, builder => '_build_role', clearer => 'clear_role', isa => 'ModelSEED::MS::Role', weak_ref => 1);
+
+
+# BUILDERS:
+sub _build_role {
+  my ($self) = @_;
+  return $self->getLinkedObject('Mapping','roles',$self->role_uuid());
+}
+
+
+# CONSTANTS:
+sub _type { return 'ComplexRole'; }
+
+my $attributes = [
+          {
+            'req' => 1,
+            'printOrder' => 0,
+            'name' => 'role_uuid',
+            'type' => 'ModelSEED::uuid',
+            'perm' => 'rw'
+          },
+          {
+            'req' => 0,
+            'printOrder' => 0,
+            'name' => 'optional',
+            'default' => '0',
+            'type' => 'Int',
+            'perm' => 'rw'
+          },
+          {
+            'len' => 1,
+            'req' => 0,
+            'printOrder' => 0,
+            'name' => 'type',
+            'default' => 'G',
+            'type' => 'Str',
+            'perm' => 'rw'
+          },
+          {
+            'len' => 1,
+            'req' => 0,
+            'printOrder' => 0,
+            'name' => 'triggering',
+            'default' => '1',
+            'type' => 'Int',
+            'perm' => 'rw'
+          }
+        ];
+
+my $attribute_map = {role_uuid => 0, optional => 1, type => 2, triggering => 3};
+sub _attributes {
+  my ($self, $key) = @_;
+  if (defined($key)) {
+    my $ind = $attribute_map->{$key};
+    if (defined($ind)) {
+      return $attributes->[$ind];
+    } else {
+      return;
+    }
+  } else {
+    return $attributes;
+  }
+}
+
+my $links = [
+          {
+            'attribute' => 'role_uuid',
+            'parent' => 'Mapping',
+            'clearer' => 'clear_role',
+            'name' => 'role',
+            'class' => 'roles',
+            'method' => 'roles'
+          }
+        ];
+
+my $link_map = {role => 0};
+sub _links {
+  my ($self, $key) = @_;
+  if (defined($key)) {
+    my $ind = $link_map->{$key};
+    if (defined($ind)) {
+      return $links->[$ind];
+    } else {
+      return;
+    }
+  } else {
+    return $links;
+  }
+}
+
+my $subobjects = [];
+
+my $subobject_map = {};
+sub _subobjects {
+  my ($self, $key) = @_;
+  if (defined($key)) {
+    my $ind = $subobject_map->{$key};
+    if (defined($ind)) {
+      return $subobjects->[$ind];
+    } else {
+      return;
+    }
+  } else {
+    return $subobjects;
+  }
+}
+
+
+__PACKAGE__->meta->make_immutable;
+1;

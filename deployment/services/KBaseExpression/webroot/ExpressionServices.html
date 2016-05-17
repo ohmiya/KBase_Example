@@ -1,0 +1,3227 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title></title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:root@t1.novalocal" />
+</head>
+
+<body style="background-color: white">
+
+
+
+<ul id="index">
+  <li><a href="#NAME">NAME</a></li>
+  <li><a href="#DESCRIPTION">DESCRIPTION</a>
+    <ul>
+      <li><a href="#get_expression_samples_data">get_expression_samples_data</a></li>
+      <li><a href="#get_expression_data_by_samples_and_features">get_expression_data_by_samples_and_features</a></li>
+      <li><a href="#get_expression_samples_data_by_series_ids">get_expression_samples_data_by_series_ids</a></li>
+      <li><a href="#get_expression_sample_ids_by_series_ids">get_expression_sample_ids_by_series_ids</a></li>
+      <li><a href="#get_expression_samples_data_by_experimental_unit_ids">get_expression_samples_data_by_experimental_unit_ids</a></li>
+      <li><a href="#get_expression_sample_ids_by_experimental_unit_ids">get_expression_sample_ids_by_experimental_unit_ids</a></li>
+      <li><a href="#get_expression_samples_data_by_experiment_meta_ids">get_expression_samples_data_by_experiment_meta_ids</a></li>
+      <li><a href="#get_expression_sample_ids_by_experiment_meta_ids">get_expression_sample_ids_by_experiment_meta_ids</a></li>
+      <li><a href="#get_expression_samples_data_by_strain_ids">get_expression_samples_data_by_strain_ids</a></li>
+      <li><a href="#get_expression_sample_ids_by_strain_ids">get_expression_sample_ids_by_strain_ids</a></li>
+      <li><a href="#get_expression_samples_data_by_genome_ids">get_expression_samples_data_by_genome_ids</a></li>
+      <li><a href="#get_expression_sample_ids_by_genome_ids">get_expression_sample_ids_by_genome_ids</a></li>
+      <li><a href="#get_expression_samples_data_by_ontology_ids">get_expression_samples_data_by_ontology_ids</a></li>
+      <li><a href="#get_expression_sample_ids_by_ontology_ids">get_expression_sample_ids_by_ontology_ids</a></li>
+      <li><a href="#get_expression_data_by_feature_ids">get_expression_data_by_feature_ids</a></li>
+      <li><a href="#compare_samples">compare_samples</a></li>
+      <li><a href="#compare_samples_vs_default_controls">compare_samples_vs_default_controls</a></li>
+      <li><a href="#compare_samples_vs_the_average">compare_samples_vs_the_average</a></li>
+      <li><a href="#get_on_off_calls">get_on_off_calls</a></li>
+      <li><a href="#get_top_changers">get_top_changers</a></li>
+      <li><a href="#get_expression_samples_titles">get_expression_samples_titles</a></li>
+      <li><a href="#get_expression_samples_descriptions">get_expression_samples_descriptions</a></li>
+      <li><a href="#get_expression_samples_molecules">get_expression_samples_molecules</a></li>
+      <li><a href="#get_expression_samples_types">get_expression_samples_types</a></li>
+      <li><a href="#get_expression_samples_external_source_ids">get_expression_samples_external_source_ids</a></li>
+      <li><a href="#get_expression_samples_original_log2_medians">get_expression_samples_original_log2_medians</a></li>
+      <li><a href="#get_expression_series_titles">get_expression_series_titles</a></li>
+      <li><a href="#get_expression_series_summaries">get_expression_series_summaries</a></li>
+      <li><a href="#get_expression_series_designs">get_expression_series_designs</a></li>
+      <li><a href="#get_expression_series_external_source_ids">get_expression_series_external_source_ids</a></li>
+      <li><a href="#get_expression_sample_ids_by_sample_external_source_ids">get_expression_sample_ids_by_sample_external_source_ids</a></li>
+      <li><a href="#get_expression_sample_ids_by_platform_external_source_ids">get_expression_sample_ids_by_platform_external_source_ids</a></li>
+      <li><a href="#get_expression_series_ids_by_series_external_source_ids">get_expression_series_ids_by_series_external_source_ids</a></li>
+      <li><a href="#get_GEO_GSE">get_GEO_GSE</a></li>
+      <li><a href="#get_GEO_GSM">get_GEO_GSM</a></li>
+    </ul>
+  </li>
+  <li><a href="#TYPES">TYPES</a>
+    <ul>
+      <li><a href="#FeatureID">FeatureID</a></li>
+      <li><a href="#FeatureIDs">FeatureIDs</a></li>
+      <li><a href="#Measurement">Measurement</a></li>
+      <li><a href="#SampleID">SampleID</a></li>
+      <li><a href="#SampleIDs">SampleIDs</a></li>
+      <li><a href="#SampleIDsAveragedFrom">SampleIDsAveragedFrom</a></li>
+      <li><a href="#SampleType">SampleType</a></li>
+      <li><a href="#SeriesID">SeriesID</a></li>
+      <li><a href="#SeriesIDs">SeriesIDs</a></li>
+      <li><a href="#ExperimentMetaID">ExperimentMetaID</a></li>
+      <li><a href="#ExperimentMetaIDs">ExperimentMetaIDs</a></li>
+      <li><a href="#ExperimentalUnitID">ExperimentalUnitID</a></li>
+      <li><a href="#ExperimentalUnitIDs">ExperimentalUnitIDs</a></li>
+      <li><a href="#SamplesStringMap">SamplesStringMap</a></li>
+      <li><a href="#SamplesFloatMap">SamplesFloatMap</a></li>
+      <li><a href="#SeriesStringMap">SeriesStringMap</a></li>
+      <li><a href="#DataExpressionLevelsForSample">DataExpressionLevelsForSample</a></li>
+      <li><a href="#LabelDataMapping">LabelDataMapping</a></li>
+      <li><a href="#ComparisonDenominatorLabel">ComparisonDenominatorLabel</a></li>
+      <li><a href="#Log2Ratio">Log2Ratio</a></li>
+      <li><a href="#DataSampleComparison">DataSampleComparison</a></li>
+      <li><a href="#DenominatorSampleComparison">DenominatorSampleComparison</a></li>
+      <li><a href="#SampleComparisonMapping">SampleComparisonMapping</a></li>
+      <li><a href="#SampleAnnotationID">SampleAnnotationID</a></li>
+      <li><a href="#OntologyID">OntologyID</a></li>
+      <li><a href="#OntologyIDs">OntologyIDs</a></li>
+      <li><a href="#OntologyName">OntologyName</a></li>
+      <li><a href="#OntologyDefinition">OntologyDefinition</a></li>
+      <li><a href="#SampleAnnotation">SampleAnnotation</a></li>
+      <li><a href="#SampleAnnotations">SampleAnnotations</a></li>
+      <li><a href="#ExternalSourceID">ExternalSourceID</a></li>
+      <li><a href="#ExternalSourceIDs">ExternalSourceIDs</a></li>
+      <li><a href="#PersonID">PersonID</a></li>
+      <li><a href="#PersonIDs">PersonIDs</a></li>
+      <li><a href="#StrainID">StrainID</a></li>
+      <li><a href="#StrainIDs">StrainIDs</a></li>
+      <li><a href="#GenomeID">GenomeID</a></li>
+      <li><a href="#GenomeIDs">GenomeIDs</a></li>
+      <li><a href="#WildTypeOnly">WildTypeOnly</a></li>
+      <li><a href="#ExpressionDataSample">ExpressionDataSample</a></li>
+      <li><a href="#ExpressionDataSamplesMap">ExpressionDataSamplesMap</a></li>
+      <li><a href="#SeriesExpressionDataSamplesMapping">SeriesExpressionDataSamplesMapping</a></li>
+      <li><a href="#ExperimentalUnitExpressionDataSamplesMapping">ExperimentalUnitExpressionDataSamplesMapping</a></li>
+      <li><a href="#ExperimentMetaExpressionDataSamplesMapping">ExperimentMetaExpressionDataSamplesMapping</a></li>
+      <li><a href="#StrainExpressionDataSamplesMapping">StrainExpressionDataSamplesMapping</a></li>
+      <li><a href="#GenomeExpressionDataSamplesMapping">GenomeExpressionDataSamplesMapping</a></li>
+      <li><a href="#OntologyExpressionDataSampleMapping">OntologyExpressionDataSampleMapping</a></li>
+      <li><a href="#SampleMeasurementMapping">SampleMeasurementMapping</a></li>
+      <li><a href="#FeatureSampleMeasurementMapping">FeatureSampleMeasurementMapping</a></li>
+      <li><a href="#GPL">GPL</a></li>
+      <li><a href="#ContactEmail">ContactEmail</a></li>
+      <li><a href="#ContactFirstName">ContactFirstName</a></li>
+      <li><a href="#ContactLastName">ContactLastName</a></li>
+      <li><a href="#ContactInstitution">ContactInstitution</a></li>
+      <li><a href="#ContactPerson">ContactPerson</a></li>
+      <li><a href="#ContactPeople">ContactPeople</a></li>
+      <li><a href="#FullMeasurement">FullMeasurement</a></li>
+      <li><a href="#GsmData">GsmData</a></li>
+      <li><a href="#GsmWarnings">GsmWarnings</a></li>
+      <li><a href="#GseWarnings">GseWarnings</a></li>
+      <li><a href="#GsmErrors">GsmErrors</a></li>
+      <li><a href="#GseErrors">GseErrors</a></li>
+      <li><a href="#GsmSampleCharacteristics">GsmSampleCharacteristics</a></li>
+      <li><a href="#GsmObject">GsmObject</a></li>
+      <li><a href="#GseSamples">GseSamples</a></li>
+      <li><a href="#GseObject">GseObject</a></li>
+      <li><a href="#MetaDataOnly">MetaDataOnly</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="NAME">NAME</h1>
+
+<p>Bio::KBase::ExpressionServices::ExpressionServicesClient</p>
+
+<h1 id="DESCRIPTION">DESCRIPTION</h1>
+
+<h2 id="get_expression_samples_data">get_expression_samples_data</h2>
+
+<pre><code>  $expressionDataSamplesMap = $obj-&gt;get_expression_samples_data($sampleIDs)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$sampleIDs is a SampleIDs
+$expressionDataSamplesMap is an ExpressionDataSamplesMap
+SampleIDs is a reference to a list where each element is a SampleID
+SampleID is a string
+ExpressionDataSamplesMap is a reference to a hash where the key is a SampleID and the value is an ExpressionDataSample
+ExpressionDataSample is a reference to a hash where the following keys are defined:
+	sampleID has a value which is a SampleID
+	sourceID has a value which is a string
+	sampleTitle has a value which is a string
+	sampleDescription has a value which is a string
+	molecule has a value which is a string
+	sampleType has a value which is a SampleType
+	dataSource has a value which is a string
+	externalSourceID has a value which is a string
+	externalSourceDate has a value which is a string
+	kbaseSubmissionDate has a value which is a string
+	custom has a value which is a string
+	originalLog2Median has a value which is a float
+	strainID has a value which is a StrainID
+	referenceStrain has a value which is a string
+	wildtype has a value which is a string
+	strainDescription has a value which is a string
+	genomeID has a value which is a GenomeID
+	genomeScientificName has a value which is a string
+	platformID has a value which is a string
+	platformTitle has a value which is a string
+	platformTechnology has a value which is a string
+	experimentalUnitID has a value which is an ExperimentalUnitID
+	experimentMetaID has a value which is an ExperimentMetaID
+	experimentTitle has a value which is a string
+	experimentDescription has a value which is a string
+	environmentID has a value which is a string
+	environmentDescription has a value which is a string
+	protocolID has a value which is a string
+	protocolDescription has a value which is a string
+	protocolName has a value which is a string
+	sampleAnnotations has a value which is a SampleAnnotations
+	seriesIDs has a value which is a SeriesIDs
+	personIDs has a value which is a PersonIDs
+	sampleIDsAveragedFrom has a value which is a SampleIDsAveragedFrom
+	dataExpressionLevelsForSample has a value which is a DataExpressionLevelsForSample
+SampleType is a string
+StrainID is a string
+GenomeID is a string
+ExperimentalUnitID is a string
+ExperimentMetaID is a string
+SampleAnnotations is a reference to a list where each element is a SampleAnnotation
+SampleAnnotation is a reference to a hash where the following keys are defined:
+	sampleAnnotationID has a value which is a SampleAnnotationID
+	ontologyID has a value which is an OntologyID
+	ontologyName has a value which is an OntologyName
+	ontologyDefinition has a value which is an OntologyDefinition
+SampleAnnotationID is a string
+OntologyID is a string
+OntologyName is a string
+OntologyDefinition is a string
+SeriesIDs is a reference to a list where each element is a SeriesID
+SeriesID is a string
+PersonIDs is a reference to a list where each element is a PersonID
+PersonID is a string
+SampleIDsAveragedFrom is a reference to a list where each element is a SampleID
+DataExpressionLevelsForSample is a reference to a hash where the key is a FeatureID and the value is a Measurement
+FeatureID is a string
+Measurement is a float</pre>
+
+</dd>
+<dt id="Description">Description</dt>
+<dd>
+
+<p>core function used by many others. Given a list of KBase SampleIds returns mapping of SampleId to expressionSampleDataStructure (essentially the core Expression Sample Object) : {sample_id -&gt; expressionSampleDataStructure}</p>
+
+</dd>
+</dl>
+
+<h2 id="get_expression_data_by_samples_and_features">get_expression_data_by_samples_and_features</h2>
+
+<pre><code>  $labelDataMapping = $obj-&gt;get_expression_data_by_samples_and_features($sampleIDs, $featureIDs)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types1">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$sampleIDs is a SampleIDs
+$featureIDs is a FeatureIDs
+$labelDataMapping is a LabelDataMapping
+SampleIDs is a reference to a list where each element is a SampleID
+SampleID is a string
+FeatureIDs is a reference to a list where each element is a FeatureID
+FeatureID is a string
+LabelDataMapping is a reference to a hash where the key is a string and the value is a DataExpressionLevelsForSample
+DataExpressionLevelsForSample is a reference to a hash where the key is a FeatureID and the value is a Measurement
+Measurement is a float</pre>
+
+</dd>
+<dt id="Description1">Description</dt>
+<dd>
+
+<p>given a list of sample ids and feature ids it returns a LabelDataMapping {sampleID}-&gt;{featureId =&gt; value}}. If feature list is an empty array [], all features with measurment values will be returned.</p>
+
+</dd>
+</dl>
+
+<h2 id="get_expression_samples_data_by_series_ids">get_expression_samples_data_by_series_ids</h2>
+
+<pre><code>  $seriesExpressionDataSamplesMapping = $obj-&gt;get_expression_samples_data_by_series_ids($seriesIDs)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types2">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$seriesIDs is a SeriesIDs
+$seriesExpressionDataSamplesMapping is a SeriesExpressionDataSamplesMapping
+SeriesIDs is a reference to a list where each element is a SeriesID
+SeriesID is a string
+SeriesExpressionDataSamplesMapping is a reference to a hash where the key is a SeriesID and the value is an ExpressionDataSamplesMap
+ExpressionDataSamplesMap is a reference to a hash where the key is a SampleID and the value is an ExpressionDataSample
+SampleID is a string
+ExpressionDataSample is a reference to a hash where the following keys are defined:
+	sampleID has a value which is a SampleID
+	sourceID has a value which is a string
+	sampleTitle has a value which is a string
+	sampleDescription has a value which is a string
+	molecule has a value which is a string
+	sampleType has a value which is a SampleType
+	dataSource has a value which is a string
+	externalSourceID has a value which is a string
+	externalSourceDate has a value which is a string
+	kbaseSubmissionDate has a value which is a string
+	custom has a value which is a string
+	originalLog2Median has a value which is a float
+	strainID has a value which is a StrainID
+	referenceStrain has a value which is a string
+	wildtype has a value which is a string
+	strainDescription has a value which is a string
+	genomeID has a value which is a GenomeID
+	genomeScientificName has a value which is a string
+	platformID has a value which is a string
+	platformTitle has a value which is a string
+	platformTechnology has a value which is a string
+	experimentalUnitID has a value which is an ExperimentalUnitID
+	experimentMetaID has a value which is an ExperimentMetaID
+	experimentTitle has a value which is a string
+	experimentDescription has a value which is a string
+	environmentID has a value which is a string
+	environmentDescription has a value which is a string
+	protocolID has a value which is a string
+	protocolDescription has a value which is a string
+	protocolName has a value which is a string
+	sampleAnnotations has a value which is a SampleAnnotations
+	seriesIDs has a value which is a SeriesIDs
+	personIDs has a value which is a PersonIDs
+	sampleIDsAveragedFrom has a value which is a SampleIDsAveragedFrom
+	dataExpressionLevelsForSample has a value which is a DataExpressionLevelsForSample
+SampleType is a string
+StrainID is a string
+GenomeID is a string
+ExperimentalUnitID is a string
+ExperimentMetaID is a string
+SampleAnnotations is a reference to a list where each element is a SampleAnnotation
+SampleAnnotation is a reference to a hash where the following keys are defined:
+	sampleAnnotationID has a value which is a SampleAnnotationID
+	ontologyID has a value which is an OntologyID
+	ontologyName has a value which is an OntologyName
+	ontologyDefinition has a value which is an OntologyDefinition
+SampleAnnotationID is a string
+OntologyID is a string
+OntologyName is a string
+OntologyDefinition is a string
+PersonIDs is a reference to a list where each element is a PersonID
+PersonID is a string
+SampleIDsAveragedFrom is a reference to a list where each element is a SampleID
+DataExpressionLevelsForSample is a reference to a hash where the key is a FeatureID and the value is a Measurement
+FeatureID is a string
+Measurement is a float</pre>
+
+</dd>
+<dt id="Description2">Description</dt>
+<dd>
+
+<p>given a list of SeriesIDs returns mapping of SeriesID to expressionDataSamples : {series_id -&gt; {sample_id -&gt; expressionSampleDataStructure}}</p>
+
+</dd>
+</dl>
+
+<h2 id="get_expression_sample_ids_by_series_ids">get_expression_sample_ids_by_series_ids</h2>
+
+<pre><code>  $sampleIDs = $obj-&gt;get_expression_sample_ids_by_series_ids($seriesIDs)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types3">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$seriesIDs is a SeriesIDs
+$sampleIDs is a SampleIDs
+SeriesIDs is a reference to a list where each element is a SeriesID
+SeriesID is a string
+SampleIDs is a reference to a list where each element is a SampleID
+SampleID is a string</pre>
+
+</dd>
+<dt id="Description3">Description</dt>
+<dd>
+
+<p>given a list of SeriesIDs returns a list of Sample IDs</p>
+
+</dd>
+</dl>
+
+<h2 id="get_expression_samples_data_by_experimental_unit_ids">get_expression_samples_data_by_experimental_unit_ids</h2>
+
+<pre><code>  $experimentalUnitExpressionDataSamplesMapping = $obj-&gt;get_expression_samples_data_by_experimental_unit_ids($experimentalUnitIDs)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types4">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$experimentalUnitIDs is an ExperimentalUnitIDs
+$experimentalUnitExpressionDataSamplesMapping is an ExperimentalUnitExpressionDataSamplesMapping
+ExperimentalUnitIDs is a reference to a list where each element is an ExperimentalUnitID
+ExperimentalUnitID is a string
+ExperimentalUnitExpressionDataSamplesMapping is a reference to a hash where the key is an ExperimentalUnitID and the value is an ExpressionDataSamplesMap
+ExpressionDataSamplesMap is a reference to a hash where the key is a SampleID and the value is an ExpressionDataSample
+SampleID is a string
+ExpressionDataSample is a reference to a hash where the following keys are defined:
+	sampleID has a value which is a SampleID
+	sourceID has a value which is a string
+	sampleTitle has a value which is a string
+	sampleDescription has a value which is a string
+	molecule has a value which is a string
+	sampleType has a value which is a SampleType
+	dataSource has a value which is a string
+	externalSourceID has a value which is a string
+	externalSourceDate has a value which is a string
+	kbaseSubmissionDate has a value which is a string
+	custom has a value which is a string
+	originalLog2Median has a value which is a float
+	strainID has a value which is a StrainID
+	referenceStrain has a value which is a string
+	wildtype has a value which is a string
+	strainDescription has a value which is a string
+	genomeID has a value which is a GenomeID
+	genomeScientificName has a value which is a string
+	platformID has a value which is a string
+	platformTitle has a value which is a string
+	platformTechnology has a value which is a string
+	experimentalUnitID has a value which is an ExperimentalUnitID
+	experimentMetaID has a value which is an ExperimentMetaID
+	experimentTitle has a value which is a string
+	experimentDescription has a value which is a string
+	environmentID has a value which is a string
+	environmentDescription has a value which is a string
+	protocolID has a value which is a string
+	protocolDescription has a value which is a string
+	protocolName has a value which is a string
+	sampleAnnotations has a value which is a SampleAnnotations
+	seriesIDs has a value which is a SeriesIDs
+	personIDs has a value which is a PersonIDs
+	sampleIDsAveragedFrom has a value which is a SampleIDsAveragedFrom
+	dataExpressionLevelsForSample has a value which is a DataExpressionLevelsForSample
+SampleType is a string
+StrainID is a string
+GenomeID is a string
+ExperimentMetaID is a string
+SampleAnnotations is a reference to a list where each element is a SampleAnnotation
+SampleAnnotation is a reference to a hash where the following keys are defined:
+	sampleAnnotationID has a value which is a SampleAnnotationID
+	ontologyID has a value which is an OntologyID
+	ontologyName has a value which is an OntologyName
+	ontologyDefinition has a value which is an OntologyDefinition
+SampleAnnotationID is a string
+OntologyID is a string
+OntologyName is a string
+OntologyDefinition is a string
+SeriesIDs is a reference to a list where each element is a SeriesID
+SeriesID is a string
+PersonIDs is a reference to a list where each element is a PersonID
+PersonID is a string
+SampleIDsAveragedFrom is a reference to a list where each element is a SampleID
+DataExpressionLevelsForSample is a reference to a hash where the key is a FeatureID and the value is a Measurement
+FeatureID is a string
+Measurement is a float</pre>
+
+</dd>
+<dt id="Description4">Description</dt>
+<dd>
+
+<p>given a list of ExperimentalUnitIDs returns mapping of ExperimentalUnitID to expressionDataSamples : {experimental_unit_id -&gt; {sample_id -&gt; expressionSampleDataStructure}}</p>
+
+</dd>
+</dl>
+
+<h2 id="get_expression_sample_ids_by_experimental_unit_ids">get_expression_sample_ids_by_experimental_unit_ids</h2>
+
+<pre><code>  $sampleIDs = $obj-&gt;get_expression_sample_ids_by_experimental_unit_ids($experimentalUnitIDs)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types5">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$experimentalUnitIDs is an ExperimentalUnitIDs
+$sampleIDs is a SampleIDs
+ExperimentalUnitIDs is a reference to a list where each element is an ExperimentalUnitID
+ExperimentalUnitID is a string
+SampleIDs is a reference to a list where each element is a SampleID
+SampleID is a string</pre>
+
+</dd>
+<dt id="Description5">Description</dt>
+<dd>
+
+<p>given a list of ExperimentalUnitIDs returns a list of Sample IDs</p>
+
+</dd>
+</dl>
+
+<h2 id="get_expression_samples_data_by_experiment_meta_ids">get_expression_samples_data_by_experiment_meta_ids</h2>
+
+<pre><code>  $experimentMetaExpressionDataSamplesMapping = $obj-&gt;get_expression_samples_data_by_experiment_meta_ids($experimentMetaIDs)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types6">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$experimentMetaIDs is an ExperimentMetaIDs
+$experimentMetaExpressionDataSamplesMapping is an ExperimentMetaExpressionDataSamplesMapping
+ExperimentMetaIDs is a reference to a list where each element is an ExperimentMetaID
+ExperimentMetaID is a string
+ExperimentMetaExpressionDataSamplesMapping is a reference to a hash where the key is an ExperimentMetaID and the value is an ExperimentalUnitExpressionDataSamplesMapping
+ExperimentalUnitExpressionDataSamplesMapping is a reference to a hash where the key is an ExperimentalUnitID and the value is an ExpressionDataSamplesMap
+ExperimentalUnitID is a string
+ExpressionDataSamplesMap is a reference to a hash where the key is a SampleID and the value is an ExpressionDataSample
+SampleID is a string
+ExpressionDataSample is a reference to a hash where the following keys are defined:
+	sampleID has a value which is a SampleID
+	sourceID has a value which is a string
+	sampleTitle has a value which is a string
+	sampleDescription has a value which is a string
+	molecule has a value which is a string
+	sampleType has a value which is a SampleType
+	dataSource has a value which is a string
+	externalSourceID has a value which is a string
+	externalSourceDate has a value which is a string
+	kbaseSubmissionDate has a value which is a string
+	custom has a value which is a string
+	originalLog2Median has a value which is a float
+	strainID has a value which is a StrainID
+	referenceStrain has a value which is a string
+	wildtype has a value which is a string
+	strainDescription has a value which is a string
+	genomeID has a value which is a GenomeID
+	genomeScientificName has a value which is a string
+	platformID has a value which is a string
+	platformTitle has a value which is a string
+	platformTechnology has a value which is a string
+	experimentalUnitID has a value which is an ExperimentalUnitID
+	experimentMetaID has a value which is an ExperimentMetaID
+	experimentTitle has a value which is a string
+	experimentDescription has a value which is a string
+	environmentID has a value which is a string
+	environmentDescription has a value which is a string
+	protocolID has a value which is a string
+	protocolDescription has a value which is a string
+	protocolName has a value which is a string
+	sampleAnnotations has a value which is a SampleAnnotations
+	seriesIDs has a value which is a SeriesIDs
+	personIDs has a value which is a PersonIDs
+	sampleIDsAveragedFrom has a value which is a SampleIDsAveragedFrom
+	dataExpressionLevelsForSample has a value which is a DataExpressionLevelsForSample
+SampleType is a string
+StrainID is a string
+GenomeID is a string
+SampleAnnotations is a reference to a list where each element is a SampleAnnotation
+SampleAnnotation is a reference to a hash where the following keys are defined:
+	sampleAnnotationID has a value which is a SampleAnnotationID
+	ontologyID has a value which is an OntologyID
+	ontologyName has a value which is an OntologyName
+	ontologyDefinition has a value which is an OntologyDefinition
+SampleAnnotationID is a string
+OntologyID is a string
+OntologyName is a string
+OntologyDefinition is a string
+SeriesIDs is a reference to a list where each element is a SeriesID
+SeriesID is a string
+PersonIDs is a reference to a list where each element is a PersonID
+PersonID is a string
+SampleIDsAveragedFrom is a reference to a list where each element is a SampleID
+DataExpressionLevelsForSample is a reference to a hash where the key is a FeatureID and the value is a Measurement
+FeatureID is a string
+Measurement is a float</pre>
+
+</dd>
+<dt id="Description6">Description</dt>
+<dd>
+
+<p>given a list of ExperimentMetaIDs returns mapping of {experimentMetaID -&gt; {experimentalUnitId -&gt; {sample_id -&gt; expressionSampleDataStructure}}}</p>
+
+</dd>
+</dl>
+
+<h2 id="get_expression_sample_ids_by_experiment_meta_ids">get_expression_sample_ids_by_experiment_meta_ids</h2>
+
+<pre><code>  $sampleIDs = $obj-&gt;get_expression_sample_ids_by_experiment_meta_ids($experimentMetaIDs)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types7">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$experimentMetaIDs is an ExperimentMetaIDs
+$sampleIDs is a SampleIDs
+ExperimentMetaIDs is a reference to a list where each element is an ExperimentMetaID
+ExperimentMetaID is a string
+SampleIDs is a reference to a list where each element is a SampleID
+SampleID is a string</pre>
+
+</dd>
+<dt id="Description7">Description</dt>
+<dd>
+
+<p>given a list of ExperimentMetaIDs returns a list of Sample IDs</p>
+
+</dd>
+</dl>
+
+<h2 id="get_expression_samples_data_by_strain_ids">get_expression_samples_data_by_strain_ids</h2>
+
+<pre><code>  $strainExpressionDataSamplesMapping = $obj-&gt;get_expression_samples_data_by_strain_ids($strainIDs, $sampleType)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types8">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$strainIDs is a StrainIDs
+$sampleType is a SampleType
+$strainExpressionDataSamplesMapping is a StrainExpressionDataSamplesMapping
+StrainIDs is a reference to a list where each element is a StrainID
+StrainID is a string
+SampleType is a string
+StrainExpressionDataSamplesMapping is a reference to a hash where the key is a StrainID and the value is an ExpressionDataSamplesMap
+ExpressionDataSamplesMap is a reference to a hash where the key is a SampleID and the value is an ExpressionDataSample
+SampleID is a string
+ExpressionDataSample is a reference to a hash where the following keys are defined:
+	sampleID has a value which is a SampleID
+	sourceID has a value which is a string
+	sampleTitle has a value which is a string
+	sampleDescription has a value which is a string
+	molecule has a value which is a string
+	sampleType has a value which is a SampleType
+	dataSource has a value which is a string
+	externalSourceID has a value which is a string
+	externalSourceDate has a value which is a string
+	kbaseSubmissionDate has a value which is a string
+	custom has a value which is a string
+	originalLog2Median has a value which is a float
+	strainID has a value which is a StrainID
+	referenceStrain has a value which is a string
+	wildtype has a value which is a string
+	strainDescription has a value which is a string
+	genomeID has a value which is a GenomeID
+	genomeScientificName has a value which is a string
+	platformID has a value which is a string
+	platformTitle has a value which is a string
+	platformTechnology has a value which is a string
+	experimentalUnitID has a value which is an ExperimentalUnitID
+	experimentMetaID has a value which is an ExperimentMetaID
+	experimentTitle has a value which is a string
+	experimentDescription has a value which is a string
+	environmentID has a value which is a string
+	environmentDescription has a value which is a string
+	protocolID has a value which is a string
+	protocolDescription has a value which is a string
+	protocolName has a value which is a string
+	sampleAnnotations has a value which is a SampleAnnotations
+	seriesIDs has a value which is a SeriesIDs
+	personIDs has a value which is a PersonIDs
+	sampleIDsAveragedFrom has a value which is a SampleIDsAveragedFrom
+	dataExpressionLevelsForSample has a value which is a DataExpressionLevelsForSample
+GenomeID is a string
+ExperimentalUnitID is a string
+ExperimentMetaID is a string
+SampleAnnotations is a reference to a list where each element is a SampleAnnotation
+SampleAnnotation is a reference to a hash where the following keys are defined:
+	sampleAnnotationID has a value which is a SampleAnnotationID
+	ontologyID has a value which is an OntologyID
+	ontologyName has a value which is an OntologyName
+	ontologyDefinition has a value which is an OntologyDefinition
+SampleAnnotationID is a string
+OntologyID is a string
+OntologyName is a string
+OntologyDefinition is a string
+SeriesIDs is a reference to a list where each element is a SeriesID
+SeriesID is a string
+PersonIDs is a reference to a list where each element is a PersonID
+PersonID is a string
+SampleIDsAveragedFrom is a reference to a list where each element is a SampleID
+DataExpressionLevelsForSample is a reference to a hash where the key is a FeatureID and the value is a Measurement
+FeatureID is a string
+Measurement is a float</pre>
+
+</dd>
+<dt id="Description8">Description</dt>
+<dd>
+
+<p>given a list of Strains, and a SampleType (controlled vocabulary : microarray, RNA-Seq, qPCR, or proteomics) , it returns a StrainExpressionDataSamplesMapping, StrainId -&gt; ExpressionSampleDataStructure {strain_id -&gt; {sample_id -&gt; expressionSampleDataStructure}}</p>
+
+</dd>
+</dl>
+
+<h2 id="get_expression_sample_ids_by_strain_ids">get_expression_sample_ids_by_strain_ids</h2>
+
+<pre><code>  $sampleIDs = $obj-&gt;get_expression_sample_ids_by_strain_ids($strainIDs, $sampleType)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types9">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$strainIDs is a StrainIDs
+$sampleType is a SampleType
+$sampleIDs is a SampleIDs
+StrainIDs is a reference to a list where each element is a StrainID
+StrainID is a string
+SampleType is a string
+SampleIDs is a reference to a list where each element is a SampleID
+SampleID is a string</pre>
+
+</dd>
+<dt id="Description9">Description</dt>
+<dd>
+
+<p>given a list of Strains, and a SampleType, it returns a list of Sample IDs</p>
+
+</dd>
+</dl>
+
+<h2 id="get_expression_samples_data_by_genome_ids">get_expression_samples_data_by_genome_ids</h2>
+
+<pre><code>  $genomeExpressionDataSamplesMapping = $obj-&gt;get_expression_samples_data_by_genome_ids($genomeIDs, $sampleType, $wildTypeOnly)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types10">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$genomeIDs is a GenomeIDs
+$sampleType is a SampleType
+$wildTypeOnly is a WildTypeOnly
+$genomeExpressionDataSamplesMapping is a GenomeExpressionDataSamplesMapping
+GenomeIDs is a reference to a list where each element is a GenomeID
+GenomeID is a string
+SampleType is a string
+WildTypeOnly is an int
+GenomeExpressionDataSamplesMapping is a reference to a hash where the key is a GenomeID and the value is a StrainExpressionDataSamplesMapping
+StrainExpressionDataSamplesMapping is a reference to a hash where the key is a StrainID and the value is an ExpressionDataSamplesMap
+StrainID is a string
+ExpressionDataSamplesMap is a reference to a hash where the key is a SampleID and the value is an ExpressionDataSample
+SampleID is a string
+ExpressionDataSample is a reference to a hash where the following keys are defined:
+	sampleID has a value which is a SampleID
+	sourceID has a value which is a string
+	sampleTitle has a value which is a string
+	sampleDescription has a value which is a string
+	molecule has a value which is a string
+	sampleType has a value which is a SampleType
+	dataSource has a value which is a string
+	externalSourceID has a value which is a string
+	externalSourceDate has a value which is a string
+	kbaseSubmissionDate has a value which is a string
+	custom has a value which is a string
+	originalLog2Median has a value which is a float
+	strainID has a value which is a StrainID
+	referenceStrain has a value which is a string
+	wildtype has a value which is a string
+	strainDescription has a value which is a string
+	genomeID has a value which is a GenomeID
+	genomeScientificName has a value which is a string
+	platformID has a value which is a string
+	platformTitle has a value which is a string
+	platformTechnology has a value which is a string
+	experimentalUnitID has a value which is an ExperimentalUnitID
+	experimentMetaID has a value which is an ExperimentMetaID
+	experimentTitle has a value which is a string
+	experimentDescription has a value which is a string
+	environmentID has a value which is a string
+	environmentDescription has a value which is a string
+	protocolID has a value which is a string
+	protocolDescription has a value which is a string
+	protocolName has a value which is a string
+	sampleAnnotations has a value which is a SampleAnnotations
+	seriesIDs has a value which is a SeriesIDs
+	personIDs has a value which is a PersonIDs
+	sampleIDsAveragedFrom has a value which is a SampleIDsAveragedFrom
+	dataExpressionLevelsForSample has a value which is a DataExpressionLevelsForSample
+ExperimentalUnitID is a string
+ExperimentMetaID is a string
+SampleAnnotations is a reference to a list where each element is a SampleAnnotation
+SampleAnnotation is a reference to a hash where the following keys are defined:
+	sampleAnnotationID has a value which is a SampleAnnotationID
+	ontologyID has a value which is an OntologyID
+	ontologyName has a value which is an OntologyName
+	ontologyDefinition has a value which is an OntologyDefinition
+SampleAnnotationID is a string
+OntologyID is a string
+OntologyName is a string
+OntologyDefinition is a string
+SeriesIDs is a reference to a list where each element is a SeriesID
+SeriesID is a string
+PersonIDs is a reference to a list where each element is a PersonID
+PersonID is a string
+SampleIDsAveragedFrom is a reference to a list where each element is a SampleID
+DataExpressionLevelsForSample is a reference to a hash where the key is a FeatureID and the value is a Measurement
+FeatureID is a string
+Measurement is a float</pre>
+
+</dd>
+<dt id="Description10">Description</dt>
+<dd>
+
+<p>given a list of Genomes, a SampleType ( controlled vocabulary : microarray, RNA-Seq, qPCR, or proteomics) and a int indicating WildTypeOnly (1 = true, 0 = false) , it returns a GenomeExpressionDataSamplesMapping , GenomeId -&gt; StrainId -&gt; ExpressionDataSample. StrainId -&gt; ExpressionSampleDataStructure {genome_id -&gt; {strain_id -&gt; {sample_id -&gt; expressionSampleDataStructure}}}</p>
+
+</dd>
+</dl>
+
+<h2 id="get_expression_sample_ids_by_genome_ids">get_expression_sample_ids_by_genome_ids</h2>
+
+<pre><code>  $sampleIDs = $obj-&gt;get_expression_sample_ids_by_genome_ids($genomeIDs, $sampleType, $wildTypeOnly)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types11">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$genomeIDs is a GenomeIDs
+$sampleType is a SampleType
+$wildTypeOnly is a WildTypeOnly
+$sampleIDs is a SampleIDs
+GenomeIDs is a reference to a list where each element is a GenomeID
+GenomeID is a string
+SampleType is a string
+WildTypeOnly is an int
+SampleIDs is a reference to a list where each element is a SampleID
+SampleID is a string</pre>
+
+</dd>
+<dt id="Description11">Description</dt>
+<dd>
+
+<p>given a list of GenomeIDs, a SampleType ( controlled vocabulary : microarray, RNA-Seq, qPCR, or proteomics) and a int indicating WildType Only (1 = true, 0 = false) , it returns a list of Sample IDs</p>
+
+</dd>
+</dl>
+
+<h2 id="get_expression_samples_data_by_ontology_ids">get_expression_samples_data_by_ontology_ids</h2>
+
+<pre><code>  $ontologyExpressionDataSampleMapping = $obj-&gt;get_expression_samples_data_by_ontology_ids($ontologyIDs, $AndOr, $genomeId, $sampleType, $wildTypeOnly)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types12">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$ontologyIDs is an OntologyIDs
+$AndOr is a string
+$genomeId is a GenomeID
+$sampleType is a SampleType
+$wildTypeOnly is a WildTypeOnly
+$ontologyExpressionDataSampleMapping is an OntologyExpressionDataSampleMapping
+OntologyIDs is a reference to a list where each element is an OntologyID
+OntologyID is a string
+GenomeID is a string
+SampleType is a string
+WildTypeOnly is an int
+OntologyExpressionDataSampleMapping is a reference to a hash where the key is an OntologyID and the value is an ExpressionDataSamplesMap
+ExpressionDataSamplesMap is a reference to a hash where the key is a SampleID and the value is an ExpressionDataSample
+SampleID is a string
+ExpressionDataSample is a reference to a hash where the following keys are defined:
+	sampleID has a value which is a SampleID
+	sourceID has a value which is a string
+	sampleTitle has a value which is a string
+	sampleDescription has a value which is a string
+	molecule has a value which is a string
+	sampleType has a value which is a SampleType
+	dataSource has a value which is a string
+	externalSourceID has a value which is a string
+	externalSourceDate has a value which is a string
+	kbaseSubmissionDate has a value which is a string
+	custom has a value which is a string
+	originalLog2Median has a value which is a float
+	strainID has a value which is a StrainID
+	referenceStrain has a value which is a string
+	wildtype has a value which is a string
+	strainDescription has a value which is a string
+	genomeID has a value which is a GenomeID
+	genomeScientificName has a value which is a string
+	platformID has a value which is a string
+	platformTitle has a value which is a string
+	platformTechnology has a value which is a string
+	experimentalUnitID has a value which is an ExperimentalUnitID
+	experimentMetaID has a value which is an ExperimentMetaID
+	experimentTitle has a value which is a string
+	experimentDescription has a value which is a string
+	environmentID has a value which is a string
+	environmentDescription has a value which is a string
+	protocolID has a value which is a string
+	protocolDescription has a value which is a string
+	protocolName has a value which is a string
+	sampleAnnotations has a value which is a SampleAnnotations
+	seriesIDs has a value which is a SeriesIDs
+	personIDs has a value which is a PersonIDs
+	sampleIDsAveragedFrom has a value which is a SampleIDsAveragedFrom
+	dataExpressionLevelsForSample has a value which is a DataExpressionLevelsForSample
+StrainID is a string
+ExperimentalUnitID is a string
+ExperimentMetaID is a string
+SampleAnnotations is a reference to a list where each element is a SampleAnnotation
+SampleAnnotation is a reference to a hash where the following keys are defined:
+	sampleAnnotationID has a value which is a SampleAnnotationID
+	ontologyID has a value which is an OntologyID
+	ontologyName has a value which is an OntologyName
+	ontologyDefinition has a value which is an OntologyDefinition
+SampleAnnotationID is a string
+OntologyName is a string
+OntologyDefinition is a string
+SeriesIDs is a reference to a list where each element is a SeriesID
+SeriesID is a string
+PersonIDs is a reference to a list where each element is a PersonID
+PersonID is a string
+SampleIDsAveragedFrom is a reference to a list where each element is a SampleID
+DataExpressionLevelsForSample is a reference to a hash where the key is a FeatureID and the value is a Measurement
+FeatureID is a string
+Measurement is a float</pre>
+
+</dd>
+<dt id="Description12">Description</dt>
+<dd>
+
+<p>given a list of ontologyIDs, AndOr operator (and requires sample to have all ontology IDs, or sample has to have any of the terms), GenomeId, SampleType ( controlled vocabulary : microarray, RNA-Seq, qPCR, or proteomics), wildTypeOnly returns OntologyID(concatenated if Anded) -&gt; ExpressionDataSample</p>
+
+</dd>
+</dl>
+
+<h2 id="get_expression_sample_ids_by_ontology_ids">get_expression_sample_ids_by_ontology_ids</h2>
+
+<pre><code>  $sampleIDs = $obj-&gt;get_expression_sample_ids_by_ontology_ids($ontologyIDs, $AndOr, $genomeId, $sampleType, $wildTypeOnly)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types13">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$ontologyIDs is an OntologyIDs
+$AndOr is a string
+$genomeId is a GenomeID
+$sampleType is a SampleType
+$wildTypeOnly is a WildTypeOnly
+$sampleIDs is a SampleIDs
+OntologyIDs is a reference to a list where each element is an OntologyID
+OntologyID is a string
+GenomeID is a string
+SampleType is a string
+WildTypeOnly is an int
+SampleIDs is a reference to a list where each element is a SampleID
+SampleID is a string</pre>
+
+</dd>
+<dt id="Description13">Description</dt>
+<dd>
+
+<p>given a list of ontologyIDs, AndOr operator (and requires sample to have all ontology IDs, or sample has to have any of the terms), GenomeId, SampleType ( controlled vocabulary : microarray, RNA-Seq, qPCR, or proteomics), wildTypeOnly returns a list of SampleIDs</p>
+
+</dd>
+</dl>
+
+<h2 id="get_expression_data_by_feature_ids">get_expression_data_by_feature_ids</h2>
+
+<pre><code>  $featureSampleMeasurementMapping = $obj-&gt;get_expression_data_by_feature_ids($featureIDs, $sampleType, $wildTypeOnly)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types14">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$featureIDs is a FeatureIDs
+$sampleType is a SampleType
+$wildTypeOnly is a WildTypeOnly
+$featureSampleMeasurementMapping is a FeatureSampleMeasurementMapping
+FeatureIDs is a reference to a list where each element is a FeatureID
+FeatureID is a string
+SampleType is a string
+WildTypeOnly is an int
+FeatureSampleMeasurementMapping is a reference to a hash where the key is a FeatureID and the value is a SampleMeasurementMapping
+SampleMeasurementMapping is a reference to a hash where the key is a SampleID and the value is a Measurement
+SampleID is a string
+Measurement is a float</pre>
+
+</dd>
+<dt id="Description14">Description</dt>
+<dd>
+
+<p>given a list of FeatureIDs, a SampleType ( controlled vocabulary : microarray, RNA-Seq, qPCR, or proteomics) and an int indicating WildType Only (1 = true, 0 = false) returns a FeatureSampleMeasurementMapping: {featureID-&gt;{sample_id-&gt;measurement}}</p>
+
+</dd>
+</dl>
+
+<h2 id="compare_samples">compare_samples</h2>
+
+<pre><code>  $sampleComparisonMapping = $obj-&gt;compare_samples($numeratorsDataMapping, $denominatorsDataMapping)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types15">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$numeratorsDataMapping is a LabelDataMapping
+$denominatorsDataMapping is a LabelDataMapping
+$sampleComparisonMapping is a SampleComparisonMapping
+LabelDataMapping is a reference to a hash where the key is a string and the value is a DataExpressionLevelsForSample
+DataExpressionLevelsForSample is a reference to a hash where the key is a FeatureID and the value is a Measurement
+FeatureID is a string
+Measurement is a float
+SampleComparisonMapping is a reference to a hash where the key is a SampleID and the value is a DenominatorSampleComparison
+SampleID is a string
+DenominatorSampleComparison is a reference to a hash where the key is a ComparisonDenominatorLabel and the value is a DataSampleComparison
+ComparisonDenominatorLabel is a string
+DataSampleComparison is a reference to a hash where the key is a FeatureID and the value is a Log2Ratio
+Log2Ratio is a float</pre>
+
+</dd>
+<dt id="Description15">Description</dt>
+<dd>
+
+<p>Compare samples takes two data structures labelDataMapping {sampleID or label}-&gt;{featureId or label =&gt; value}}, the first labelDataMapping is the numerator, the 2nd is the denominator in the comparison. returns a SampleComparisonMapping {numerator_sample_id(or label)-&gt;{denominator_sample_id(or label)-&gt;{feature_id(or label) -&gt; log2Ratio}}}</p>
+
+</dd>
+</dl>
+
+<h2 id="compare_samples_vs_default_controls">compare_samples_vs_default_controls</h2>
+
+<pre><code>  $sampleComparisonMapping = $obj-&gt;compare_samples_vs_default_controls($numeratorSampleIDs)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types16">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$numeratorSampleIDs is a SampleIDs
+$sampleComparisonMapping is a SampleComparisonMapping
+SampleIDs is a reference to a list where each element is a SampleID
+SampleID is a string
+SampleComparisonMapping is a reference to a hash where the key is a SampleID and the value is a DenominatorSampleComparison
+DenominatorSampleComparison is a reference to a hash where the key is a ComparisonDenominatorLabel and the value is a DataSampleComparison
+ComparisonDenominatorLabel is a string
+DataSampleComparison is a reference to a hash where the key is a FeatureID and the value is a Log2Ratio
+FeatureID is a string
+Log2Ratio is a float</pre>
+
+</dd>
+<dt id="Description16">Description</dt>
+<dd>
+
+<p>Compares each sample vs its defined default control. If the Default control is not specified for a sample, then nothing is returned for that sample . Takes a list of sampleIDs returns SampleComparisonMapping {sample_id -&gt;{denominator_default_control sample_id -&gt;{feature_id -&gt; log2Ratio}}}</p>
+
+</dd>
+</dl>
+
+<h2 id="compare_samples_vs_the_average">compare_samples_vs_the_average</h2>
+
+<pre><code>  $sampleComparisonMapping = $obj-&gt;compare_samples_vs_the_average($numeratorSampleIDs, $denominatorSampleIDs)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types17">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$numeratorSampleIDs is a SampleIDs
+$denominatorSampleIDs is a SampleIDs
+$sampleComparisonMapping is a SampleComparisonMapping
+SampleIDs is a reference to a list where each element is a SampleID
+SampleID is a string
+SampleComparisonMapping is a reference to a hash where the key is a SampleID and the value is a DenominatorSampleComparison
+DenominatorSampleComparison is a reference to a hash where the key is a ComparisonDenominatorLabel and the value is a DataSampleComparison
+ComparisonDenominatorLabel is a string
+DataSampleComparison is a reference to a hash where the key is a FeatureID and the value is a Log2Ratio
+FeatureID is a string
+Log2Ratio is a float</pre>
+
+</dd>
+<dt id="Description17">Description</dt>
+<dd>
+
+<p>Compares each numerator sample vs the average of all the denominator sampleIds. Take a list of numerator sample IDs and a list of samples Ids to average for the denominator. returns SampleComparisonMapping {numerator_sample_id-&gt;{denominator_sample_id -&gt;{feature_id -&gt; log2Ratio}}}</p>
+
+</dd>
+</dl>
+
+<h2 id="get_on_off_calls">get_on_off_calls</h2>
+
+<pre><code>  $onOffMappings = $obj-&gt;get_on_off_calls($sampleComparisonMapping, $off_threshold, $on_threshold)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types18">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$sampleComparisonMapping is a SampleComparisonMapping
+$off_threshold is a float
+$on_threshold is a float
+$onOffMappings is a SampleComparisonMapping
+SampleComparisonMapping is a reference to a hash where the key is a SampleID and the value is a DenominatorSampleComparison
+SampleID is a string
+DenominatorSampleComparison is a reference to a hash where the key is a ComparisonDenominatorLabel and the value is a DataSampleComparison
+ComparisonDenominatorLabel is a string
+DataSampleComparison is a reference to a hash where the key is a FeatureID and the value is a Log2Ratio
+FeatureID is a string
+Log2Ratio is a float</pre>
+
+</dd>
+<dt id="Description18">Description</dt>
+<dd>
+
+<p>Takes in comparison results. If the value is &gt;= on_threshold it is deemed on (1), if &lt;= off_threshold it is off(-1), meets none then 0. Thresholds normally set to zero. returns SampleComparisonMapping {numerator_sample_id(or label)-&gt;{denominator_sample_id(or label)-&gt;{feature_id(or label) -&gt; on_off_call (possible values 0,-1,1)}}}</p>
+
+</dd>
+</dl>
+
+<h2 id="get_top_changers">get_top_changers</h2>
+
+<pre><code>  $topChangersMappings = $obj-&gt;get_top_changers($sampleComparisonMapping, $direction, $count)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types19">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$sampleComparisonMapping is a SampleComparisonMapping
+$direction is a string
+$count is an int
+$topChangersMappings is a SampleComparisonMapping
+SampleComparisonMapping is a reference to a hash where the key is a SampleID and the value is a DenominatorSampleComparison
+SampleID is a string
+DenominatorSampleComparison is a reference to a hash where the key is a ComparisonDenominatorLabel and the value is a DataSampleComparison
+ComparisonDenominatorLabel is a string
+DataSampleComparison is a reference to a hash where the key is a FeatureID and the value is a Log2Ratio
+FeatureID is a string
+Log2Ratio is a float</pre>
+
+</dd>
+<dt id="Description19">Description</dt>
+<dd>
+
+<p>Takes in comparison results. Direction must equal &#39;up&#39;, &#39;down&#39;, or &#39;both&#39;. Count is the number of changers returned in each direction. returns SampleComparisonMapping {numerator_sample_id(or label)-&gt;{denominator_sample_id(or label)-&gt;{feature_id(or label) -&gt; log2Ratio (note that the features listed will be limited to the top changers)}}}</p>
+
+</dd>
+</dl>
+
+<h2 id="get_expression_samples_titles">get_expression_samples_titles</h2>
+
+<pre><code>  $samplesTitlesMap = $obj-&gt;get_expression_samples_titles($sampleIDs)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types20">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$sampleIDs is a SampleIDs
+$samplesTitlesMap is a SamplesStringMap
+SampleIDs is a reference to a list where each element is a SampleID
+SampleID is a string
+SamplesStringMap is a reference to a hash where the key is a SampleID and the value is a string</pre>
+
+</dd>
+<dt id="Description20">Description</dt>
+<dd>
+
+<p>given a List of SampleIDs, returns a Hash (key : SampleID, value: Title of Sample)</p>
+
+</dd>
+</dl>
+
+<h2 id="get_expression_samples_descriptions">get_expression_samples_descriptions</h2>
+
+<pre><code>  $samplesDescriptionsMap = $obj-&gt;get_expression_samples_descriptions($sampleIDs)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types21">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$sampleIDs is a SampleIDs
+$samplesDescriptionsMap is a SamplesStringMap
+SampleIDs is a reference to a list where each element is a SampleID
+SampleID is a string
+SamplesStringMap is a reference to a hash where the key is a SampleID and the value is a string</pre>
+
+</dd>
+<dt id="Description21">Description</dt>
+<dd>
+
+<p>given a List of SampleIDs, returns a Hash (key : SampleID, value: Description of Sample)</p>
+
+</dd>
+</dl>
+
+<h2 id="get_expression_samples_molecules">get_expression_samples_molecules</h2>
+
+<pre><code>  $samplesMoleculesMap = $obj-&gt;get_expression_samples_molecules($sampleIDs)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types22">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$sampleIDs is a SampleIDs
+$samplesMoleculesMap is a SamplesStringMap
+SampleIDs is a reference to a list where each element is a SampleID
+SampleID is a string
+SamplesStringMap is a reference to a hash where the key is a SampleID and the value is a string</pre>
+
+</dd>
+<dt id="Description22">Description</dt>
+<dd>
+
+<p>given a List of SampleIDs, returns a Hash (key : SampleID, value: Molecule of Sample)</p>
+
+</dd>
+</dl>
+
+<h2 id="get_expression_samples_types">get_expression_samples_types</h2>
+
+<pre><code>  $samplesTypesMap = $obj-&gt;get_expression_samples_types($sampleIDs)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types23">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$sampleIDs is a SampleIDs
+$samplesTypesMap is a SamplesStringMap
+SampleIDs is a reference to a list where each element is a SampleID
+SampleID is a string
+SamplesStringMap is a reference to a hash where the key is a SampleID and the value is a string</pre>
+
+</dd>
+<dt id="Description23">Description</dt>
+<dd>
+
+<p>given a List of SampleIDs, returns a Hash (key : SampleID, value: Type of Sample)</p>
+
+</dd>
+</dl>
+
+<h2 id="get_expression_samples_external_source_ids">get_expression_samples_external_source_ids</h2>
+
+<pre><code>  $samplesExternalSourceIdMap = $obj-&gt;get_expression_samples_external_source_ids($sampleIDs)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types24">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$sampleIDs is a SampleIDs
+$samplesExternalSourceIdMap is a SamplesStringMap
+SampleIDs is a reference to a list where each element is a SampleID
+SampleID is a string
+SamplesStringMap is a reference to a hash where the key is a SampleID and the value is a string</pre>
+
+</dd>
+<dt id="Description24">Description</dt>
+<dd>
+
+<p>given a List of SampleIDs, returns a Hash (key : SampleID, value: External_Source_ID of Sample (typically GSM))</p>
+
+</dd>
+</dl>
+
+<h2 id="get_expression_samples_original_log2_medians">get_expression_samples_original_log2_medians</h2>
+
+<pre><code>  $samplesFloatMap = $obj-&gt;get_expression_samples_original_log2_medians($sampleIDs)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types25">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$sampleIDs is a SampleIDs
+$samplesFloatMap is a SamplesFloatMap
+SampleIDs is a reference to a list where each element is a SampleID
+SampleID is a string
+SamplesFloatMap is a reference to a hash where the key is a SampleID and the value is a float</pre>
+
+</dd>
+<dt id="Description25">Description</dt>
+<dd>
+
+<p>given a List of SampleIDs, returns a Hash (key : SampleID, value: OriginalLog2Median of Sample)</p>
+
+</dd>
+</dl>
+
+<h2 id="get_expression_series_titles">get_expression_series_titles</h2>
+
+<pre><code>  $seriesStringMap = $obj-&gt;get_expression_series_titles($seriesIDs)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types26">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$seriesIDs is a SeriesIDs
+$seriesStringMap is a SeriesStringMap
+SeriesIDs is a reference to a list where each element is a SeriesID
+SeriesID is a string
+SeriesStringMap is a reference to a hash where the key is a SeriesID and the value is a string</pre>
+
+</dd>
+<dt id="Description26">Description</dt>
+<dd>
+
+<p>given a List of SeriesIDs, returns a Hash (key : SeriesID, value: Title of Series)</p>
+
+</dd>
+</dl>
+
+<h2 id="get_expression_series_summaries">get_expression_series_summaries</h2>
+
+<pre><code>  $seriesStringMap = $obj-&gt;get_expression_series_summaries($seriesIDs)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types27">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$seriesIDs is a SeriesIDs
+$seriesStringMap is a SeriesStringMap
+SeriesIDs is a reference to a list where each element is a SeriesID
+SeriesID is a string
+SeriesStringMap is a reference to a hash where the key is a SeriesID and the value is a string</pre>
+
+</dd>
+<dt id="Description27">Description</dt>
+<dd>
+
+<p>given a List of SeriesIDs, returns a Hash (key : SeriesID, value: Summary of Series)</p>
+
+</dd>
+</dl>
+
+<h2 id="get_expression_series_designs">get_expression_series_designs</h2>
+
+<pre><code>  $seriesStringMap = $obj-&gt;get_expression_series_designs($seriesIDs)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types28">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$seriesIDs is a SeriesIDs
+$seriesStringMap is a SeriesStringMap
+SeriesIDs is a reference to a list where each element is a SeriesID
+SeriesID is a string
+SeriesStringMap is a reference to a hash where the key is a SeriesID and the value is a string</pre>
+
+</dd>
+<dt id="Description28">Description</dt>
+<dd>
+
+<p>given a List of SeriesIDs, returns a Hash (key : SeriesID, value: Design of Series)</p>
+
+</dd>
+</dl>
+
+<h2 id="get_expression_series_external_source_ids">get_expression_series_external_source_ids</h2>
+
+<pre><code>  $seriesStringMap = $obj-&gt;get_expression_series_external_source_ids($seriesIDs)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types29">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$seriesIDs is a SeriesIDs
+$seriesStringMap is a SeriesStringMap
+SeriesIDs is a reference to a list where each element is a SeriesID
+SeriesID is a string
+SeriesStringMap is a reference to a hash where the key is a SeriesID and the value is a string</pre>
+
+</dd>
+<dt id="Description29">Description</dt>
+<dd>
+
+<p>given a List of SeriesIDs, returns a Hash (key : SeriesID, value: External_Source_ID of Series (typically GSE))</p>
+
+</dd>
+</dl>
+
+<h2 id="get_expression_sample_ids_by_sample_external_source_ids">get_expression_sample_ids_by_sample_external_source_ids</h2>
+
+<pre><code>  $sampleIDs = $obj-&gt;get_expression_sample_ids_by_sample_external_source_ids($ExternalSourceIDs)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types30">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$ExternalSourceIDs is an ExternalSourceIDs
+$sampleIDs is a SampleIDs
+ExternalSourceIDs is a reference to a list where each element is an ExternalSourceID
+ExternalSourceID is a string
+SampleIDs is a reference to a list where each element is a SampleID
+SampleID is a string</pre>
+
+</dd>
+<dt id="Description30">Description</dt>
+<dd>
+
+<p>get sample ids by the sample&#39;s external source id : Takes a list of sample external source ids, and returns a list of sample ids</p>
+
+</dd>
+</dl>
+
+<h2 id="get_expression_sample_ids_by_platform_external_source_ids">get_expression_sample_ids_by_platform_external_source_ids</h2>
+
+<pre><code>  $sampleIDs = $obj-&gt;get_expression_sample_ids_by_platform_external_source_ids($ExternalSourceIDs)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types31">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$ExternalSourceIDs is an ExternalSourceIDs
+$sampleIDs is a SampleIDs
+ExternalSourceIDs is a reference to a list where each element is an ExternalSourceID
+ExternalSourceID is a string
+SampleIDs is a reference to a list where each element is a SampleID
+SampleID is a string</pre>
+
+</dd>
+<dt id="Description31">Description</dt>
+<dd>
+
+<p>get sample ids by the platform&#39;s external source id : Takes a list of platform external source ids, and returns a list of sample ids</p>
+
+</dd>
+</dl>
+
+<h2 id="get_expression_series_ids_by_series_external_source_ids">get_expression_series_ids_by_series_external_source_ids</h2>
+
+<pre><code>  $seriesIDs = $obj-&gt;get_expression_series_ids_by_series_external_source_ids($ExternalSourceIDs)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types32">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$ExternalSourceIDs is an ExternalSourceIDs
+$seriesIDs is a SeriesIDs
+ExternalSourceIDs is a reference to a list where each element is an ExternalSourceID
+ExternalSourceID is a string
+SeriesIDs is a reference to a list where each element is a SeriesID
+SeriesID is a string</pre>
+
+</dd>
+<dt id="Description32">Description</dt>
+<dd>
+
+<p>get series ids by the series&#39;s external source id : Takes a list of series external source ids, and returns a list of series ids</p>
+
+</dd>
+</dl>
+
+<h2 id="get_GEO_GSE">get_GEO_GSE</h2>
+
+<pre><code>  $gseObject = $obj-&gt;get_GEO_GSE($gse_input_id, $metaDataOnly)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types33">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$gse_input_id is a string
+$metaDataOnly is a MetaDataOnly
+$gseObject is a GseObject
+MetaDataOnly is an int
+GseObject is a reference to a hash where the following keys are defined:
+	gseID has a value which is a string
+	gseTitle has a value which is a string
+	gseSummary has a value which is a string
+	gseDesign has a value which is a string
+	gseSubmissionDate has a value which is a string
+	pubMedID has a value which is a string
+	gseSamples has a value which is a GseSamples
+	gseWarnings has a value which is a GseWarnings
+	gseErrors has a value which is a GseErrors
+GseSamples is a reference to a hash where the key is a string and the value is a GsmObject
+GsmObject is a reference to a hash where the following keys are defined:
+	gsmID has a value which is a string
+	gsmTitle has a value which is a string
+	gsmDescription has a value which is a string
+	gsmMolecule has a value which is a string
+	gsmSubmissionDate has a value which is a string
+	gsmTaxID has a value which is a string
+	gsmSampleOrganism has a value which is a string
+	gsmSampleCharacteristics has a value which is a GsmSampleCharacteristics
+	gsmProtocol has a value which is a string
+	gsmValueType has a value which is a string
+	gsmOriginalLog2Median has a value which is a float
+	gsmPlatform has a value which is a GPL
+	gsmContactPeople has a value which is a ContactPeople
+	gsmData has a value which is a GsmData
+	gsmFeatureMappingApproach has a value which is a string
+	gsmWarning has a value which is a GsmWarnings
+	gsmErrors has a value which is a GsmErrors
+GsmSampleCharacteristics is a reference to a list where each element is a string
+GPL is a reference to a hash where the following keys are defined:
+	gplID has a value which is a string
+	gplTitle has a value which is a string
+	gplTechnology has a value which is a string
+	gplTaxID has a value which is a string
+ContactPeople is a reference to a hash where the key is a ContactEmail and the value is a ContactPerson
+ContactEmail is a string
+ContactPerson is a reference to a hash where the following keys are defined:
+	contactFirstName has a value which is a ContactFirstName
+	contactLastName has a value which is a ContactLastName
+	contactInstitution has a value which is a ContactInstitution
+ContactFirstName is a string
+ContactLastName is a string
+ContactInstitution is a string
+GsmData is a reference to a hash where the key is a FeatureID and the value is a FullMeasurement
+FeatureID is a string
+FullMeasurement is a reference to a hash where the following keys are defined:
+	value has a value which is a float
+	N has a value which is a float
+	stddev has a value which is a float
+	Z_score has a value which is a float
+	p_value has a value which is a float
+	median has a value which is a float
+	mean has a value which is a float
+GsmWarnings is a reference to a list where each element is a string
+GsmErrors is a reference to a list where each element is a string
+GseWarnings is a reference to a list where each element is a string
+GseErrors is a reference to a list where each element is a string</pre>
+
+</dd>
+<dt id="Description33">Description</dt>
+<dd>
+
+<p>given a GEO GSE ID and a flag (1 = MetaDataOnly, 0 = IncludeData), it will return a complex data structure to be put into the upload tab files</p>
+
+</dd>
+</dl>
+
+<h2 id="get_GEO_GSM">get_GEO_GSM</h2>
+
+<pre><code>  $gsmObject = $obj-&gt;get_GEO_GSM($gsm_input_id, $metaDataOnly)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types34">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$gsm_input_id is a string
+$metaDataOnly is a MetaDataOnly
+$gsmObject is a GsmObject
+MetaDataOnly is an int
+GsmObject is a reference to a hash where the following keys are defined:
+	gsmID has a value which is a string
+	gsmTitle has a value which is a string
+	gsmDescription has a value which is a string
+	gsmMolecule has a value which is a string
+	gsmSubmissionDate has a value which is a string
+	gsmTaxID has a value which is a string
+	gsmSampleOrganism has a value which is a string
+	gsmSampleCharacteristics has a value which is a GsmSampleCharacteristics
+	gsmProtocol has a value which is a string
+	gsmValueType has a value which is a string
+	gsmOriginalLog2Median has a value which is a float
+	gsmPlatform has a value which is a GPL
+	gsmContactPeople has a value which is a ContactPeople
+	gsmData has a value which is a GsmData
+	gsmFeatureMappingApproach has a value which is a string
+	gsmWarning has a value which is a GsmWarnings
+	gsmErrors has a value which is a GsmErrors
+GsmSampleCharacteristics is a reference to a list where each element is a string
+GPL is a reference to a hash where the following keys are defined:
+	gplID has a value which is a string
+	gplTitle has a value which is a string
+	gplTechnology has a value which is a string
+	gplTaxID has a value which is a string
+ContactPeople is a reference to a hash where the key is a ContactEmail and the value is a ContactPerson
+ContactEmail is a string
+ContactPerson is a reference to a hash where the following keys are defined:
+	contactFirstName has a value which is a ContactFirstName
+	contactLastName has a value which is a ContactLastName
+	contactInstitution has a value which is a ContactInstitution
+ContactFirstName is a string
+ContactLastName is a string
+ContactInstitution is a string
+GsmData is a reference to a hash where the key is a FeatureID and the value is a FullMeasurement
+FeatureID is a string
+FullMeasurement is a reference to a hash where the following keys are defined:
+	value has a value which is a float
+	N has a value which is a float
+	stddev has a value which is a float
+	Z_score has a value which is a float
+	p_value has a value which is a float
+	median has a value which is a float
+	mean has a value which is a float
+GsmWarnings is a reference to a list where each element is a string
+GsmErrors is a reference to a list where each element is a string</pre>
+
+</dd>
+<dt id="Description34">Description</dt>
+<dd>
+
+<p>given a GEO GSM ID and a flag (1 = MetaDataOnly, 0 = IncludeData), it will return a complex data structure to be put into the upload tab files</p>
+
+</dd>
+</dl>
+
+<h1 id="TYPES">TYPES</h1>
+
+<h2 id="FeatureID">FeatureID</h2>
+
+<dl>
+
+<dt id="Description35">Description</dt>
+<dd>
+
+<p>KBase Feature ID for a feature, typically CDS/PEG</p>
+
+</dd>
+<dt id="Definition">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="FeatureIDs">FeatureIDs</h2>
+
+<dl>
+
+<dt id="Description36">Description</dt>
+<dd>
+
+<p>KBase list of Feature IDs , typically CDS/PEG</p>
+
+</dd>
+<dt id="Definition1">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a list where each element is a FeatureID
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="Measurement">Measurement</h2>
+
+<dl>
+
+<dt id="Description37">Description</dt>
+<dd>
+
+<p>Measurement Value (Zero median normalized within a sample) for a given feature</p>
+
+</dd>
+<dt id="Definition2">Definition</dt>
+<dd>
+
+
+
+<pre>
+a float
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="SampleID">SampleID</h2>
+
+<dl>
+
+<dt id="Description38">Description</dt>
+<dd>
+
+<p>KBase Sample ID for the sample</p>
+
+</dd>
+<dt id="Definition3">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="SampleIDs">SampleIDs</h2>
+
+<dl>
+
+<dt id="Description39">Description</dt>
+<dd>
+
+<p>List of KBase Sample IDs</p>
+
+</dd>
+<dt id="Definition4">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a list where each element is a SampleID
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="SampleIDsAveragedFrom">SampleIDsAveragedFrom</h2>
+
+<dl>
+
+<dt id="Description40">Description</dt>
+<dd>
+
+<p>List of KBase Sample IDs thatt his sample was averaged from</p>
+
+</dd>
+<dt id="Definition5">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a list where each element is a SampleID
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="SampleType">SampleType</h2>
+
+<dl>
+
+<dt id="Description41">Description</dt>
+<dd>
+
+<p>Sample type controlled vocabulary : microarray, RNA-Seq, qPCR, or proteomics</p>
+
+</dd>
+<dt id="Definition6">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="SeriesID">SeriesID</h2>
+
+<dl>
+
+<dt id="Description42">Description</dt>
+<dd>
+
+<p>Kbase Series ID</p>
+
+</dd>
+<dt id="Definition7">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="SeriesIDs">SeriesIDs</h2>
+
+<dl>
+
+<dt id="Description43">Description</dt>
+<dd>
+
+<p>list of KBase Series IDs</p>
+
+</dd>
+<dt id="Definition8">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a list where each element is a SeriesID
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="ExperimentMetaID">ExperimentMetaID</h2>
+
+<dl>
+
+<dt id="Description44">Description</dt>
+<dd>
+
+<p>Kbase ExperimentMeta ID</p>
+
+</dd>
+<dt id="Definition9">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="ExperimentMetaIDs">ExperimentMetaIDs</h2>
+
+<dl>
+
+<dt id="Description45">Description</dt>
+<dd>
+
+<p>list of KBase ExperimentMeta IDs</p>
+
+</dd>
+<dt id="Definition10">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a list where each element is an ExperimentMetaID
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="ExperimentalUnitID">ExperimentalUnitID</h2>
+
+<dl>
+
+<dt id="Description46">Description</dt>
+<dd>
+
+<p>Kbase ExperimentalUnitID</p>
+
+</dd>
+<dt id="Definition11">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="ExperimentalUnitIDs">ExperimentalUnitIDs</h2>
+
+<dl>
+
+<dt id="Description47">Description</dt>
+<dd>
+
+<p>list of KBase ExperimentalUnitIDs</p>
+
+</dd>
+<dt id="Definition12">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a list where each element is an ExperimentalUnitID
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="SamplesStringMap">SamplesStringMap</h2>
+
+<dl>
+
+<dt id="Description48">Description</dt>
+<dd>
+
+<p>Mapping between sample id and corresponding value. Used as return for get_expression_samples_(titles,descriptions,molecules,types,external_source_ids)</p>
+
+</dd>
+<dt id="Definition13">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the key is a SampleID and the value is a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="SamplesFloatMap">SamplesFloatMap</h2>
+
+<dl>
+
+<dt id="Description49">Description</dt>
+<dd>
+
+<p>Mapping between sample id and corresponding value. Used as return for get_expression_samples_original_log2_median</p>
+
+</dd>
+<dt id="Definition14">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the key is a SampleID and the value is a float
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="SeriesStringMap">SeriesStringMap</h2>
+
+<dl>
+
+<dt id="Description50">Description</dt>
+<dd>
+
+<p>Mapping between sample id and corresponding value. Used as return for get_series_(titles,summaries,designs,external_source_ids)</p>
+
+</dd>
+<dt id="Definition15">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the key is a SeriesID and the value is a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="DataExpressionLevelsForSample">DataExpressionLevelsForSample</h2>
+
+<dl>
+
+<dt id="Description51">Description</dt>
+<dd>
+
+<p>mapping kbase feature id as the key and measurement as the value</p>
+
+</dd>
+<dt id="Definition16">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the key is a FeatureID and the value is a Measurement
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="LabelDataMapping">LabelDataMapping</h2>
+
+<dl>
+
+<dt id="Description52">Description</dt>
+<dd>
+
+<p>Mapping from Label (often a sample id, but free text to identify} to DataExpressionLevelsForSample</p>
+
+</dd>
+<dt id="Definition17">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the key is a string and the value is a DataExpressionLevelsForSample
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="ComparisonDenominatorLabel">ComparisonDenominatorLabel</h2>
+
+<dl>
+
+<dt id="Description53">Description</dt>
+<dd>
+
+<p>denominator label is the label for the denominator in a comparison. This label can be a single sampleId (default or defined) or a comma separated list of sampleIds that were averaged.</p>
+
+</dd>
+<dt id="Definition18">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="Log2Ratio">Log2Ratio</h2>
+
+<dl>
+
+<dt id="Description54">Description</dt>
+<dd>
+
+<p>Log2Ratio Log2Level of sample over log2Level of another sample for a given feature. Note if the Ratio is consumed by On Off Call function it will have 1(on), 0(unknown), -1(off) for its values</p>
+
+</dd>
+<dt id="Definition19">Definition</dt>
+<dd>
+
+
+
+<pre>
+a float
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="DataSampleComparison">DataSampleComparison</h2>
+
+<dl>
+
+<dt id="Description55">Description</dt>
+<dd>
+
+<p>mapping kbase feature id as the key and log2Ratio as the value</p>
+
+</dd>
+<dt id="Definition20">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the key is a FeatureID and the value is a Log2Ratio
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="DenominatorSampleComparison">DenominatorSampleComparison</h2>
+
+<dl>
+
+<dt id="Description56">Description</dt>
+<dd>
+
+<p>mapping ComparisonDenominatorLabel to DataSampleComparison mapping</p>
+
+</dd>
+<dt id="Definition21">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the key is a ComparisonDenominatorLabel and the value is a DataSampleComparison
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="SampleComparisonMapping">SampleComparisonMapping</h2>
+
+<dl>
+
+<dt id="Description57">Description</dt>
+<dd>
+
+<p>mapping Sample Id for the numerator to a DenominatorSampleComparison. This is the comparison data structure {NumeratorSampleId-&gt;{denominatorLabel -&gt; {feature -&gt; log2ratio}}}</p>
+
+</dd>
+<dt id="Definition22">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the key is a SampleID and the value is a DenominatorSampleComparison
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="SampleAnnotationID">SampleAnnotationID</h2>
+
+<dl>
+
+<dt id="Description58">Description</dt>
+<dd>
+
+<p>Kbase SampleAnnotation ID</p>
+
+</dd>
+<dt id="Definition23">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="OntologyID">OntologyID</h2>
+
+<dl>
+
+<dt id="Description59">Description</dt>
+<dd>
+
+<p>Kbase OntologyID</p>
+
+</dd>
+<dt id="Definition24">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="OntologyIDs">OntologyIDs</h2>
+
+<dl>
+
+<dt id="Description60">Description</dt>
+<dd>
+
+<p>list of Kbase Ontology IDs</p>
+
+</dd>
+<dt id="Definition25">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a list where each element is an OntologyID
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="OntologyName">OntologyName</h2>
+
+<dl>
+
+<dt id="Description61">Description</dt>
+<dd>
+
+<p>Kbase OntologyName</p>
+
+</dd>
+<dt id="Definition26">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="OntologyDefinition">OntologyDefinition</h2>
+
+<dl>
+
+<dt id="Description62">Description</dt>
+<dd>
+
+<p>Kbase OntologyDefinition</p>
+
+</dd>
+<dt id="Definition27">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="SampleAnnotation">SampleAnnotation</h2>
+
+<dl>
+
+<dt id="Description63">Description</dt>
+<dd>
+
+<p>Data structure for top level information for sample annotation and ontology</p>
+
+</dd>
+<dt id="Definition28">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+sampleAnnotationID has a value which is a SampleAnnotationID
+ontologyID has a value which is an OntologyID
+ontologyName has a value which is an OntologyName
+ontologyDefinition has a value which is an OntologyDefinition</pre>
+
+</dd>
+</dl>
+
+<h2 id="SampleAnnotations">SampleAnnotations</h2>
+
+<dl>
+
+<dt id="Description64">Description</dt>
+<dd>
+
+<p>list of Sample Annotations associated with the Sample</p>
+
+</dd>
+<dt id="Definition29">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a list where each element is a SampleAnnotation
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="ExternalSourceID">ExternalSourceID</h2>
+
+<dl>
+
+<dt id="Description65">Description</dt>
+<dd>
+
+<p>externalSourceId (could be for Platform, Sample or Series)(typically maps to a GPL, GSM or GSE from GEO)</p>
+
+</dd>
+<dt id="Definition30">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="ExternalSourceIDs">ExternalSourceIDs</h2>
+
+<dl>
+
+<dt id="Description66">Description</dt>
+<dd>
+
+<p>list of externalSourceIDs</p>
+
+</dd>
+<dt id="Definition31">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a list where each element is an ExternalSourceID
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="PersonID">PersonID</h2>
+
+<dl>
+
+<dt id="Description67">Description</dt>
+<dd>
+
+<p>Kbase Person ID</p>
+
+</dd>
+<dt id="Definition32">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="PersonIDs">PersonIDs</h2>
+
+<dl>
+
+<dt id="Description68">Description</dt>
+<dd>
+
+<p>list of KBase PersonsIDs</p>
+
+</dd>
+<dt id="Definition33">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a list where each element is a PersonID
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="StrainID">StrainID</h2>
+
+<dl>
+
+<dt id="Description69">Description</dt>
+<dd>
+
+<p>KBase StrainID</p>
+
+</dd>
+<dt id="Definition34">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="StrainIDs">StrainIDs</h2>
+
+<dl>
+
+<dt id="Description70">Description</dt>
+<dd>
+
+<p>list of KBase StrainIDs</p>
+
+</dd>
+<dt id="Definition35">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a list where each element is a StrainID
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="GenomeID">GenomeID</h2>
+
+<dl>
+
+<dt id="Description71">Description</dt>
+<dd>
+
+<p>KBase GenomeID</p>
+
+</dd>
+<dt id="Definition36">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="GenomeIDs">GenomeIDs</h2>
+
+<dl>
+
+<dt id="Description72">Description</dt>
+<dd>
+
+<p>list of KBase GenomeIDs</p>
+
+</dd>
+<dt id="Definition37">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a list where each element is a GenomeID
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="WildTypeOnly">WildTypeOnly</h2>
+
+<dl>
+
+<dt id="Description73">Description</dt>
+<dd>
+
+<p>Single integer 1= WildTypeonly, 0 means all strains ok</p>
+
+</dd>
+<dt id="Definition38">Definition</dt>
+<dd>
+
+
+
+<pre>
+an int
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="ExpressionDataSample">ExpressionDataSample</h2>
+
+<dl>
+
+<dt id="Description74">Description</dt>
+<dd>
+
+<p>Data structure for all the top level metadata and value data for an expression sample. Essentially a expression Sample object.</p>
+
+</dd>
+<dt id="Definition39">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+sampleID has a value which is a SampleID
+sourceID has a value which is a string
+sampleTitle has a value which is a string
+sampleDescription has a value which is a string
+molecule has a value which is a string
+sampleType has a value which is a SampleType
+dataSource has a value which is a string
+externalSourceID has a value which is a string
+externalSourceDate has a value which is a string
+kbaseSubmissionDate has a value which is a string
+custom has a value which is a string
+originalLog2Median has a value which is a float
+strainID has a value which is a StrainID
+referenceStrain has a value which is a string
+wildtype has a value which is a string
+strainDescription has a value which is a string
+genomeID has a value which is a GenomeID
+genomeScientificName has a value which is a string
+platformID has a value which is a string
+platformTitle has a value which is a string
+platformTechnology has a value which is a string
+experimentalUnitID has a value which is an ExperimentalUnitID
+experimentMetaID has a value which is an ExperimentMetaID
+experimentTitle has a value which is a string
+experimentDescription has a value which is a string
+environmentID has a value which is a string
+environmentDescription has a value which is a string
+protocolID has a value which is a string
+protocolDescription has a value which is a string
+protocolName has a value which is a string
+sampleAnnotations has a value which is a SampleAnnotations
+seriesIDs has a value which is a SeriesIDs
+personIDs has a value which is a PersonIDs
+sampleIDsAveragedFrom has a value which is a SampleIDsAveragedFrom
+dataExpressionLevelsForSample has a value which is a DataExpressionLevelsForSample</pre>
+
+</dd>
+</dl>
+
+<h2 id="ExpressionDataSamplesMap">ExpressionDataSamplesMap</h2>
+
+<dl>
+
+<dt id="Description75">Description</dt>
+<dd>
+
+<p>Mapping between sampleID and ExpressionDataSample</p>
+
+</dd>
+<dt id="Definition40">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the key is a SampleID and the value is an ExpressionDataSample
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="SeriesExpressionDataSamplesMapping">SeriesExpressionDataSamplesMapping</h2>
+
+<dl>
+
+<dt id="Description76">Description</dt>
+<dd>
+
+<p>mapping between seriesIDs and all Samples it contains</p>
+
+</dd>
+<dt id="Definition41">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the key is a SeriesID and the value is an ExpressionDataSamplesMap
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="ExperimentalUnitExpressionDataSamplesMapping">ExperimentalUnitExpressionDataSamplesMapping</h2>
+
+<dl>
+
+<dt id="Description77">Description</dt>
+<dd>
+
+<p>mapping between experimentalUnitIDs and all Samples it contains</p>
+
+</dd>
+<dt id="Definition42">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the key is an ExperimentalUnitID and the value is an ExpressionDataSamplesMap
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="ExperimentMetaExpressionDataSamplesMapping">ExperimentMetaExpressionDataSamplesMapping</h2>
+
+<dl>
+
+<dt id="Description78">Description</dt>
+<dd>
+
+<p>mapping between experimentMetaIDs and ExperimentalUnitExpressionDataSamplesMapping it contains</p>
+
+</dd>
+<dt id="Definition43">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the key is an ExperimentMetaID and the value is an ExperimentalUnitExpressionDataSamplesMapping
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="StrainExpressionDataSamplesMapping">StrainExpressionDataSamplesMapping</h2>
+
+<dl>
+
+<dt id="Description79">Description</dt>
+<dd>
+
+<p>mapping between strainIDs and all Samples it contains</p>
+
+</dd>
+<dt id="Definition44">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the key is a StrainID and the value is an ExpressionDataSamplesMap
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="GenomeExpressionDataSamplesMapping">GenomeExpressionDataSamplesMapping</h2>
+
+<dl>
+
+<dt id="Description80">Description</dt>
+<dd>
+
+<p>mapping between genomeIDs and all StrainExpressionDataSamplesMapping it contains</p>
+
+</dd>
+<dt id="Definition45">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the key is a GenomeID and the value is a StrainExpressionDataSamplesMapping
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="OntologyExpressionDataSampleMapping">OntologyExpressionDataSampleMapping</h2>
+
+<dl>
+
+<dt id="Description81">Description</dt>
+<dd>
+
+<p>mapping between ontologyIDs (concatenated if searched for with the and operator) and all the Samples that match that term(s)</p>
+
+</dd>
+<dt id="Definition46">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the key is an OntologyID and the value is an ExpressionDataSamplesMap
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="SampleMeasurementMapping">SampleMeasurementMapping</h2>
+
+<dl>
+
+<dt id="Description82">Description</dt>
+<dd>
+
+<p>mapping kbase sample id as the key and a single measurement (for a scpecified feature id, one mapping higher) as the value</p>
+
+</dd>
+<dt id="Definition47">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the key is a SampleID and the value is a Measurement
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="FeatureSampleMeasurementMapping">FeatureSampleMeasurementMapping</h2>
+
+<dl>
+
+<dt id="Description83">Description</dt>
+<dd>
+
+<p>mapping between FeatureIds and the mappings between samples and log2level mapping</p>
+
+</dd>
+<dt id="Definition48">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the key is a FeatureID and the value is a SampleMeasurementMapping
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="GPL">GPL</h2>
+
+<dl>
+
+<dt id="Description84">Description</dt>
+<dd>
+
+<p>Data structure for a GEO Platform</p>
+
+</dd>
+<dt id="Definition49">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+gplID has a value which is a string
+gplTitle has a value which is a string
+gplTechnology has a value which is a string
+gplTaxID has a value which is a string</pre>
+
+</dd>
+</dl>
+
+<h2 id="ContactEmail">ContactEmail</h2>
+
+<dl>
+
+<dt id="Description85">Description</dt>
+<dd>
+
+<p>Email for the GSM contact person</p>
+
+</dd>
+<dt id="Definition50">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="ContactFirstName">ContactFirstName</h2>
+
+<dl>
+
+<dt id="Description86">Description</dt>
+<dd>
+
+<p>First Name of GSM contact person</p>
+
+</dd>
+<dt id="Definition51">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="ContactLastName">ContactLastName</h2>
+
+<dl>
+
+<dt id="Description87">Description</dt>
+<dd>
+
+<p>Last Name of GSM contact person</p>
+
+</dd>
+<dt id="Definition52">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="ContactInstitution">ContactInstitution</h2>
+
+<dl>
+
+<dt id="Description88">Description</dt>
+<dd>
+
+<p>Institution of GSM contact person</p>
+
+</dd>
+<dt id="Definition53">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="ContactPerson">ContactPerson</h2>
+
+<dl>
+
+<dt id="Description89">Description</dt>
+<dd>
+
+<p>Data structure for GSM ContactPerson</p>
+
+</dd>
+<dt id="Definition54">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+contactFirstName has a value which is a ContactFirstName
+contactLastName has a value which is a ContactLastName
+contactInstitution has a value which is a ContactInstitution</pre>
+
+</dd>
+</dl>
+
+<h2 id="ContactPeople">ContactPeople</h2>
+
+<dl>
+
+<dt id="Description90">Description</dt>
+<dd>
+
+<p>Mapping between key : ContactEmail and value : ContactPerson Data Structure</p>
+
+</dd>
+<dt id="Definition55">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the key is a ContactEmail and the value is a ContactPerson
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="FullMeasurement">FullMeasurement</h2>
+
+<dl>
+
+<dt id="Description91">Description</dt>
+<dd>
+
+<p>Measurement data structure</p>
+
+</dd>
+<dt id="Definition56">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+value has a value which is a float
+N has a value which is a float
+stddev has a value which is a float
+Z_score has a value which is a float
+p_value has a value which is a float
+median has a value which is a float
+mean has a value which is a float</pre>
+
+</dd>
+</dl>
+
+<h2 id="GsmData">GsmData</h2>
+
+<dl>
+
+<dt id="Description92">Description</dt>
+<dd>
+
+<p>mapping kbase feature id as the key and FullMeasurement Structure as the value</p>
+
+</dd>
+<dt id="Definition57">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the key is a FeatureID and the value is a FullMeasurement
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="GsmWarnings">GsmWarnings</h2>
+
+<dl>
+
+<dt id="Description93">Description</dt>
+<dd>
+
+<p>List of GSM level warnings</p>
+
+</dd>
+<dt id="Definition58">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a list where each element is a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="GseWarnings">GseWarnings</h2>
+
+<dl>
+
+<dt id="Description94">Description</dt>
+<dd>
+
+<p>List of GSE level warnings</p>
+
+</dd>
+<dt id="Definition59">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a list where each element is a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="GsmErrors">GsmErrors</h2>
+
+<dl>
+
+<dt id="Description95">Description</dt>
+<dd>
+
+<p>List of GSM level errors</p>
+
+</dd>
+<dt id="Definition60">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a list where each element is a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="GseErrors">GseErrors</h2>
+
+<dl>
+
+<dt id="Description96">Description</dt>
+<dd>
+
+<p>List of GSE level errors</p>
+
+</dd>
+<dt id="Definition61">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a list where each element is a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="GsmSampleCharacteristics">GsmSampleCharacteristics</h2>
+
+<dl>
+
+<dt id="Description97">Description</dt>
+<dd>
+
+<p>List of GSM Sample Characteristics from ch1</p>
+
+</dd>
+<dt id="Definition62">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a list where each element is a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="GsmObject">GsmObject</h2>
+
+<dl>
+
+<dt id="Description98">Description</dt>
+<dd>
+
+<p>GSM OBJECT</p>
+
+</dd>
+<dt id="Definition63">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+gsmID has a value which is a string
+gsmTitle has a value which is a string
+gsmDescription has a value which is a string
+gsmMolecule has a value which is a string
+gsmSubmissionDate has a value which is a string
+gsmTaxID has a value which is a string
+gsmSampleOrganism has a value which is a string
+gsmSampleCharacteristics has a value which is a GsmSampleCharacteristics
+gsmProtocol has a value which is a string
+gsmValueType has a value which is a string
+gsmOriginalLog2Median has a value which is a float
+gsmPlatform has a value which is a GPL
+gsmContactPeople has a value which is a ContactPeople
+gsmData has a value which is a GsmData
+gsmFeatureMappingApproach has a value which is a string
+gsmWarning has a value which is a GsmWarnings
+gsmErrors has a value which is a GsmErrors</pre>
+
+</dd>
+</dl>
+
+<h2 id="GseSamples">GseSamples</h2>
+
+<dl>
+
+<dt id="Description99">Description</dt>
+<dd>
+
+<p>Mapping of Key GSMID to GSM Object</p>
+
+</dd>
+<dt id="Definition64">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the key is a string and the value is a GsmObject
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="GseObject">GseObject</h2>
+
+<dl>
+
+<dt id="Description100">Description</dt>
+<dd>
+
+<p>GSE OBJECT</p>
+
+</dd>
+<dt id="Definition65">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+gseID has a value which is a string
+gseTitle has a value which is a string
+gseSummary has a value which is a string
+gseDesign has a value which is a string
+gseSubmissionDate has a value which is a string
+pubMedID has a value which is a string
+gseSamples has a value which is a GseSamples
+gseWarnings has a value which is a GseWarnings
+gseErrors has a value which is a GseErrors</pre>
+
+</dd>
+</dl>
+
+<h2 id="MetaDataOnly">MetaDataOnly</h2>
+
+<dl>
+
+<dt id="Description101">Description</dt>
+<dd>
+
+<p>Single integer 1= metaDataOnly, 0 means returns data</p>
+
+</dd>
+<dt id="Definition66">Definition</dt>
+<dd>
+
+
+
+<pre>
+an int
+</pre>
+
+</dd>
+</dl>
+
+
+</body>
+
+</html>
+
+

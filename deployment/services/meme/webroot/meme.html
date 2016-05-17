@@ -1,0 +1,1282 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title></title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:root@localhost" />
+</head>
+
+<body style="background-color: white">
+
+
+
+<ul id="index">
+  <li><a href="#NAME">NAME</a></li>
+  <li><a href="#DESCRIPTION">DESCRIPTION</a>
+    <ul>
+      <li><a href="#find_motifs_with_meme">find_motifs_with_meme</a></li>
+      <li><a href="#find_motifs_with_meme_from_ws">find_motifs_with_meme_from_ws</a></li>
+      <li><a href="#find_motifs_with_meme_job_from_ws">find_motifs_with_meme_job_from_ws</a></li>
+      <li><a href="#compare_motifs_with_tomtom">compare_motifs_with_tomtom</a></li>
+      <li><a href="#compare_motifs_with_tomtom_by_collection">compare_motifs_with_tomtom_by_collection</a></li>
+      <li><a href="#compare_motifs_with_tomtom_by_collection_from_ws">compare_motifs_with_tomtom_by_collection_from_ws</a></li>
+      <li><a href="#compare_motifs_with_tomtom_job_by_collection_from_ws">compare_motifs_with_tomtom_job_by_collection_from_ws</a></li>
+      <li><a href="#find_sites_with_mast">find_sites_with_mast</a></li>
+      <li><a href="#find_sites_with_mast_by_collection">find_sites_with_mast_by_collection</a></li>
+      <li><a href="#find_sites_with_mast_by_collection_from_ws">find_sites_with_mast_by_collection_from_ws</a></li>
+      <li><a href="#find_sites_with_mast_job_by_collection_from_ws">find_sites_with_mast_job_by_collection_from_ws</a></li>
+      <li><a href="#get_pspm_collection_from_meme_result">get_pspm_collection_from_meme_result</a></li>
+      <li><a href="#get_pspm_collection_from_meme_result_from_ws">get_pspm_collection_from_meme_result_from_ws</a></li>
+      <li><a href="#get_pspm_collection_from_meme_result_job_from_ws">get_pspm_collection_from_meme_result_job_from_ws</a></li>
+    </ul>
+  </li>
+  <li><a href="#TYPES">TYPES</a>
+    <ul>
+      <li><a href="#sequence_set_ref">sequence_set_ref</a></li>
+      <li><a href="#meme_run_result_ref">meme_run_result_ref</a></li>
+      <li><a href="#meme_pspm_collection_ref">meme_pspm_collection_ref</a></li>
+      <li><a href="#MemeSite">MemeSite</a></li>
+      <li><a href="#MemeMotif">MemeMotif</a></li>
+      <li><a href="#MemeRunParameters">MemeRunParameters</a></li>
+      <li><a href="#MemeRunResult">MemeRunResult</a></li>
+      <li><a href="#MemePSPM">MemePSPM</a></li>
+      <li><a href="#MemePSPMCollection">MemePSPMCollection</a></li>
+      <li><a href="#TomtomRunParameters">TomtomRunParameters</a></li>
+      <li><a href="#TomtomHit">TomtomHit</a></li>
+      <li><a href="#TomtomRunResult">TomtomRunResult</a></li>
+      <li><a href="#MastRunParameters">MastRunParameters</a></li>
+      <li><a href="#MastHit">MastHit</a></li>
+      <li><a href="#MastRunResult">MastRunResult</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="NAME">NAME</h1>
+
+<p>Bio::KBase::meme::Client</p>
+
+<h1 id="DESCRIPTION">DESCRIPTION</h1>
+
+<p>Module MEME version 1.0 This module provides a set of methods for work with regulatory motifs. These methods integrate capabilities of three MEME Suite tools into KBase: - MEME is a tool for finding ungapped motifs in unaligned DNA sequences - TOMTOM is a tool for comparison of an input DNA motif to the elements of a database of known motifs - MAST is a tool for searching biological sequence databases for occurrences of known motifs</p>
+
+<p>Data types summary MemeRunParameters data type keeps input parameters for MEME run. TomtomRunParameters data type keeps input parameters for TOMTOM run. MastRunParameters data type keeps input parameters for MAST run. MemeSite data type represents a particular site from MEME motif description. MemeMotif data type represents DNA sequence motif predicted by MEME. MemeRunResult data type represents result of a single MEME run and contains parameters of the search and list of identified motifs. MemePSPM data type represents a position-specific letter-probability matrix for use with TOMTOM and MAST. MemePSPMCollection data type contains collection of matrices for use with TOMTOM and MAST. TomtomHit represents a results of comparison of two matrices by TOMTOM. TomtomRunResult represents result of a single TOMTOM run. MastHit represents a particular MAST hit. MastRunResult represents results of a single MAST run.</p>
+
+<p>Methods summary find_motifs_with_meme - runs MEME for a set of nucleotide sequences provided as SequenceSet object and returns MemeRunResult object find_motifs_with_meme_from_ws - runs MEME for a set of nucleotide sequences provided as workspace ID of the SequenceSet and returns kbase ID of MemeRunResult object saved in workspace find_motifs_with_meme_job_from_ws - runs MEME for a set of nucleotide sequences provided as workspace ID of the SequenceSet and returns job ID compare_motifs_with_tomtom - runs TOMTOM for MemePSPM as query vs. MemePSPMCollection as target and returns TomtomRunResult (list of motif pairs) (removed)compare_motifs_with_tomtom_from_ws - runs TOMTOM for MemePSPM as query vs. MemePSPMCollection as target provided as workspace IDs and returns kbase ID of the TomtomRunResult saved in workspace (removed)compare_motifs_with_tomtom_job_from_ws - runs TOMTOM for MemePSPM as query vs. MemePSPMCollection as target provided as workspace IDs and returns job ID compare_motifs_with_tomtom_by_collection - runs TOMTOM for two collection of PSPMs and returns TomtomRunResult (list of motif pairs) compare_motifs_with_tomtom_by_collection_from_ws - runs TOMTOM for two collection of PSPMs provided as workspace IDs and returns kbase ID of the TomtomRunResult saved in workspace compare_motifs_with_tomtom_job_by_collection_from_ws - runs TOMTOM for two collection of PSPMs provided as workspace IDs and returns job ID find_sites_with_mast - runs MAST for MemePSPM vs. SequenceSet and returns MastRunResult (list of MAST hits) (removed)find_sites_with_mast_from_ws - runs MAST for MemePSPM stored in workspace vs. SequenceSet stored in workspace and returns kbase ID of MastRunResult (list of MAST hits) saved in workspace (removed)find_sites_with_mast_job_from_ws - runs MAST for MemePSPM stored in workspace vs. SequenceSet stored in workspace and returns job ID find_sites_with_mast_by_collection - runs MAST for MemePSPMCollection vs. SequenceSet and returns MastRunResult (list of MAST hits) find_sites_with_mast_by_collection_from_ws - runs MAST for MemePSPMCollection stored in workspace vs. SequenceSet stored in workspace and returns kbase ID of MastRunResult (list of MAST hits) saved in workspace find_sites_with_mast_job_by_collection_from_ws - runs MAST for MemePSPMCollection stored in workspace vs. SequenceSet stored in workspace and returns kbase ID of MastRunResult (list of MAST hits) saved in workspace get_pspm_collection_from_meme_result - converts MemeRunResult into MemePSPMCollection get_pspm_collection_from_meme_result_from_ws - converts MemeRunResult into MemePSPMCollection and writes the result to workspace get_pspm_collection_from_meme_result_job_from_ws - returns ID of job object that contains ID of MemePSPMCollection converted from MemeRunResult</p>
+
+<h2 id="find_motifs_with_meme">find_motifs_with_meme</h2>
+
+<pre><code>  $meme_run_result = $obj-&gt;find_motifs_with_meme($sequenceSet, $params)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$sequenceSet is a KBaseSequences.SequenceSet
+$params is a MEME.MemeRunParameters
+$meme_run_result is a MEME.MemeRunResult
+KBaseSequences.SequenceSet is a reference to a hash where the following keys are defined:
+	sequence_set_id has a value which is a string
+	description has a value which is a string
+	sequences has a value which is a reference to a list where each element is a KBaseSequences.Sequence
+KBaseSequences.Sequence is a reference to a hash where the following keys are defined:
+	sequence_id has a value which is a string
+	description has a value which is a string
+	sequence has a value which is a string
+MemeRunParameters is a reference to a hash where the following keys are defined:
+	mod has a value which is a string
+	nmotifs has a value which is an int
+	minw has a value which is an int
+	maxw has a value which is an int
+	nsites has a value which is an int
+	minsites has a value which is an int
+	maxsites has a value which is an int
+	pal has a value which is an int
+	revcomp has a value which is an int
+	source_ref has a value which is a MEME.sequence_set_ref
+	source_id has a value which is a string
+sequence_set_ref is a string
+MemeRunResult is a reference to a hash where the following keys are defined:
+	id has a value which is a string
+	source_ref has a value which is a string
+	source_id has a value which is a string
+	timestamp has a value which is a string
+	meme_version has a value which is a string
+	input_file_name has a value which is a string
+	alphabet has a value which is a string
+	training_set has a value which is a reference to a list where each element is a string
+	command_line has a value which is a string
+	mod has a value which is a string
+	nmotifs has a value which is an int
+	evt has a value which is a string
+	object_function has a value which is a string
+	minw has a value which is an int
+	maxw has a value which is an int
+	minic has a value which is a float
+	wg has a value which is an int
+	ws has a value which is an int
+	endgaps has a value which is a string
+	minsites has a value which is an int
+	maxsites has a value which is an int
+	wnsites has a value which is a float
+	prob has a value which is an int
+	spmap has a value which is a string
+	spfuzz has a value which is a string
+	substring has a value which is a string
+	branching has a value which is a string
+	wbranch has a value which is a string
+	prior has a value which is a string
+	b has a value which is a float
+	maxiter has a value which is an int
+	distance has a value which is a float
+	n has a value which is an int
+	n_cap has a value which is an int
+	strands has a value which is a string
+	seed has a value which is an int
+	seqfrac has a value which is an int
+	letter_freq has a value which is a string
+	bg_freq has a value which is a string
+	motifs has a value which is a reference to a list where each element is a MEME.MemeMotif
+	raw_output has a value which is a string
+	params has a value which is a MEME.MemeRunParameters
+MemeMotif is a reference to a hash where the following keys are defined:
+	id has a value which is a string
+	description has a value which is a string
+	width has a value which is an int
+	llr has a value which is a float
+	evalue has a value which is a float
+	raw_output has a value which is a string
+	sites has a value which is a reference to a list where each element is a MEME.MemeSite
+MemeSite is a reference to a hash where the following keys are defined:
+	source_sequence_id has a value which is a string
+	start has a value which is an int
+	pvalue has a value which is a float
+	left_flank has a value which is a string
+	right_flank has a value which is a string
+	sequence has a value which is a string</pre>
+
+</dd>
+<dt id="Description">Description</dt>
+<dd>
+
+<p>Returns results of a single MEME run MEME will be run with -dna -text parameters SequenceSet sequenceSet - input set of sequences MemeRunParameters params - parameters of MEME run</p>
+
+</dd>
+</dl>
+
+<h2 id="find_motifs_with_meme_from_ws">find_motifs_with_meme_from_ws</h2>
+
+<pre><code>  $output_id = $obj-&gt;find_motifs_with_meme_from_ws($ws_name, $params)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types1">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$ws_name is a string
+$params is a MEME.MemeRunParameters
+$output_id is a string
+MemeRunParameters is a reference to a hash where the following keys are defined:
+	mod has a value which is a string
+	nmotifs has a value which is an int
+	minw has a value which is an int
+	maxw has a value which is an int
+	nsites has a value which is an int
+	minsites has a value which is an int
+	maxsites has a value which is an int
+	pal has a value which is an int
+	revcomp has a value which is an int
+	source_ref has a value which is a MEME.sequence_set_ref
+	source_id has a value which is a string
+sequence_set_ref is a string</pre>
+
+</dd>
+<dt id="Description1">Description</dt>
+<dd>
+
+<p>Returns kbase id of MemeRunResult object that contains results of a single MEME run MEME will be run with -dna -text parameters string ws_name - workspace id to save run result MemeRunParameters params - parameters of MEME run</p>
+
+</dd>
+</dl>
+
+<h2 id="find_motifs_with_meme_job_from_ws">find_motifs_with_meme_job_from_ws</h2>
+
+<pre><code>  $job_id = $obj-&gt;find_motifs_with_meme_job_from_ws($ws_name, $params)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types2">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$ws_name is a string
+$params is a MEME.MemeRunParameters
+$job_id is a string
+MemeRunParameters is a reference to a hash where the following keys are defined:
+	mod has a value which is a string
+	nmotifs has a value which is an int
+	minw has a value which is an int
+	maxw has a value which is an int
+	nsites has a value which is an int
+	minsites has a value which is an int
+	maxsites has a value which is an int
+	pal has a value which is an int
+	revcomp has a value which is an int
+	source_ref has a value which is a MEME.sequence_set_ref
+	source_id has a value which is a string
+sequence_set_ref is a string</pre>
+
+</dd>
+<dt id="Description2">Description</dt>
+<dd>
+
+<p>Returns id of job object that contains id of a single MEME run result MEME will be run with -dna -text parameters string ws_name - workspace id to save run result MemeRunParameters params - parameters of MEME run</p>
+
+</dd>
+</dl>
+
+<h2 id="compare_motifs_with_tomtom">compare_motifs_with_tomtom</h2>
+
+<pre><code>  $tomtom_run_result = $obj-&gt;compare_motifs_with_tomtom($query, $target, $params)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types3">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$query is a MEME.MemePSPM
+$target is a MEME.MemePSPMCollection
+$params is a MEME.TomtomRunParameters
+$tomtom_run_result is a MEME.TomtomRunResult
+MemePSPM is a reference to a hash where the following keys are defined:
+	id has a value which is a string
+	source_id has a value which is a string
+	description has a value which is a string
+	alphabet has a value which is a string
+	width has a value which is an int
+	nsites has a value which is an int
+	evalue has a value which is a float
+	matrix has a value which is a reference to a list where each element is a reference to a list where each element is a float
+MemePSPMCollection is a reference to a hash where the following keys are defined:
+	id has a value which is a string
+	source_ref has a value which is a MEME.meme_run_result_ref
+	timestamp has a value which is a string
+	description has a value which is a string
+	alphabet has a value which is a string
+	pspms has a value which is a reference to a list where each element is a MEME.MemePSPM
+meme_run_result_ref is a string
+TomtomRunParameters is a reference to a hash where the following keys are defined:
+	query_ref has a value which is a MEME.meme_pspm_collection_ref
+	target_ref has a value which is a MEME.meme_pspm_collection_ref
+	pspm_id has a value which is a string
+	thresh has a value which is a float
+	evalue has a value which is an int
+	dist has a value which is a string
+	internal has a value which is an int
+	min_overlap has a value which is an int
+meme_pspm_collection_ref is a string
+TomtomRunResult is a reference to a hash where the following keys are defined:
+	id has a value which is a string
+	timestamp has a value which is a string
+	params has a value which is a MEME.TomtomRunParameters
+	hits has a value which is a reference to a list where each element is a MEME.TomtomHit
+TomtomHit is a reference to a hash where the following keys are defined:
+	query_pspm_id has a value which is a string
+	target_pspm_id has a value which is a string
+	optimal_offset has a value which is an int
+	pvalue has a value which is a float
+	evalue has a value which is a float
+	qvalue has a value which is a float
+	overlap has a value which is an int
+	query_consensus has a value which is a string
+	target_consensus has a value which is a string
+	strand has a value which is a string</pre>
+
+</dd>
+<dt id="Description3">Description</dt>
+<dd>
+
+<p>Returns TomtomRunResult with results of a single TOMTOM run TOMTOM will be run with -text parameter MemePSPM query - query motifs for TOMTOM run MemePSPMCollection target - target motifs for TOMTOM run TomtomRunParameters params - parameters of TOMTOM run</p>
+
+</dd>
+</dl>
+
+<h2 id="compare_motifs_with_tomtom_by_collection">compare_motifs_with_tomtom_by_collection</h2>
+
+<pre><code>  $tomtom_run_result = $obj-&gt;compare_motifs_with_tomtom_by_collection($query, $target, $params)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types4">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$query is a MEME.MemePSPMCollection
+$target is a MEME.MemePSPMCollection
+$params is a MEME.TomtomRunParameters
+$tomtom_run_result is a MEME.TomtomRunResult
+MemePSPMCollection is a reference to a hash where the following keys are defined:
+	id has a value which is a string
+	source_ref has a value which is a MEME.meme_run_result_ref
+	timestamp has a value which is a string
+	description has a value which is a string
+	alphabet has a value which is a string
+	pspms has a value which is a reference to a list where each element is a MEME.MemePSPM
+meme_run_result_ref is a string
+MemePSPM is a reference to a hash where the following keys are defined:
+	id has a value which is a string
+	source_id has a value which is a string
+	description has a value which is a string
+	alphabet has a value which is a string
+	width has a value which is an int
+	nsites has a value which is an int
+	evalue has a value which is a float
+	matrix has a value which is a reference to a list where each element is a reference to a list where each element is a float
+TomtomRunParameters is a reference to a hash where the following keys are defined:
+	query_ref has a value which is a MEME.meme_pspm_collection_ref
+	target_ref has a value which is a MEME.meme_pspm_collection_ref
+	pspm_id has a value which is a string
+	thresh has a value which is a float
+	evalue has a value which is an int
+	dist has a value which is a string
+	internal has a value which is an int
+	min_overlap has a value which is an int
+meme_pspm_collection_ref is a string
+TomtomRunResult is a reference to a hash where the following keys are defined:
+	id has a value which is a string
+	timestamp has a value which is a string
+	params has a value which is a MEME.TomtomRunParameters
+	hits has a value which is a reference to a list where each element is a MEME.TomtomHit
+TomtomHit is a reference to a hash where the following keys are defined:
+	query_pspm_id has a value which is a string
+	target_pspm_id has a value which is a string
+	optimal_offset has a value which is an int
+	pvalue has a value which is a float
+	evalue has a value which is a float
+	qvalue has a value which is a float
+	overlap has a value which is an int
+	query_consensus has a value which is a string
+	target_consensus has a value which is a string
+	strand has a value which is a string</pre>
+
+</dd>
+<dt id="Description4">Description</dt>
+<dd>
+
+<p>Returns TomtomRunResult with results of a single TOMTOM run TOMTOM will be run with -text parameter MemePSPMCollection query - query motifs for TOMTOM run MemePSPMCollection target - target motifs for TOMTOM run TomtomRunParameters params - parameters of TOMTOM run</p>
+
+</dd>
+</dl>
+
+<h2 id="compare_motifs_with_tomtom_by_collection_from_ws">compare_motifs_with_tomtom_by_collection_from_ws</h2>
+
+<pre><code>  $output_id = $obj-&gt;compare_motifs_with_tomtom_by_collection_from_ws($ws_name, $params)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types5">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$ws_name is a string
+$params is a MEME.TomtomRunParameters
+$output_id is a string
+TomtomRunParameters is a reference to a hash where the following keys are defined:
+	query_ref has a value which is a MEME.meme_pspm_collection_ref
+	target_ref has a value which is a MEME.meme_pspm_collection_ref
+	pspm_id has a value which is a string
+	thresh has a value which is a float
+	evalue has a value which is an int
+	dist has a value which is a string
+	internal has a value which is an int
+	min_overlap has a value which is an int
+meme_pspm_collection_ref is a string</pre>
+
+</dd>
+<dt id="Description5">Description</dt>
+<dd>
+
+<p>Returns kbase ID of TomtomRunResult with results of a single TOMTOM run string ws_name - workspace id TOMTOM will be run with -text parameter TomtomRunParameters params - parameters of TOMTOM run</p>
+
+</dd>
+</dl>
+
+<h2 id="compare_motifs_with_tomtom_job_by_collection_from_ws">compare_motifs_with_tomtom_job_by_collection_from_ws</h2>
+
+<pre><code>  $job_id = $obj-&gt;compare_motifs_with_tomtom_job_by_collection_from_ws($ws_name, $params)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types6">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$ws_name is a string
+$params is a MEME.TomtomRunParameters
+$job_id is a string
+TomtomRunParameters is a reference to a hash where the following keys are defined:
+	query_ref has a value which is a MEME.meme_pspm_collection_ref
+	target_ref has a value which is a MEME.meme_pspm_collection_ref
+	pspm_id has a value which is a string
+	thresh has a value which is a float
+	evalue has a value which is an int
+	dist has a value which is a string
+	internal has a value which is an int
+	min_overlap has a value which is an int
+meme_pspm_collection_ref is a string</pre>
+
+</dd>
+<dt id="Description6">Description</dt>
+<dd>
+
+<p>Returns ID of job object that contains ID of results of a single TOMTOM run string ws_name - workspace id TOMTOM will be run with -text parameter TomtomRunParameters params - parameters of TOMTOM run</p>
+
+</dd>
+</dl>
+
+<h2 id="find_sites_with_mast">find_sites_with_mast</h2>
+
+<pre><code>  $mast_run_result = $obj-&gt;find_sites_with_mast($query, $target, $params)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types7">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$query is a MEME.MemePSPM
+$target is a KBaseSequences.SequenceSet
+$params is a MEME.MastRunParameters
+$mast_run_result is a MEME.MastRunResult
+MemePSPM is a reference to a hash where the following keys are defined:
+	id has a value which is a string
+	source_id has a value which is a string
+	description has a value which is a string
+	alphabet has a value which is a string
+	width has a value which is an int
+	nsites has a value which is an int
+	evalue has a value which is a float
+	matrix has a value which is a reference to a list where each element is a reference to a list where each element is a float
+KBaseSequences.SequenceSet is a reference to a hash where the following keys are defined:
+	sequence_set_id has a value which is a string
+	description has a value which is a string
+	sequences has a value which is a reference to a list where each element is a KBaseSequences.Sequence
+KBaseSequences.Sequence is a reference to a hash where the following keys are defined:
+	sequence_id has a value which is a string
+	description has a value which is a string
+	sequence has a value which is a string
+MastRunParameters is a reference to a hash where the following keys are defined:
+	query_ref has a value which is a MEME.meme_pspm_collection_ref
+	target_ref has a value which is a MEME.sequence_set_ref
+	pspm_id has a value which is a string
+	mt has a value which is a float
+meme_pspm_collection_ref is a string
+sequence_set_ref is a string
+MastRunResult is a reference to a hash where the following keys are defined:
+	id has a value which is a string
+	timestamp has a value which is a string
+	params has a value which is a MEME.MastRunParameters
+	hits has a value which is a reference to a list where each element is a MEME.MastHit
+MastHit is a reference to a hash where the following keys are defined:
+	seq_id has a value which is a string
+	pspm_id has a value which is a string
+	strand has a value which is a string
+	hit_start has a value which is an int
+	hit_end has a value which is an int
+	score has a value which is a float
+	hit_pvalue has a value which is a float</pre>
+
+</dd>
+<dt id="Description7">Description</dt>
+<dd>
+
+<p>Returns MastRunResult containing list of MAST hits MAST will be run with -hit_list parameter MemePSPM query - query PSPM for MAST run SequenceSet target - target sequences for MAST run MastRunParameters params - parameters of MAST run</p>
+
+</dd>
+</dl>
+
+<h2 id="find_sites_with_mast_by_collection">find_sites_with_mast_by_collection</h2>
+
+<pre><code>  $mast_run_result = $obj-&gt;find_sites_with_mast_by_collection($query, $target, $params)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types8">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$query is a MEME.MemePSPMCollection
+$target is a KBaseSequences.SequenceSet
+$params is a MEME.MastRunParameters
+$mast_run_result is a MEME.MastRunResult
+MemePSPMCollection is a reference to a hash where the following keys are defined:
+	id has a value which is a string
+	source_ref has a value which is a MEME.meme_run_result_ref
+	timestamp has a value which is a string
+	description has a value which is a string
+	alphabet has a value which is a string
+	pspms has a value which is a reference to a list where each element is a MEME.MemePSPM
+meme_run_result_ref is a string
+MemePSPM is a reference to a hash where the following keys are defined:
+	id has a value which is a string
+	source_id has a value which is a string
+	description has a value which is a string
+	alphabet has a value which is a string
+	width has a value which is an int
+	nsites has a value which is an int
+	evalue has a value which is a float
+	matrix has a value which is a reference to a list where each element is a reference to a list where each element is a float
+KBaseSequences.SequenceSet is a reference to a hash where the following keys are defined:
+	sequence_set_id has a value which is a string
+	description has a value which is a string
+	sequences has a value which is a reference to a list where each element is a KBaseSequences.Sequence
+KBaseSequences.Sequence is a reference to a hash where the following keys are defined:
+	sequence_id has a value which is a string
+	description has a value which is a string
+	sequence has a value which is a string
+MastRunParameters is a reference to a hash where the following keys are defined:
+	query_ref has a value which is a MEME.meme_pspm_collection_ref
+	target_ref has a value which is a MEME.sequence_set_ref
+	pspm_id has a value which is a string
+	mt has a value which is a float
+meme_pspm_collection_ref is a string
+sequence_set_ref is a string
+MastRunResult is a reference to a hash where the following keys are defined:
+	id has a value which is a string
+	timestamp has a value which is a string
+	params has a value which is a MEME.MastRunParameters
+	hits has a value which is a reference to a list where each element is a MEME.MastHit
+MastHit is a reference to a hash where the following keys are defined:
+	seq_id has a value which is a string
+	pspm_id has a value which is a string
+	strand has a value which is a string
+	hit_start has a value which is an int
+	hit_end has a value which is an int
+	score has a value which is a float
+	hit_pvalue has a value which is a float</pre>
+
+</dd>
+<dt id="Description8">Description</dt>
+<dd>
+
+<p>Returns MastRunResult containing list of MAST hits MAST will be run with -hit_list parameter MemePSPMCollection query - query motifs for MAST run SequenceSet target - target sequences for MAST run MastRunParameters params - parameters of MAST run</p>
+
+</dd>
+</dl>
+
+<h2 id="find_sites_with_mast_by_collection_from_ws">find_sites_with_mast_by_collection_from_ws</h2>
+
+<pre><code>  $output_id = $obj-&gt;find_sites_with_mast_by_collection_from_ws($ws_name, $params)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types9">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$ws_name is a string
+$params is a MEME.MastRunParameters
+$output_id is a string
+MastRunParameters is a reference to a hash where the following keys are defined:
+	query_ref has a value which is a MEME.meme_pspm_collection_ref
+	target_ref has a value which is a MEME.sequence_set_ref
+	pspm_id has a value which is a string
+	mt has a value which is a float
+meme_pspm_collection_ref is a string
+sequence_set_ref is a string</pre>
+
+</dd>
+<dt id="Description9">Description</dt>
+<dd>
+
+<p>Returns kbase ID of MastRunResult containing list of MAST hits MAST will be run with -hit_list parameter string ws_name - workspace id MastRunParameters params - parameters of MAST run</p>
+
+</dd>
+</dl>
+
+<h2 id="find_sites_with_mast_job_by_collection_from_ws">find_sites_with_mast_job_by_collection_from_ws</h2>
+
+<pre><code>  $job_id = $obj-&gt;find_sites_with_mast_job_by_collection_from_ws($ws_name, $params)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types10">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$ws_name is a string
+$params is a MEME.MastRunParameters
+$job_id is a string
+MastRunParameters is a reference to a hash where the following keys are defined:
+	query_ref has a value which is a MEME.meme_pspm_collection_ref
+	target_ref has a value which is a MEME.sequence_set_ref
+	pspm_id has a value which is a string
+	mt has a value which is a float
+meme_pspm_collection_ref is a string
+sequence_set_ref is a string</pre>
+
+</dd>
+<dt id="Description10">Description</dt>
+<dd>
+
+<p>Returns ID of job object that contains ID of MastRunResult MAST will be run with -hit_list parameter string ws_name - workspace id MastRunParameters params - parameters of MAST run</p>
+
+</dd>
+</dl>
+
+<h2 id="get_pspm_collection_from_meme_result">get_pspm_collection_from_meme_result</h2>
+
+<pre><code>  $meme_pspm_collection = $obj-&gt;get_pspm_collection_from_meme_result($meme_run_result)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types11">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$meme_run_result is a MEME.MemeRunResult
+$meme_pspm_collection is a MEME.MemePSPMCollection
+MemeRunResult is a reference to a hash where the following keys are defined:
+	id has a value which is a string
+	source_ref has a value which is a string
+	source_id has a value which is a string
+	timestamp has a value which is a string
+	meme_version has a value which is a string
+	input_file_name has a value which is a string
+	alphabet has a value which is a string
+	training_set has a value which is a reference to a list where each element is a string
+	command_line has a value which is a string
+	mod has a value which is a string
+	nmotifs has a value which is an int
+	evt has a value which is a string
+	object_function has a value which is a string
+	minw has a value which is an int
+	maxw has a value which is an int
+	minic has a value which is a float
+	wg has a value which is an int
+	ws has a value which is an int
+	endgaps has a value which is a string
+	minsites has a value which is an int
+	maxsites has a value which is an int
+	wnsites has a value which is a float
+	prob has a value which is an int
+	spmap has a value which is a string
+	spfuzz has a value which is a string
+	substring has a value which is a string
+	branching has a value which is a string
+	wbranch has a value which is a string
+	prior has a value which is a string
+	b has a value which is a float
+	maxiter has a value which is an int
+	distance has a value which is a float
+	n has a value which is an int
+	n_cap has a value which is an int
+	strands has a value which is a string
+	seed has a value which is an int
+	seqfrac has a value which is an int
+	letter_freq has a value which is a string
+	bg_freq has a value which is a string
+	motifs has a value which is a reference to a list where each element is a MEME.MemeMotif
+	raw_output has a value which is a string
+	params has a value which is a MEME.MemeRunParameters
+MemeMotif is a reference to a hash where the following keys are defined:
+	id has a value which is a string
+	description has a value which is a string
+	width has a value which is an int
+	llr has a value which is a float
+	evalue has a value which is a float
+	raw_output has a value which is a string
+	sites has a value which is a reference to a list where each element is a MEME.MemeSite
+MemeSite is a reference to a hash where the following keys are defined:
+	source_sequence_id has a value which is a string
+	start has a value which is an int
+	pvalue has a value which is a float
+	left_flank has a value which is a string
+	right_flank has a value which is a string
+	sequence has a value which is a string
+MemeRunParameters is a reference to a hash where the following keys are defined:
+	mod has a value which is a string
+	nmotifs has a value which is an int
+	minw has a value which is an int
+	maxw has a value which is an int
+	nsites has a value which is an int
+	minsites has a value which is an int
+	maxsites has a value which is an int
+	pal has a value which is an int
+	revcomp has a value which is an int
+	source_ref has a value which is a MEME.sequence_set_ref
+	source_id has a value which is a string
+sequence_set_ref is a string
+MemePSPMCollection is a reference to a hash where the following keys are defined:
+	id has a value which is a string
+	source_ref has a value which is a MEME.meme_run_result_ref
+	timestamp has a value which is a string
+	description has a value which is a string
+	alphabet has a value which is a string
+	pspms has a value which is a reference to a list where each element is a MEME.MemePSPM
+meme_run_result_ref is a string
+MemePSPM is a reference to a hash where the following keys are defined:
+	id has a value which is a string
+	source_id has a value which is a string
+	description has a value which is a string
+	alphabet has a value which is a string
+	width has a value which is an int
+	nsites has a value which is an int
+	evalue has a value which is a float
+	matrix has a value which is a reference to a list where each element is a reference to a list where each element is a float</pre>
+
+</dd>
+<dt id="Description11">Description</dt>
+<dd>
+
+<p>Converts MemeRunResult into MemePSPMCollection MemeRunResult meme_run_result - source MemeRunResult</p>
+
+</dd>
+</dl>
+
+<h2 id="get_pspm_collection_from_meme_result_from_ws">get_pspm_collection_from_meme_result_from_ws</h2>
+
+<pre><code>  $output_id = $obj-&gt;get_pspm_collection_from_meme_result_from_ws($ws_name, $input_id)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types12">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$ws_name is a string
+$input_id is a string
+$output_id is a string</pre>
+
+</dd>
+<dt id="Description12">Description</dt>
+<dd>
+
+<p>Converts MemeRunResult into MemePSPMCollection and writes the result to workspace string ws_name - workspace id string input_id - KBase ID of source MemeRunResult</p>
+
+</dd>
+</dl>
+
+<h2 id="get_pspm_collection_from_meme_result_job_from_ws">get_pspm_collection_from_meme_result_job_from_ws</h2>
+
+<pre><code>  $job_id = $obj-&gt;get_pspm_collection_from_meme_result_job_from_ws($ws_name, $input_id)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types13">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$ws_name is a string
+$input_id is a MEME.meme_run_result_ref
+$job_id is a string
+meme_run_result_ref is a string</pre>
+
+</dd>
+<dt id="Description13">Description</dt>
+<dd>
+
+<p>Returns ID of job object that contains ID of MemePSPMCollection converted from MemeRunResult string ws_name - workspace id string meme_run_result_id - KBase ID of source MemeRunResult</p>
+
+</dd>
+</dl>
+
+<h1 id="TYPES">TYPES</h1>
+
+<h2 id="sequence_set_ref">sequence_set_ref</h2>
+
+<dl>
+
+<dt id="Description14">Description</dt>
+<dd>
+
+<p>Represents WS KBaseSequences.SequenceSet identifier @id ws KBaseSequences.SequenceSet</p>
+
+</dd>
+<dt id="Definition">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="meme_run_result_ref">meme_run_result_ref</h2>
+
+<dl>
+
+<dt id="Description15">Description</dt>
+<dd>
+
+<p>Represents WS MemeRunResult identifier @id ws MEME.MemeRunResult</p>
+
+</dd>
+<dt id="Definition1">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="meme_pspm_collection_ref">meme_pspm_collection_ref</h2>
+
+<dl>
+
+<dt id="Description16">Description</dt>
+<dd>
+
+<p>Represents WS MemePSPMCollection identifier @id ws MEME.MemePSPMCollection</p>
+
+</dd>
+<dt id="Definition2">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="MemeSite">MemeSite</h2>
+
+<dl>
+
+<dt id="Description17">Description</dt>
+<dd>
+
+<p>Represents a particular site from MEME motif description string source_sequence_id - ID of sequence where the site was found int start - position of site start float pvalue - site P-value string left_flank - sequence of left flank string sequence - sequence of site string right_flank - sequence of right flank</p>
+
+<p>@optional start pvalue left_flank right_flank</p>
+
+</dd>
+<dt id="Definition3">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+source_sequence_id has a value which is a string
+start has a value which is an int
+pvalue has a value which is a float
+left_flank has a value which is a string
+right_flank has a value which is a string
+sequence has a value which is a string</pre>
+
+</dd>
+</dl>
+
+<h2 id="MemeMotif">MemeMotif</h2>
+
+<dl>
+
+<dt id="Description18">Description</dt>
+<dd>
+
+<p>Represents a particular motif found by MEME string id - KBase ID of MemeMotif string description - name of motif or number of motif in collection or anything else int width - width of motif int sites - number of sites float llr - log likelihood ratio of motif float evalue - E-value of motif string raw_output - part of MEME output file with data about this motif list&lt;MemeSite&gt; sites - list of sites</p>
+
+<p>@optional description width llr evalue raw_output</p>
+
+</dd>
+<dt id="Definition4">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+id has a value which is a string
+description has a value which is a string
+width has a value which is an int
+llr has a value which is a float
+evalue has a value which is a float
+raw_output has a value which is a string
+sites has a value which is a reference to a list where each element is a MEME.MemeSite</pre>
+
+</dd>
+</dl>
+
+<h2 id="MemeRunParameters">MemeRunParameters</h2>
+
+<dl>
+
+<dt id="Description19">Description</dt>
+<dd>
+
+<p>Contains parameters of a MEME run string mod - distribution of motifs, acceptable values are &quot;oops&quot;, &quot;zoops&quot;, &quot;anr&quot; int nmotifs - maximum number of motifs to find int minw - minumum motif width int maxw - maximum motif width int nsites - number of sites for each motif int minsites - minimum number of sites for each motif int maxsites - maximum number of sites for each motif int pal - force palindromes, acceptable values are 0 and 1 int revcomp - allow sites on + or - DNA strands, acceptable values are 0 and 1 sequence_set_ref source_ref - WS reference to source SequenceSet object string source_id - id of source SequenceSet object</p>
+
+<p>@optional nmotifs minw maxw nsites minsites maxsites pal revcomp source_ref source_id</p>
+
+</dd>
+<dt id="Definition5">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+mod has a value which is a string
+nmotifs has a value which is an int
+minw has a value which is an int
+maxw has a value which is an int
+nsites has a value which is an int
+minsites has a value which is an int
+maxsites has a value which is an int
+pal has a value which is an int
+revcomp has a value which is an int
+source_ref has a value which is a MEME.sequence_set_ref
+source_id has a value which is a string</pre>
+
+</dd>
+</dl>
+
+<h2 id="MemeRunResult">MemeRunResult</h2>
+
+<dl>
+
+<dt id="Description20">Description</dt>
+<dd>
+
+<p>Represents results of a single MEME run string id - KBase ID of MemeRunResult string source_ref - WS reference to source SequenceSet object string source_id - id of source SequenceSet object string timestamp - timestamp for creation time of collection string version - version of MEME like &quot;MEME version 4.9.0 (Release date: Wed Oct 3 11:07:26 EST 2012)&quot; string input_file_name - name of input file, DATAFILE field of MEME output string alphabet - ALPHABET field of MEME output (like &quot;ACGT&quot;) string training_set - strings from TRAINING SET section, except DATAFILE and ALPHABET fields string command_line - command line of MEME run string mod - value of mod parameter of MEME run int nmotifs - value of nmotifs parameter of MEME run string evt - value of evt parameter of MEME run string object_function - value of object function parameter of MEME run int minw - value of minw parameter of MEME run int maxw - value of maxw parameter of MEME run float minic - value of minic parameter of MEME run int wg - value of wg parameter of MEME run int ws - value of wc parameter of MEME run string endgaps - value of endgaps parameter of MEME run int minsites - value of minsites parameter of MEME run int maxsites - value of maxsites parameter of MEME run float wnsites - value of wnsites parameter of MEME run int prob - value of prob parameter of MEME run string spmap - value of spmsp parameter of MEME run float spfuzz - value of spfuzz parameter of MEME run string substring - value of substring parameter of MEME run string branching - value of branching parameter of MEME run string wbranch - value of wbranch parameter of MEME run string prior - value of prior parameter of MEME run float b - value of b parameter of MEME run int maxiter - value of maxiter parameter of MEME run float distance - value of distance parameter of MEME run int n - value of n parameter of MEME run int n_cap - value of N parameter of MEME run string strands - value of strands parameter of MEME run int seed - value of seed parameter of MEME run int seqfrac - value of seqfrac parameter of MEME run string letter_freq - letter frequencies in dataset string bg_freq - background letter frequencies list&lt;MemeMotif&gt; motifs - A list of all motifs in a collection string raw_output - section of MEME output text file (all before motif data) MemeRunParameters params</p>
+
+<p>@optional source_ref source_id timestamp meme_version input_file_name alphabet training_set command_line mod nmotifs evt object_function minw maxw minic wg ws endgaps minsites maxsites wnsites prob spmap spfuzz substring branching wbranch prior b maxiter distance n n_cap strands seed seqfrac letter_freq bg_freq motifs raw_output</p>
+
+</dd>
+<dt id="Definition6">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+id has a value which is a string
+source_ref has a value which is a string
+source_id has a value which is a string
+timestamp has a value which is a string
+meme_version has a value which is a string
+input_file_name has a value which is a string
+alphabet has a value which is a string
+training_set has a value which is a reference to a list where each element is a string
+command_line has a value which is a string
+mod has a value which is a string
+nmotifs has a value which is an int
+evt has a value which is a string
+object_function has a value which is a string
+minw has a value which is an int
+maxw has a value which is an int
+minic has a value which is a float
+wg has a value which is an int
+ws has a value which is an int
+endgaps has a value which is a string
+minsites has a value which is an int
+maxsites has a value which is an int
+wnsites has a value which is a float
+prob has a value which is an int
+spmap has a value which is a string
+spfuzz has a value which is a string
+substring has a value which is a string
+branching has a value which is a string
+wbranch has a value which is a string
+prior has a value which is a string
+b has a value which is a float
+maxiter has a value which is an int
+distance has a value which is a float
+n has a value which is an int
+n_cap has a value which is an int
+strands has a value which is a string
+seed has a value which is an int
+seqfrac has a value which is an int
+letter_freq has a value which is a string
+bg_freq has a value which is a string
+motifs has a value which is a reference to a list where each element is a MEME.MemeMotif
+raw_output has a value which is a string
+params has a value which is a MEME.MemeRunParameters</pre>
+
+</dd>
+</dl>
+
+<h2 id="MemePSPM">MemePSPM</h2>
+
+<dl>
+
+<dt id="Description21">Description</dt>
+<dd>
+
+<p>Represents a position-specific probability matrix fot MEME motif string id - KBase ID of the matrix object string source_id - KBase ID of source object string description - description of motif string alphabet - ALPHABET field of MEME output (&quot;ACGT&quot; for nucleotide motifs) int width - width of motif int nsites - number of sites float evalue - E-value of motif list&lt;list&lt;float&gt;&gt; matrix - The letter probability matrix is a table of probabilities where the rows are positions in the motif and the columns are letters in the alphabet. The columns are ordered alphabetically so for DNA the first column is A, the second is C, the third is G and the last is T.</p>
+
+<p>@optional source_id description width nsites evalue</p>
+
+</dd>
+<dt id="Definition7">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+id has a value which is a string
+source_id has a value which is a string
+description has a value which is a string
+alphabet has a value which is a string
+width has a value which is an int
+nsites has a value which is an int
+evalue has a value which is a float
+matrix has a value which is a reference to a list where each element is a reference to a list where each element is a float</pre>
+
+</dd>
+</dl>
+
+<h2 id="MemePSPMCollection">MemePSPMCollection</h2>
+
+<dl>
+
+<dt id="Description22">Description</dt>
+<dd>
+
+<p>Represents collection of MemePSPMs string id - KBase ID of MotifPSPMMeme meme_run_result_ref source_ref - WS reference of source object string timestamp - timestamp for creation time of collection string description - user&#39;s description of the collection string alphabet - ALPHABET field of MEME output (&quot;ACGT&quot; for nucleotide motifs) list&lt;MemeMotif&gt; pspms - A list of all MemePSPMs in a collection</p>
+
+<p>@optional source_ref timestamp description</p>
+
+</dd>
+<dt id="Definition8">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+id has a value which is a string
+source_ref has a value which is a MEME.meme_run_result_ref
+timestamp has a value which is a string
+description has a value which is a string
+alphabet has a value which is a string
+pspms has a value which is a reference to a list where each element is a MEME.MemePSPM</pre>
+
+</dd>
+</dl>
+
+<h2 id="TomtomRunParameters">TomtomRunParameters</h2>
+
+<dl>
+
+<dt id="Description23">Description</dt>
+<dd>
+
+<p>Contains parameters of a TOMTOM run meme_pspm_collection_ref query_ref - query motifs for TOMTOM run meme_pspm_collection_ref target_ref - target motifs for TOMTOM run string pspm_id - KBase ID of a MemePSPM from the query collection that will be used. When empty string provided, all motifs in the query collection will be used float thresh - thresh parameter of TOMTOM run, must be smaller than or equal to 1.0 unless evalueTomtom == 1 int evalue - evalue parameter of TOMTOM run (accepable values are &quot;0&quot; and &quot;1&quot;) string dist - value of dist parameter of TOMTOM run (accepable values are &quot;allr&quot;, &quot;ed&quot;, &quot;kullback&quot;, &quot;pearson&quot;, &quot;sandelin&quot;) int internal - internal parameter of TOMTOM run (accepable values are &quot;0&quot; and &quot;1&quot;) int min_overlap - value of min-overlap parameter of TOMTOM run. In case a query motif is smaller than minOverlapTomtom specified, then the motif&#39;s width is used as the minimum overlap for that query.</p>
+
+<p>@optional query_ref target_ref pspm_id thresh evalue dist internal min_overlap</p>
+
+</dd>
+<dt id="Definition9">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+query_ref has a value which is a MEME.meme_pspm_collection_ref
+target_ref has a value which is a MEME.meme_pspm_collection_ref
+pspm_id has a value which is a string
+thresh has a value which is a float
+evalue has a value which is an int
+dist has a value which is a string
+internal has a value which is an int
+min_overlap has a value which is an int</pre>
+
+</dd>
+</dl>
+
+<h2 id="TomtomHit">TomtomHit</h2>
+
+<dl>
+
+<dt id="Description24">Description</dt>
+<dd>
+
+<p>Represents a particluar TOMTOM hit string query_pspm_id - id of query MemePSPM string target_pspm_id - id of target MemePSPM int optimal_offset - Optimal offset: the offset between the query and the target motif float pvalue - p-value float evalue - E-value float qvalue - q-value int overlap - Overlap: the number of positions of overlap between the two motifs. string query_consensus - Query consensus sequence. string target_consensus - Target consensus sequence. string strand - Orientation: Orientation of target motif with respect to query motif.</p>
+
+<p>@optional optimal_offset pvalue evalue qvalue overlap query_consensus target_consensus strand</p>
+
+</dd>
+<dt id="Definition10">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+query_pspm_id has a value which is a string
+target_pspm_id has a value which is a string
+optimal_offset has a value which is an int
+pvalue has a value which is a float
+evalue has a value which is a float
+qvalue has a value which is a float
+overlap has a value which is an int
+query_consensus has a value which is a string
+target_consensus has a value which is a string
+strand has a value which is a string</pre>
+
+</dd>
+</dl>
+
+<h2 id="TomtomRunResult">TomtomRunResult</h2>
+
+<dl>
+
+<dt id="Description25">Description</dt>
+<dd>
+
+<p>Represents result of a single TOMTOM run string id - KBase ID of TomtomRunResult string timestamp - timestamp for creation time of TomtomRunResult TomtomRunParameters params - run parameters list&lt;TomtomHit&gt; hits - A list of all hits found by TOMTOM</p>
+
+<p>@optional timestamp hits</p>
+
+</dd>
+<dt id="Definition11">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+id has a value which is a string
+timestamp has a value which is a string
+params has a value which is a MEME.TomtomRunParameters
+hits has a value which is a reference to a list where each element is a MEME.TomtomHit</pre>
+
+</dd>
+</dl>
+
+<h2 id="MastRunParameters">MastRunParameters</h2>
+
+<dl>
+
+<dt id="Description26">Description</dt>
+<dd>
+
+<p>Contains parameters of a MAST run meme_pspm_collection_ref query_ref - query motifs for MAST run sequence_set_ref target_ref - target sequences for MAST run string pspm_id - KBase ID of a MemePSPM from the query collection that will be used. When empty string provided, all motifs in the query collection will be used float mt - value of mt parameter for MAST run</p>
+
+<p>@optional query_ref target_ref pspm_id mt</p>
+
+</dd>
+<dt id="Definition12">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+query_ref has a value which is a MEME.meme_pspm_collection_ref
+target_ref has a value which is a MEME.sequence_set_ref
+pspm_id has a value which is a string
+mt has a value which is a float</pre>
+
+</dd>
+</dl>
+
+<h2 id="MastHit">MastHit</h2>
+
+<dl>
+
+<dt id="Description27">Description</dt>
+<dd>
+
+<p>Represents a particluar MAST hit string seq_id - name of sequence string strand - strand (&quot;+&quot; or &quot;-&quot;) string pspm_id - id of MemePSPM int hit_start - start position of hit int hit_end - end position of hit float score - hit score float hitPvalue - hit p-value</p>
+
+<p>@optional strand hit_start hit_end score hit_pvalue</p>
+
+</dd>
+<dt id="Definition13">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+seq_id has a value which is a string
+pspm_id has a value which is a string
+strand has a value which is a string
+hit_start has a value which is an int
+hit_end has a value which is an int
+score has a value which is a float
+hit_pvalue has a value which is a float</pre>
+
+</dd>
+</dl>
+
+<h2 id="MastRunResult">MastRunResult</h2>
+
+<dl>
+
+<dt id="Description28">Description</dt>
+<dd>
+
+<p>Represents result of a single MAST run string id - KBase ID of MastRunResult string timestamp - timestamp for creation time of MastRunResult MastRunParameters params - run parameters list&lt;MastHit&gt; hits - A list of all hits found by MAST</p>
+
+<p>@optional timestamp hits</p>
+
+</dd>
+<dt id="Definition14">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+id has a value which is a string
+timestamp has a value which is a string
+params has a value which is a MEME.MastRunParameters
+hits has a value which is a reference to a list where each element is a MEME.MastHit</pre>
+
+</dd>
+</dl>
+
+
+</body>
+
+</html>
+
+

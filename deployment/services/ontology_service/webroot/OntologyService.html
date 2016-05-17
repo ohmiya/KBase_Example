@@ -1,0 +1,1005 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title></title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:root@localhost" />
+</head>
+
+<body style="background-color: white">
+
+
+
+<ul id="index">
+  <li><a href="#NAME">NAME</a></li>
+  <li><a href="#DESCRIPTION">DESCRIPTION</a>
+    <ul>
+      <li><a href="#get_goidlist">get_goidlist</a></li>
+      <li><a href="#get_go_description">get_go_description</a></li>
+      <li><a href="#get_go_enrichment">get_go_enrichment</a></li>
+      <li><a href="#get_go_annotation">get_go_annotation</a></li>
+      <li><a href="#association_test">association_test</a></li>
+    </ul>
+  </li>
+  <li><a href="#TYPES">TYPES</a>
+    <ul>
+      <li><a href="#Species">Species</a></li>
+      <li><a href="#GoID">GoID</a></li>
+      <li><a href="#ontology_id">ontology_id</a></li>
+      <li><a href="#GoDesc">GoDesc</a></li>
+      <li><a href="#ontology_description">ontology_description</a></li>
+      <li><a href="#GeneID">GeneID</a></li>
+      <li><a href="#gene_id">gene_id</a></li>
+      <li><a href="#EvidenceCode">EvidenceCode</a></li>
+      <li><a href="#evidence_code">evidence_code</a></li>
+      <li><a href="#Domain">Domain</a></li>
+      <li><a href="#domain">domain</a></li>
+      <li><a href="#TestType">TestType</a></li>
+      <li><a href="#test_type">test_type</a></li>
+      <li><a href="#GoIDList">GoIDList</a></li>
+      <li><a href="#ontology_id_list">ontology_id_list</a></li>
+      <li><a href="#GoDescList">GoDescList</a></li>
+      <li><a href="#ontology_description_list">ontology_description_list</a></li>
+      <li><a href="#GeneIDList">GeneIDList</a></li>
+      <li><a href="#gene_id_list">gene_id_list</a></li>
+      <li><a href="#DomainList">DomainList</a></li>
+      <li><a href="#domain_list">domain_list</a></li>
+      <li><a href="#StringArray">StringArray</a></li>
+      <li><a href="#string_list">string_list</a></li>
+      <li><a href="#EvidenceCodeList">EvidenceCodeList</a></li>
+      <li><a href="#ontology_type">ontology_type</a></li>
+      <li><a href="#GoTermInfo">GoTermInfo</a></li>
+      <li><a href="#GoTermInfoList">GoTermInfoList</a></li>
+      <li><a href="#GoIDMap2GoTermInfo">GoIDMap2GoTermInfo</a></li>
+      <li><a href="#GeneIDMap2GoInfo">GeneIDMap2GoInfo</a></li>
+      <li><a href="#Enrichment">Enrichment</a></li>
+      <li><a href="#EnrichmentList">EnrichmentList</a></li>
+      <li><a href="#OntologyAnnotation">OntologyAnnotation</a></li>
+      <li><a href="#ontology_annotation_list">ontology_annotation_list</a></li>
+      <li><a href="#GeneAnnotations">GeneAnnotations</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="NAME">NAME</h1>
+
+<p>Bio::KBase::OntologyService::Client</p>
+
+<h1 id="DESCRIPTION">DESCRIPTION</h1>
+
+<p>This module provides public interface/APIs for KBase gene ontology (GO) services in a species-independent manner. It encapsulates the basic functionality of extracting domain ontologies (e.g. biological process, molecular function, cellular process) of interest for a given set of species specific genes. It only accepts KBase gene ids. External gene ids need to be converted to KBase ids. Additionally, it also allows gene ontology enrichment analysis (&quot;hypergeometric&quot;) to be performed on a set of genes that identifies statistically overrepresented GO terms within given gene sets, say for example, GO enrichment of over-expressed genes in drought stress in plant roots. To support these key features, currently this modules provides five API-functions that are backed by custom defined data structures. Majority of these API-functions accept a list of input items (majority of them being text strings) such as list of gene-ids, list of go-ids, list of ontology-domains, and Test type ( &quot;hypergeometric&quot;) and return the requested results as tabular dataset.</p>
+
+<h2 id="get_goidlist">get_goidlist</h2>
+
+<pre><code>  $results = $obj-&gt;get_goidlist($geneIDList, $domainList, $ecList)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$geneIDList is a GeneIDList
+$domainList is a DomainList
+$ecList is an EvidenceCodeList
+$results is a GeneIDMap2GoInfo
+GeneIDList is a reference to a list where each element is a GeneID
+GeneID is a string
+DomainList is a reference to a list where each element is a Domain
+Domain is a string
+EvidenceCodeList is a reference to a list where each element is an EvidenceCode
+EvidenceCode is a string
+GeneIDMap2GoInfo is a reference to a hash where the key is a GeneID and the value is a GoIDMap2GoTermInfo
+GoIDMap2GoTermInfo is a reference to a hash where the key is a GoID and the value is a GoTermInfoList
+GoID is a string
+GoTermInfoList is a reference to a list where each element is a GoTermInfo
+GoTermInfo is a reference to a hash where the following keys are defined:
+	domain has a value which is a Domain
+	ec has a value which is an EvidenceCode
+	desc has a value which is a GoDesc
+GoDesc is a string</pre>
+
+</dd>
+<dt id="Description">Description</dt>
+<dd>
+
+<p>This function call accepts three parameters: a list of kbase gene-identifiers, a list of ontology domains, and a list of evidence codes. The list of gene identifiers cannot be empty; however the list of ontology domains and the list of evidence codes can be empty. If any of the last two lists is not empty then the gene-id and go-id pairs retrieved from KBase are further filtered by using the desired ontology domains and/or evidence codes supplied as input. So, if you don&#39;t want to filter the initial results then it is recommended to provide empty domain and evidence code lists. Finally, this function returns a mapping of kbase gene id to go-ids along with go-description, ontology domain, and evidence code; note that in the returned table of results, each gene-id is associated with a list of one of more go-ids. Also, if no species is provided as input then by default, Arabidopsis thaliana is used as the input species.</p>
+
+</dd>
+</dl>
+
+<h2 id="get_go_description">get_go_description</h2>
+
+<pre><code>  $results = $obj-&gt;get_go_description($goIDList)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types1">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$goIDList is a GoIDList
+$results is a reference to a hash where the key is a GoID and the value is a StringArray
+GoIDList is a reference to a list where each element is a GoID
+GoID is a string
+StringArray is a reference to a list where each element is a string</pre>
+
+</dd>
+<dt id="Description1">Description</dt>
+<dd>
+
+<p>Extract GO term description for a given list of GO identifiers. This function expects an input list of GO-ids (white space or comman separated) and returns a table of three columns, first column being the GO ids, the second column is the GO description and third column is GO domain (biological process, molecular function, cellular component</p>
+
+</dd>
+</dl>
+
+<h2 id="get_go_enrichment">get_go_enrichment</h2>
+
+<pre><code>  $results = $obj-&gt;get_go_enrichment($geneIDList, $domainList, $ecList, $type, $ontologytype)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types2">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$geneIDList is a GeneIDList
+$domainList is a DomainList
+$ecList is an EvidenceCodeList
+$type is a TestType
+$ontologytype is an ontology_type
+$results is an EnrichmentList
+GeneIDList is a reference to a list where each element is a GeneID
+GeneID is a string
+DomainList is a reference to a list where each element is a Domain
+Domain is a string
+EvidenceCodeList is a reference to a list where each element is an EvidenceCode
+EvidenceCode is a string
+TestType is a string
+ontology_type is a string
+EnrichmentList is a reference to a list where each element is an Enrichment
+Enrichment is a reference to a hash where the following keys are defined:
+	goID has a value which is a GoID
+	goDesc has a value which is a GoDesc
+	pvalue has a value which is a float
+GoID is a string
+GoDesc is a string</pre>
+
+</dd>
+<dt id="Description2">Description</dt>
+<dd>
+
+<p>For a given list of kbase gene ids from a particular genome (for example &quot;Athaliana&quot; ) find out the significantly enriched GO terms in your gene set. This function accepts four parameters: A list of kbase gene-identifiers, a list of ontology domains (e.g.&quot;biological process&quot;, &quot;molecular function&quot;, &quot;cellular component&quot;), a list of evidence codes (e.g.&quot;IEA&quot;,&quot;IDA&quot;,&quot;IEP&quot; etc.), and test type (e.g. &quot;hypergeometric&quot;). The list of kbase gene identifiers cannot be empty; however the list of ontology domains and the list of evidence codes can be empty. If any of these two lists is not empty then the gene-id and the go-id pairs retrieved from KBase are further filtered by using the desired ontology domains and/or evidence codes supplied as input. So, if you don&#39;t want to filter the initial results then it is recommended to provide empty domain and evidence code lists. Final filtered list of the kbase gene-id to go-ids mapping is used to calculate GO enrichment using hypergeometric test and provides pvalues.The default pvalue cutoff is used as 0.05. The current released version ignores test type and by default, it uses hypergeometric test. So even if you do not provide TestType, it will do hypergeometric test.</p>
+
+</dd>
+</dl>
+
+<h2 id="get_go_annotation">get_go_annotation</h2>
+
+<pre><code>  $results = $obj-&gt;get_go_annotation($geneIDList)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types3">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$geneIDList is a GeneIDList
+$results is a GeneAnnotations
+GeneIDList is a reference to a list where each element is a GeneID
+GeneID is a string
+GeneAnnotations is a reference to a hash where the following keys are defined:
+	gene_enrichment_annotations has a value which is a reference to a hash where the key is a gene_id and the value is an ontology_annotation_list
+gene_id is a string
+ontology_annotation_list is a reference to a list where each element is an OntologyAnnotation
+OntologyAnnotation is a reference to a hash where the following keys are defined:
+	ontology_id has a value which is a string
+	ontology_type has a value which is a string
+	ontology_description has a value which is a string
+	p_value has a value which is a string</pre>
+
+</dd>
+<dt id="Description3">Description</dt>
+<dd>
+
+<p>Returns the precomputed annotation with validation GO terms</p>
+
+</dd>
+</dl>
+
+<h2 id="association_test">association_test</h2>
+
+<pre><code>  $results = $obj-&gt;association_test($gene_list, $ws_name, $in_obj_id, $out_obj_id, $type, $correction_method, $cut_off)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types4">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$gene_list is a GeneIDList
+$ws_name is a string
+$in_obj_id is a string
+$out_obj_id is a string
+$type is a TestType
+$correction_method is a string
+$cut_off is a float
+$results is a reference to a hash where the key is a string and the value is a string
+GeneIDList is a reference to a list where each element is a GeneID
+GeneID is a string
+TestType is a string</pre>
+
+</dd>
+<dt id="Description4">Description</dt>
+<dd>
+
+<p>Association Test gene_list is tested against each cluster in a network typed object with test method (TestType) and p-value correction method (correction_method). The current correction_method is either &quot;none&quot; or &quot;bonferroni&quot; and the default is &quot;none&quot; if it is not specified. The current test type, by default, uses hypergeometric test. Even if you do not provide TestType, it will do hypergeometric test.</p>
+
+</dd>
+</dl>
+
+<h1 id="TYPES">TYPES</h1>
+
+<h2 id="Species">Species</h2>
+
+<dl>
+
+<dt id="Description5">Description</dt>
+<dd>
+
+<p>Plant Species names.</p>
+
+<pre><code>     The current list of plant species includes: 
+     Alyrata: Arabidopsis lyrata
+     Athaliana: Arabidopsis thaliana
+     Bdistachyon: Brachypodium distachyon
+     Creinhardtii: Chlamydomonas reinhardtii
+     Gmax: Glycine max
+     Oglaberrima: Oryza glaberrima
+     Oindica: Oryza sativa indica
+     Osativa: Oryza sativa japonica
+     Ptrichocarpa: Populus trichocarpa 
+     Sbicolor: Sorghum bicolor 
+     Smoellendorffii:  Selaginella moellendorffii
+     Vvinifera: Vitis vinefera 
+     Zmays: Zea mays</code></pre>
+
+</dd>
+<dt id="Definition">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="GoID">GoID</h2>
+
+<dl>
+
+<dt id="Description6">Description</dt>
+<dd>
+
+<p>GoID : Unique GO term id (Source: external Gene Ontology database - http://www.geneontology.org/)</p>
+
+</dd>
+<dt id="Definition1">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="ontology_id">ontology_id</h2>
+
+<dl>
+
+<dt id="Description7">Description</dt>
+<dd>
+
+<p>GoID : Unique GO term id (Source: external Gene Ontology database - http://www.geneontology.org/)</p>
+
+</dd>
+<dt id="Definition2">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="GoDesc">GoDesc</h2>
+
+<dl>
+
+<dt id="Description8">Description</dt>
+<dd>
+
+<p>GoDesc : Human readable text description of the corresponding GO term</p>
+
+</dd>
+<dt id="Definition3">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="ontology_description">ontology_description</h2>
+
+<dl>
+
+<dt id="Description9">Description</dt>
+<dd>
+
+<p>GoDesc : Human readable text description of the corresponding GO term</p>
+
+</dd>
+<dt id="Definition4">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="GeneID">GeneID</h2>
+
+<dl>
+
+<dt id="Description10">Description</dt>
+<dd>
+
+<p>Unique identifier of a species specific Gene (aka Feature entity in KBase parlence). This ID is an external identifier that exists in the public databases such as Gramene, Ensembl, NCBI etc.</p>
+
+</dd>
+<dt id="Definition5">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="gene_id">gene_id</h2>
+
+<dl>
+
+<dt id="Description11">Description</dt>
+<dd>
+
+<p>Unique identifier of a species specific Gene (aka Feature entity in KBase parlence). This ID is an external identifier that exists in the public databases such as Gramene, Ensembl, NCBI etc.</p>
+
+</dd>
+<dt id="Definition6">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="EvidenceCode">EvidenceCode</h2>
+
+<dl>
+
+<dt id="Description12">Description</dt>
+<dd>
+
+<p>Evidence code indicates how the annotation to a particular term is supported. The list of evidence codes includes Experimental, Computational Analysis, Author statement, Curator statement, Automatically assigned and Obsolete evidence codes. This list will be useful in selecting the correct evidence code for an annotation. The details are given below:</p>
+
+<p>+ Experimental Evidence Codes EXP: Inferred from Experiment IDA: Inferred from Direct Assay IPI: Inferred from Physical Interaction IMP: Inferred from Mutant Phenotype IGI: Inferred from Genetic Interaction IEP: Inferred from Expression Pattern</p>
+
+<p>+ Computational Analysis Evidence Codes ISS: Inferred from Sequence or Structural Similarity ISO: Inferred from Sequence Orthology ISA: Inferred from Sequence Alignment ISM: Inferred from Sequence Model IGC: Inferred from Genomic Context IBA: Inferred from Biological aspect of Ancestor IBD: Inferred from Biological aspect of Descendant IKR: Inferred from Key Residues IRD: Inferred from Rapid Divergence RCA: inferred from Reviewed Computational Analysis</p>
+
+<p>+ Author Statement Evidence Codes TAS: Traceable Author Statement NAS: Non-traceable Author Statement</p>
+
+<p>+ Curator Statement Evidence Codes IC: Inferred by Curator ND: No biological Data available</p>
+
+<p>+ Automatically-assigned Evidence Codes IEA: Inferred from Electronic Annotation</p>
+
+<p>+ Obsolete Evidence Codes NR: Not Recorded</p>
+
+</dd>
+<dt id="Definition7">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="evidence_code">evidence_code</h2>
+
+<dl>
+
+<dt id="Description13">Description</dt>
+<dd>
+
+<p>Evidence code indicates how the annotation to a particular term is supported. The list of evidence codes includes Experimental, Computational Analysis, Author statement, Curator statement, Automatically assigned and Obsolete evidence codes. This list will be useful in selecting the correct evidence code for an annotation. The details are given below:</p>
+
+<p>+ Experimental Evidence Codes EXP: Inferred from Experiment IDA: Inferred from Direct Assay IPI: Inferred from Physical Interaction IMP: Inferred from Mutant Phenotype IGI: Inferred from Genetic Interaction IEP: Inferred from Expression Pattern</p>
+
+<p>+ Computational Analysis Evidence Codes ISS: Inferred from Sequence or Structural Similarity ISO: Inferred from Sequence Orthology ISA: Inferred from Sequence Alignment ISM: Inferred from Sequence Model IGC: Inferred from Genomic Context IBA: Inferred from Biological aspect of Ancestor IBD: Inferred from Biological aspect of Descendant IKR: Inferred from Key Residues IRD: Inferred from Rapid Divergence RCA: inferred from Reviewed Computational Analysis</p>
+
+<p>+ Author Statement Evidence Codes TAS: Traceable Author Statement NAS: Non-traceable Author Statement</p>
+
+<p>+ Curator Statement Evidence Codes IC: Inferred by Curator ND: No biological Data available</p>
+
+<p>+ Automatically-assigned Evidence Codes IEA: Inferred from Electronic Annotation</p>
+
+<p>+ Obsolete Evidence Codes NR: Not Recorded</p>
+
+</dd>
+<dt id="Definition8">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="Domain">Domain</h2>
+
+<dl>
+
+<dt id="Description14">Description</dt>
+<dd>
+
+<p>Captures which branch of knowledge the GO terms refers to e.g. &quot;biological_process&quot;, &quot;molecular_function&quot;, &quot;cellular_component&quot; etc.</p>
+
+</dd>
+<dt id="Definition9">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="domain">domain</h2>
+
+<dl>
+
+<dt id="Description15">Description</dt>
+<dd>
+
+<p>Captures which branch of knowledge the GO terms refers to e.g. &quot;biological_process&quot;, &quot;molecular_function&quot;, &quot;cellular_component&quot; etc.</p>
+
+</dd>
+<dt id="Definition10">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="TestType">TestType</h2>
+
+<dl>
+
+<dt id="Description16">Description</dt>
+<dd>
+
+<p>Test type, whether it&#39;s &quot;hypergeometric&quot; and &quot;chisq&quot;</p>
+
+</dd>
+<dt id="Definition11">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="test_type">test_type</h2>
+
+<dl>
+
+<dt id="Description17">Description</dt>
+<dd>
+
+<p>Test type, whether it&#39;s &quot;hypergeometric&quot; and &quot;chisq&quot;</p>
+
+</dd>
+<dt id="Definition12">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="GoIDList">GoIDList</h2>
+
+<dl>
+
+<dt id="Description18">Description</dt>
+<dd>
+
+<p>A list of ontology identifiers</p>
+
+</dd>
+<dt id="Definition13">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a list where each element is a GoID
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="ontology_id_list">ontology_id_list</h2>
+
+<dl>
+
+<dt id="Description19">Description</dt>
+<dd>
+
+<p>A list of ontology identifiers</p>
+
+</dd>
+<dt id="Definition14">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a list where each element is an ontology_id
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="GoDescList">GoDescList</h2>
+
+<dl>
+
+<dt id="Description20">Description</dt>
+<dd>
+
+<p>a list of GO terms description</p>
+
+</dd>
+<dt id="Definition15">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a list where each element is a GoDesc
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="ontology_description_list">ontology_description_list</h2>
+
+<dl>
+
+<dt id="Description21">Description</dt>
+<dd>
+
+<p>a list of GO terms description</p>
+
+</dd>
+<dt id="Definition16">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a list where each element is an ontology_description
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="GeneIDList">GeneIDList</h2>
+
+<dl>
+
+<dt id="Description22">Description</dt>
+<dd>
+
+<p>A list of gene identifiers from same species</p>
+
+</dd>
+<dt id="Definition17">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a list where each element is a GeneID
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="gene_id_list">gene_id_list</h2>
+
+<dl>
+
+<dt id="Description23">Description</dt>
+<dd>
+
+<p>A list of gene identifiers from same species</p>
+
+</dd>
+<dt id="Definition18">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a list where each element is a gene_id
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="DomainList">DomainList</h2>
+
+<dl>
+
+<dt id="Description24">Description</dt>
+<dd>
+
+<p>A list of ontology domains</p>
+
+</dd>
+<dt id="Definition19">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a list where each element is a Domain
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="domain_list">domain_list</h2>
+
+<dl>
+
+<dt id="Description25">Description</dt>
+<dd>
+
+<p>A list of ontology domains</p>
+
+</dd>
+<dt id="Definition20">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a list where each element is a domain
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="StringArray">StringArray</h2>
+
+<dl>
+
+<dt id="Definition21">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a list where each element is a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="string_list">string_list</h2>
+
+<dl>
+
+<dt id="Definition22">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a list where each element is a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="EvidenceCodeList">EvidenceCodeList</h2>
+
+<dl>
+
+<dt id="Description26">Description</dt>
+<dd>
+
+<p>A list of ontology term evidence codes. One ontology term can have one or more evidence codes.</p>
+
+</dd>
+<dt id="Definition23">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a list where each element is an EvidenceCode
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="ontology_type">ontology_type</h2>
+
+<dl>
+
+<dt id="Definition24">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="GoTermInfo">GoTermInfo</h2>
+
+<dl>
+
+<dt id="Definition25">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+domain has a value which is a Domain
+ec has a value which is an EvidenceCode
+desc has a value which is a GoDesc</pre>
+
+</dd>
+</dl>
+
+<h2 id="GoTermInfoList">GoTermInfoList</h2>
+
+<dl>
+
+<dt id="Definition26">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a list where each element is a GoTermInfo
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="GoIDMap2GoTermInfo">GoIDMap2GoTermInfo</h2>
+
+<dl>
+
+<dt id="Definition27">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the key is a GoID and the value is a GoTermInfoList
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="GeneIDMap2GoInfo">GeneIDMap2GoInfo</h2>
+
+<dl>
+
+<dt id="Definition28">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the key is a GeneID and the value is a GoIDMap2GoTermInfo
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="Enrichment">Enrichment</h2>
+
+<dl>
+
+<dt id="Description27">Description</dt>
+<dd>
+
+<p>A composite data structure to capture ontology enrichment type object</p>
+
+</dd>
+<dt id="Definition29">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+goID has a value which is a GoID
+goDesc has a value which is a GoDesc
+pvalue has a value which is a float</pre>
+
+</dd>
+</dl>
+
+<h2 id="EnrichmentList">EnrichmentList</h2>
+
+<dl>
+
+<dt id="Description28">Description</dt>
+<dd>
+
+<p>A list of ontology enrichment objects</p>
+
+</dd>
+<dt id="Definition30">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a list where each element is an Enrichment
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="OntologyAnnotation">OntologyAnnotation</h2>
+
+<dl>
+
+<dt id="Description29">Description</dt>
+<dd>
+
+<p>Structure for OntologyAnnotation object @optional p_value</p>
+
+</dd>
+<dt id="Definition31">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+ontology_id has a value which is a string
+ontology_type has a value which is a string
+ontology_description has a value which is a string
+p_value has a value which is a string</pre>
+
+</dd>
+</dl>
+
+<h2 id="ontology_annotation_list">ontology_annotation_list</h2>
+
+<dl>
+
+<dt id="Definition32">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a list where each element is an OntologyAnnotation
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="GeneAnnotations">GeneAnnotations</h2>
+
+<dl>
+
+<dt id="Description30">Description</dt>
+<dd>
+
+<p>Structure for GeneAnnotations</p>
+
+</dd>
+<dt id="Definition33">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+gene_enrichment_annotations has a value which is a reference to a hash where the key is a gene_id and the value is an ontology_annotation_list</pre>
+
+</dd>
+</dl>
+
+
+</body>
+
+</html>
+
+

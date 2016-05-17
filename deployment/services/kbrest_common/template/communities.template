@@ -1,0 +1,131 @@
+use strict;
+use warnings;
+use Config::Simple;
+
+use Getopt::Long;
+
+use LWP::UserAgent;
+use JSON;
+
+use Bio::KBase::IDServer::Client;
+
+sub help {
+  my $helptext = qq~
+NAME
+    ##resource## -- ##description##
+
+VERSION
+    ##version##
+
+SYNOPSIS
+    ##resource## [ ##optionlist default####optionlist##]
+
+DESCRIPTION
+    ##long description##
+
+  Options
+    ##options detailed default##
+    ##optionsdetailed##
+
+  Output
+    ##outputs##
+
+EXAMPLES
+    ##example##
+
+SEE ALSO
+    ##related##
+
+AUTHORS
+    ##authors##
+
+~;
+  print $helptext;
+}
+
+my $cfg = new Config::Simple($ENV{'KB_TOP'}.'/deployment.cfg');
+
+my $HOST      = $cfg->param('##section##.api_host').'/##item##';
+my $text      = '';
+my $user      = '';
+my $pass      = '';
+my $token     = '';
+my $verbosity = 'minimal';
+my $help      = '';
+my $webkey    = '';
+my $offset    = '0';
+my $limit     = '10';
+my $id        = undef;
+ ##optionvars## 
+
+GetOptions ( 'user=s' => \$user,
+             'pass=s' => \$pass,
+             'token=s' => \$token,
+             'verbosity=s' => \$verbosity,
+             'help' => \$help,
+             'webkey=s' => \$webkey,
+             'limit=s' => \$limit,
+             'offset=s' => \$offset,
+             'text=s' => \$text,
+	         'id=s' => \$id ##getopts##);
+
+if ($help) {
+  &help();
+  exit 0;
+}
+
+if ($user || $pass) {
+    if ($user && $pass) {
+	my $agent = LWP::UserAgent->new;
+	$agent->protocols_allowed( [ 'https' ] );
+	my $request = HTTP::Request->new("POST", "https://nexus.api.globusonline.org/goauth/token?grant_type=client_credentials" );
+	$request->authorization_basic($user, $pass);
+	my $response = $agent->request($request)->content();
+	my $ustruct = "";
+	eval {
+	    my $json = new JSON;
+	    $ustruct = $json->decode($response);
+	};
+	if ($@) {
+	    die "could not reach auth server";
+	} else {
+	    if ($ustruct->{access_token}) {
+		$token = $ustruct->{access_token};
+	    } else {
+		die "authentication failed";
+	    }
+	}
+    } else {
+	die "you must supply both username and password";
+    }
+}
+
+if ($id && $id =~/^kb\|/) {
+  my $id_server_url = "http://www.kbase.us/services/idserver";
+  my $idserver = Bio::KBase::IDServer::Client->new($id_server_url);
+  my $return = $idserver->kbase_ids_to_external_ids( [ $id ]);
+  $id = $return->{$id}->[1];
+}
+
+my $subresource = "##subitem##";
+my $additionals = "";##additionals## 
+
+my $last = "";
+if ($id) {
+    $last = "/$id";
+} elsif ($text) {
+    $last = "/$text";
+}
+
+my $url = $HOST.$subresource.$last."?verbosity=$verbosity".$additionals;
+if ($webkey) {
+  $url .= "&auth=".$webkey;
+}
+my $ua = LWP::UserAgent->new;
+if ($token) {
+  $ua->default_header('user_auth' => $token);
+}
+if (exists $ENV{'KB_AUTH_TOKEN'}) {
+  $ua->default_header('user_auth' => $ENV{'KB_AUTH_TOKEN'});
+}
+print $ua->get($url)->content;

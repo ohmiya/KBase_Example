@@ -1,0 +1,193 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>authorization_server</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:root@localhost" />
+</head>
+
+<body style="background-color: white">
+
+
+
+<ul id="index">
+  <li><a href="#Bio::KBase::AuthUser">Bio::KBase::AuthUser</a>
+    <ul>
+      <li><a href="#Examples">Examples</a></li>
+      <li><a href="#Caching">Caching</a></li>
+      <li><a href="#Class-Variables">Class Variables</a></li>
+      <li><a href="#Instance-Variables">Instance Variables</a></li>
+      <li><a href="#Methods">Methods</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="Bio::KBase::AuthUser">Bio::KBase::AuthUser</h1>
+
+<p>User object for KBase authentication. Stores user profile and authentication information, including oauth credentials.</p>
+
+<p>This is a container for user attributes - creating, destroying them in the user database is handled by the Bio::KBase::AuthDirectory class.</p>
+
+<h2 id="Examples">Examples</h2>
+
+<pre><code>   my $user = Bio::KBase::AuthUser-&gt;new()
+   # fetch from profile service
+   my $token = Bio::KBase::AuthToken-&gt;new( user_id =&gt; &quot;mrbig&quot;, password =&gt; &#39;bigP@SSword&#39;);
+   $user-&gt;get( token =&gt; $token-&gt;token );
+   # $user&#39;s attributes should now be populated.</code></pre>
+
+<h2 id="Caching">Caching</h2>
+
+<pre><code>   This class implements a user profile cache that operates on a LRU algorithm. The default lifespan of a user profile in the cache is 10 minutes, but it can be set in ~/.kbase_config file to a different value. Note that while user profile information such as name, email and user_id are cached, group membership is not, this is to facilitate the timely updating of access control lists.</code></pre>
+
+<h2 id="Class-Variables">Class Variables</h2>
+
+<dl>
+
+<dt id="Conf"><b>%Conf</b></dt>
+<dd>
+
+<p>This contains the configuration directives from the user&#39;s ~/.kbase_config under the section header &quot;authentication&quot;. All the config settings can be accessed via $Bio::KBase::AuthUser::Conf{ &#39;authentication.SOMETHING&#39;}</p>
+
+</dd>
+<dt id="VERSION"><b>$VERSION</b></dt>
+<dd>
+
+<p>This is the version string (pulled from the Bio::KBase::Auth module)</p>
+
+</dd>
+<dt id="ProfileCache"><b>$ProfileCache</b></dt>
+<dd>
+
+<p>This is a CSV formatted string that contains 3 fields: last seen time, hash key, value</p>
+
+<p>The last seen time is the output from time() when the record was last request or loaded</p>
+
+<p>The hash key is a salted SHA1 hash of the token used to acquire a user profile,</p>
+
+<p>The value is the base64 encoded JSON profile data retrieved from the profile service</p>
+
+<p>When a profile entry has been expired due to TTL, the last seen value is set to 0 and the key and value are set to &quot;_expired&quot;. Eventually this entry will be pushed out of the cache entirely as new profiles are pulled in.</p>
+
+<p>The cache is searched and timestamps are updated using perl regex functions to achieve good performance. New entries are added and deleted using split(), sort() and join() for performance as well. When the Shared memory caching option is enabled ( with authentication.shm_cache in the config file), this string is tied into an IPC::Shareable memory region.</p>
+
+</dd>
+<dt id="ProfileCacheSize"><b>$ProfileCacheSize</b></dt>
+<dd>
+
+<p>This integrer is maximum the number of profiles that are kept in the cache. Each time that a new profile is added, the entries are sorted in descending time order, and any entries above this number are dropped. This can be configured via the authentication.profile_cache_size directive.</p>
+
+</dd>
+<dt id="ProfileCacheTTL"><b>$ProfileCacheTTL</b></dt>
+<dd>
+
+<p>The number of seconds that a profile entry can remain in the cache since the last time it was accessed. Set with the authentication.profile_cache_ttl</p>
+
+</dd>
+<dt id="CacheKeySalt"><b>$CacheKeySalt</b></dt>
+<dd>
+
+<p>String used to salt the sha1 hash calculated for cache keys. Set using authentication.cache_salt</p>
+
+</dd>
+</dl>
+
+<h2 id="Instance-Variables">Instance Variables</h2>
+
+<dl>
+
+<dt id="user_id-string"><b>user_id</b> (string)</dt>
+<dd>
+
+<p>Username/user_id for this user.</p>
+
+</dd>
+<dt id="error_message-string"><b>error_message</b> (string)</dt>
+<dd>
+
+<p>contains error messages, if any, from most recent method call</p>
+
+</dd>
+<dt id="groups-hashref"><b>groups</b> (hashref)</dt>
+<dd>
+
+<p>A hash reference keyed on group names (value is simple 1) for storing Unix style groups that the user is a member of</p>
+
+</dd>
+<dt id="oauth_creds-hash"><b>oauth_creds</b> (hash)</dt>
+<dd>
+
+<p>reference to hash array keyed on consumer_keys that stores public keys, private keys, verifiers and tokens associated with this user</p>
+
+</dd>
+<dt id="name-string"><b>name</b> (string)</dt>
+<dd>
+
+<p>End-User&#39;s full name in displayable form including all name parts, ordered according to End-User&#39;s locale and preferences.</p>
+
+</dd>
+<dt id="email-string"><b>email</b> (string)</dt>
+<dd>
+
+<p>The End-User&#39;s preferred e-mail address.</p>
+
+</dd>
+<dt id="verified-boolean"><b>verified</b> (boolean)</dt>
+<dd>
+
+<p>True if the End-User&#39;s e-mail address has been verified; otherwise false.</p>
+
+</dd>
+</dl>
+
+<h2 id="Methods">Methods</h2>
+
+<dl>
+
+<dt id="new-token-token-user_id-user-groups-group1-group2"><b>new</b>( [ token =&gt; token, user_id =&gt; user, groups =&gt; \[ &#39;group1&#39;, &#39;group2&#39;], ...] )</dt>
+<dd>
+
+<p>returns a Bio::KBase::AuthUser reference. Parameters are a hash used to initialize a new user object. As a convenience, you can specify a field &quot;token&quot; and give it the value of an AuthToken, and the library will force it into the $self-&gt;oauth_creds-&gt;auth_token and then run the get() method to fetch the user record from the Globus Nexus service.</p>
+
+</dd>
+<dt id="user_id-string1"><b>user_id</b>(string)</dt>
+<dd>
+
+<p>returns a string representing the user_id of the user in the AuthUser object</p>
+
+</dd>
+<dt id="get-token-string-nocache-0-1"><b>get</b>( [token =&gt; string, nocache =&gt; 0/1])</dt>
+<dd>
+
+<p>Returns $self. If given a token string as its only argument, fetch the user profile associated with the token from Globus Nexus.</p>
+
+<pre><code>   Example:
+   $token = &quot;un=sychan|clientid=sychan|expiry=1376426267|SigningSubject=https://graph.api.go.sandbox.globuscs.info/goauth/keys/da0a4e96-e22a-11e1-9b09-1231381bc4c2|sig=8ef2ff2027b60165d5af12db70f5eba8f239fc42140de82ec262a8b4e525cc53a2866bc9da9efcf5faa893875ecea7fb5c7d3563f3f2dae48cbc0bd7dabaf2ce48e76ea0f755f15d7c1b24d8f9adf7dd0&quot;;
+
+   $user = new Bio::KBase::AuthUser;
+   $user-&gt;get( token =&gt; $token);</code></pre>
+
+<p>The AuthUser module implements caching of the user profiles, and if you want to bypass this caching set the nocache parameter to a true value.</p>
+
+</dd>
+<dt id="update-new_attr_values"><b>update</b>( %new_attr_values)</dt>
+<dd>
+
+<p>Returns $self. Updates the user&#39;s profile if we have appropriate login credentials. Takes a hash list of profile attributes and updates those values on the profile service. Returns a reference to the updated AuthUser object. Note that the API supports arbitrary custom fields, so if you would like to add a new attribute to the user profile, simply call this with the appropriater hash/value parameters</p>
+
+<pre><code>   Example:
+   # assuming we have a legit $token for the user
+   $user = new Bio::KBase::AuthUser;
+   $user-&gt;get( $token); # Get the user&#39;s record using the token
+   $user-&gt;update( &#39;new_attribute&#39; =&gt; &#39;new_value&#39;); # Should be written to the backend service</code></pre>
+
+</dd>
+</dl>
+
+
+</body>
+
+</html>
+
+

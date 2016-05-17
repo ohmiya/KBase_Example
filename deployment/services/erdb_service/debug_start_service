@@ -1,0 +1,10 @@
+#!/bin/sh
+export PERL5LIB=$PERL5LIB:/kb/deployment/lib
+if [ -z "$KB_DEPLOYMENT_CONFIG" ]
+then
+    export KB_DEPLOYMENT_CONFIG=/kb/deployment/deployment.cfg
+fi
+export KB_SERVICE_NAME=erdb
+export STARMAN_DEBUG=1
+/kb/runtime/bin/starman --listen :7099 --workers 1 \
+    /kb/deployment/lib/ERDB_Service.psgi

@@ -1,0 +1,85 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title></title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:root@localhost" />
+</head>
+
+<body style="background-color: white">
+
+
+
+<ul id="index">
+  <li><a href="#NAME">NAME</a></li>
+  <li><a href="#SYNOPSIS">SYNOPSIS</a></li>
+  <li><a href="#DESCRIPTION">DESCRIPTION</a>
+    <ul>
+      <li><a href="#Documentation-for-underlying-call">Documentation for underlying call</a></li>
+    </ul>
+  </li>
+  <li><a href="#OPTIONS">OPTIONS</a></li>
+  <li><a href="#EXAMPLE">EXAMPLE</a></li>
+  <li><a href="#VERSION">VERSION</a></li>
+</ul>
+
+<h1 id="NAME">NAME</h1>
+
+<p>get_go_annotation - find out which GO terms are associated with a list of kbase gene ids.</p>
+
+<h1 id="SYNOPSIS">SYNOPSIS</h1>
+
+<p>get_go_annotation [--url=http://kbase.us/services/ontology_service] [--domain_list=biological_process] [--evidence_code_list=IEA] &lt; geneIDs</p>
+
+<h1 id="DESCRIPTION">DESCRIPTION</h1>
+
+<p>Use this function to get GO ids, GO description, GO domain information (biological process, molecular function, cellular component) and list of evidence codes for a given list of kbase gene ids.</p>
+
+<h2 id="Documentation-for-underlying-call">Documentation for underlying call</h2>
+
+<p>This function call accepts three parameters: a list of kbase gene-identifiers, a list of ontology domains, and a list of evidence codes. The list of gene identifiers cannot be empty; however the list of ontology domains and the list of evidence codes can be empty. If any of the last two lists is not empty then the gene-id and go-id pairs retrieved from KBase are further filtered by using the desired ontology domains and/or evidence codes supplied as input. So, if you don&#39;t want to filter the initial results then it is recommended to provide empty domain and evidence code lists. Finally, this function returns a mapping of kbase gene-id to go-ids along with go-description, ontology domain, and evidence code; note that in the returned table of results, each gene-id is associated with a list of one of more go-ids. Also, if no species is provided as input then by default, Arabidopsis thaliana is used as the input species.</p>
+
+<h1 id="OPTIONS">OPTIONS</h1>
+
+<dl>
+
+<dt id="u-http:-kbase.us-services-ontology_service---url-http:-kbase.us-services-ontology_service-url-of-the-server"><b>-u</b> <i>[http://kbase.us/services/ontology_service]</i> <b>--url</b>=<i>[http://kbase.us/services/ontology_service]</i> url of the server</dt>
+<dd>
+
+</dd>
+<dt id="help-prints-help-information"><b>--help</b> prints help information</dt>
+<dd>
+
+</dd>
+<dt id="version-print-version-information"><b>--version</b> print version information</dt>
+<dd>
+
+</dd>
+<dt id="domain_list-comma-separated-list-of-ontology-domains-e.g.---domain_list-biological_process-cellular_component"><b>--domain_list</b> comma separated list of ontology domains e.g. --domain_list=[biological_process,cellular_component]</dt>
+<dd>
+
+</dd>
+<dt id="evidence_code_list-comma-separated-list-of-ontology-evidence-codes-e.g.---evidence_code_list-IEA-IEP"><b>--evidence_code_list</b> comma separated list of ontology evidence codes e.g. --evidence_code_list=[IEA,IEP]</dt>
+<dd>
+
+</dd>
+</dl>
+
+<h1 id="EXAMPLE">EXAMPLE</h1>
+
+<pre><code> echo &quot;kb|g.3899.CDS.35386&quot; | get_go_annotation 
+ echo &quot;kb|g.3899.CDS.35386&quot; | get_go_annotation --evidence_code=IEA
+ get_go_annotation --help
+ get_go_annotation --version</code></pre>
+
+<h1 id="VERSION">VERSION</h1>
+
+<p>0.1</p>
+
+
+</body>
+
+</html>
+
+

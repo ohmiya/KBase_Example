@@ -1,0 +1,21 @@
+#!/bin/bash
+
+if [ $# -gt 0 ] ; then
+	suffix=-$1
+	id=$1
+else
+	id=
+	suffix=
+fi
+
+
+PID_FILE=/kb/deployment/services/awe_service/client$suffix.pid
+
+if [ -f $PID_FILE ]; then
+    PID=`cat $PID_FILE`
+    echo "terminating process ID $PID"
+    kill -TERM -$PID
+    rm $PID_FILE
+else
+    echo "No pid file $PID_FILE found for awe client"
+fi

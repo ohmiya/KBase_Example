@@ -1,0 +1,24 @@
+#!/bin/bash
+export KB_TOP=/kb/deployment
+export KB_RUNTIME=/kb/runtime
+export PATH=$KB_TOP/bin:$KB_RUNTIME/bin:$PATH
+export PERL5LIB=$KB_TOP/lib
+export KB_SERVICE_DIR=$KB_TOP/services/awe_service
+export KB_DEPLOYMENT_CONFIG=$KB_TOP/deployment.cfg
+export R_LIBS=$KB_TOP/lib
+
+if [ $# -gt 0 ] ; then
+	suffix=-$1
+	id=$1
+	AWEC_CONFIG=/kb/deployment/services/awe_service/conf/awec.$id.cfg
+else
+	id=
+	suffix=
+	AWEC_CONFIG=/kb/deployment/services/awe_service/conf/awec.cfg
+fi
+
+PID_FILE=/kb/deployment/services/awe_service/client$suffix.pid
+AWE_DIR=/kb/deployment/services/awe_service
+
+/kb/runtime/sbin/daemonize -v -o $AWE_DIR/awec-start$suffix.log -e $AWE_DIR/awec-start$suffix.log -p $PID_FILE \
+	/kb/deployment/bin/awe-client -conf $AWEC_CONFIG

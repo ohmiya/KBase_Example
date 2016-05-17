@@ -1,0 +1,5 @@
+#!/bin/sh
+export PERL5LIB=$PERL5LIB:/kb/deployment/lib
+export STARMAN_DEBUG=1
+/kb/runtime/bin/starman --listen :3306 --workers 1 \
+    /kb/deployment/lib/MOTranslationService.psgi

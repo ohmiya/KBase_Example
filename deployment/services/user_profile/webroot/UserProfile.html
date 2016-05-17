@@ -1,0 +1,379 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title></title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:root@localhost" />
+</head>
+
+<body style="background-color: white">
+
+
+
+<ul id="index">
+  <li><a href="#NAME">NAME</a></li>
+  <li><a href="#DESCRIPTION">DESCRIPTION</a>
+    <ul>
+      <li><a href="#ver">ver</a></li>
+      <li><a href="#filter_users">filter_users</a></li>
+      <li><a href="#get_user_profile">get_user_profile</a></li>
+      <li><a href="#set_user_profile">set_user_profile</a></li>
+      <li><a href="#update_user_profile">update_user_profile</a></li>
+      <li><a href="#lookup_globus_user">lookup_globus_user</a></li>
+    </ul>
+  </li>
+  <li><a href="#TYPES">TYPES</a>
+    <ul>
+      <li><a href="#bool">bool</a></li>
+      <li><a href="#username">username</a></li>
+      <li><a href="#realname">realname</a></li>
+      <li><a href="#User">User</a></li>
+      <li><a href="#UserProfile">UserProfile</a></li>
+      <li><a href="#FilterParams">FilterParams</a></li>
+      <li><a href="#SetUserProfileParams">SetUserProfileParams</a></li>
+      <li><a href="#GlobusUser">GlobusUser</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="NAME">NAME</h1>
+
+<p>Bio::KBase::UserProfile::Client</p>
+
+<h1 id="DESCRIPTION">DESCRIPTION</h1>
+
+<h2 id="ver">ver</h2>
+
+<pre><code>  $return = $obj-&gt;ver()</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$return is a string</pre>
+
+</dd>
+<dt id="Description">Description</dt>
+<dd>
+
+</dd>
+</dl>
+
+<h2 id="filter_users">filter_users</h2>
+
+<pre><code>  $users = $obj-&gt;filter_users($p)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types1">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$p is a UserProfile.FilterParams
+$users is a reference to a list where each element is a UserProfile.User
+FilterParams is a reference to a hash where the following keys are defined:
+	filter has a value which is a string
+User is a reference to a hash where the following keys are defined:
+	username has a value which is a UserProfile.username
+	realname has a value which is a UserProfile.realname
+	thumbnail has a value which is a string
+username is a string
+realname is a string</pre>
+
+</dd>
+<dt id="Description1">Description</dt>
+<dd>
+
+<p>Returns a list of users matching the filter. If the &#39;filter&#39; field is empty or null, then this will return all Users. The filter will match substrings in usernames and realnames.</p>
+
+</dd>
+</dl>
+
+<h2 id="get_user_profile">get_user_profile</h2>
+
+<pre><code>  $profiles = $obj-&gt;get_user_profile($usernames)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types2">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$usernames is a reference to a list where each element is a UserProfile.username
+$profiles is a reference to a list where each element is a UserProfile.UserProfile
+username is a string
+UserProfile is a reference to a hash where the following keys are defined:
+	user has a value which is a UserProfile.User
+	profile has a value which is an UnspecifiedObject, which can hold any non-null object
+User is a reference to a hash where the following keys are defined:
+	username has a value which is a UserProfile.username
+	realname has a value which is a UserProfile.realname
+	thumbnail has a value which is a string
+realname is a string</pre>
+
+</dd>
+<dt id="Description2">Description</dt>
+<dd>
+
+<p>Given a list of usernames, returns a list of UserProfiles in the same order. If no UserProfile was found for a username, the UserProfile at that position will be null.</p>
+
+</dd>
+</dl>
+
+<h2 id="set_user_profile">set_user_profile</h2>
+
+<pre><code>  $obj-&gt;set_user_profile($p)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types3">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$p is a UserProfile.SetUserProfileParams
+SetUserProfileParams is a reference to a hash where the following keys are defined:
+	profile has a value which is a UserProfile.UserProfile
+UserProfile is a reference to a hash where the following keys are defined:
+	user has a value which is a UserProfile.User
+	profile has a value which is an UnspecifiedObject, which can hold any non-null object
+User is a reference to a hash where the following keys are defined:
+	username has a value which is a UserProfile.username
+	realname has a value which is a UserProfile.realname
+	thumbnail has a value which is a string
+username is a string
+realname is a string</pre>
+
+</dd>
+<dt id="Description3">Description</dt>
+<dd>
+
+<p>Set the UserProfile for the user indicated in the User field of the UserProfile object. This operation can only be performed if authenticated as the user in the UserProfile or as the admin account of this service.</p>
+
+<p>If the profile does not exist, one will be created. If it does already exist, then the entire user profile will be replaced with the new profile.</p>
+
+</dd>
+</dl>
+
+<h2 id="update_user_profile">update_user_profile</h2>
+
+<pre><code>  $obj-&gt;update_user_profile($p)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types4">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$p is a UserProfile.SetUserProfileParams
+SetUserProfileParams is a reference to a hash where the following keys are defined:
+	profile has a value which is a UserProfile.UserProfile
+UserProfile is a reference to a hash where the following keys are defined:
+	user has a value which is a UserProfile.User
+	profile has a value which is an UnspecifiedObject, which can hold any non-null object
+User is a reference to a hash where the following keys are defined:
+	username has a value which is a UserProfile.username
+	realname has a value which is a UserProfile.realname
+	thumbnail has a value which is a string
+username is a string
+realname is a string</pre>
+
+</dd>
+<dt id="Description4">Description</dt>
+<dd>
+
+<p>Update the UserProfile for the user indicated in the User field of the UserProfile object. This operation can only be performed if authenticated as the user in the UserProfile or as the admin account of this service.</p>
+
+<p>If the profile does not exist, one will be created. If it does already exist, then the specified top-level fields in profile will be updated.</p>
+
+<p>todo: add some way to remove fields. Fields in profile can only be modified or added.</p>
+
+</dd>
+</dl>
+
+<h2 id="lookup_globus_user">lookup_globus_user</h2>
+
+<pre><code>  $users = $obj-&gt;lookup_globus_user($usernames)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types5">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$usernames is a reference to a list where each element is a UserProfile.username
+$users is a reference to a hash where the key is a UserProfile.username and the value is a UserProfile.GlobusUser
+username is a string
+GlobusUser is a reference to a hash where the following keys are defined:
+	email has a value which is a string
+	fullName has a value which is a string
+	userName has a value which is a string</pre>
+
+</dd>
+<dt id="Description5">Description</dt>
+<dd>
+
+</dd>
+</dl>
+
+<h1 id="TYPES">TYPES</h1>
+
+<h2 id="bool">bool</h2>
+
+<dl>
+
+<dt id="Description6">Description</dt>
+<dd>
+
+<p>@range [0,1]</p>
+
+</dd>
+<dt id="Definition">Definition</dt>
+<dd>
+
+
+
+<pre>
+an int
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="username">username</h2>
+
+<dl>
+
+<dt id="Definition1">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="realname">realname</h2>
+
+<dl>
+
+<dt id="Definition2">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="User">User</h2>
+
+<dl>
+
+<dt id="Definition3">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+username has a value which is a UserProfile.username
+realname has a value which is a UserProfile.realname
+thumbnail has a value which is a string</pre>
+
+</dd>
+</dl>
+
+<h2 id="UserProfile">UserProfile</h2>
+
+<dl>
+
+<dt id="Definition4">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+user has a value which is a UserProfile.User
+profile has a value which is an UnspecifiedObject, which can hold any non-null object</pre>
+
+</dd>
+</dl>
+
+<h2 id="FilterParams">FilterParams</h2>
+
+<dl>
+
+<dt id="Definition5">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+filter has a value which is a string</pre>
+
+</dd>
+</dl>
+
+<h2 id="SetUserProfileParams">SetUserProfileParams</h2>
+
+<dl>
+
+<dt id="Definition6">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+profile has a value which is a UserProfile.UserProfile</pre>
+
+</dd>
+</dl>
+
+<h2 id="GlobusUser">GlobusUser</h2>
+
+<dl>
+
+<dt id="Definition7">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+email has a value which is a string
+fullName has a value which is a string
+userName has a value which is a string</pre>
+
+</dd>
+</dl>
+
+
+</body>
+
+</html>
+
+

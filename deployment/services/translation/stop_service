@@ -1,0 +1,9 @@
+#!/bin/sh
+echo trying to stop translation server.
+pid_file=/kb/deployment/services/translation/service.pid
+if [ ! -f $pid_file ] ; then 
+  echo No pid file: $pid_file found for server translation.
+exit 1
+fi
+pid=$(cat $pid_file)
+kill $pid

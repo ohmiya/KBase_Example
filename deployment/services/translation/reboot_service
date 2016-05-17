@@ -1,0 +1,7 @@
+#!/bin/sh
+# auto-generated script to stop the service, redeploy server implementation, and start the servce
+./stop_service
+cd /kb/dev_container/modules/translation
+make deploy-server-libs
+cd -
+./start_service

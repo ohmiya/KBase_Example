@@ -1,0 +1,5 @@
+if [ -z "$KB_DEPLOYMENT_CONFIG" ]
+then
+    export KB_DEPLOYMENT_CONFIG=$KB_TOP/deployment.cfg
+fi
+./glassfish_start_service.sh /kb/deployment/services/njs_wrapper/NJSWrapper.war 8200 50

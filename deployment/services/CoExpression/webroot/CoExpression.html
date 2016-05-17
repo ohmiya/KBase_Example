@@ -1,0 +1,172 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>CoExpression</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:root@localhost" />
+</head>
+
+<body style="background-color: white">
+
+
+
+<ul id="index">
+  <li><a href="#NAME">NAME</a></li>
+  <li><a href="#DESCRIPTION">DESCRIPTION</a>
+    <ul>
+      <li><a href="#filter_genes">filter_genes</a></li>
+      <li><a href="#const_coex_net_clust">const_coex_net_clust</a></li>
+    </ul>
+  </li>
+  <li><a href="#TYPES">TYPES</a>
+    <ul>
+      <li><a href="#FilterGenesParams">FilterGenesParams</a></li>
+      <li><a href="#ConstCoexNetClustParams">ConstCoexNetClustParams</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="NAME">NAME</h1>
+
+<p>Bio::KBase::CoExpression::Client</p>
+
+<h1 id="DESCRIPTION">DESCRIPTION</h1>
+
+<p>Co-Expression Service APIs</p>
+
+<pre><code> This module provides services for plant expression data in support of the coexpression
+ network and ontology driven data needs of the plant sciences community. This version of
+ the modules supports retrieval of the following information:
+ 1. Retrieval of GEO sample ID list for given EO (environmental ontology) and/or PO (plant ontology -plant tissues/organs of interest).
+ 2. Retrieval of the expression values for given GEO sample ID list.  
+ 3. For given expression values tables, it computes co-expression clusters or network (CLI only).</code></pre>
+
+<p>It will serve queries for tissue or condition specific co-expression network for biologically interesting genes/samples. Users can search differentially expressed genes in different tissues or in numerous experimental conditions or treatments (e.g various biotic or abiotic stresses). Currently the metadata annotation is provided for a subset of gene expression experiments from the NCBI GEO microarray experiments for Arabidopsis and Poplar. The samples of these experiments are manually annotated using plant ontology (PO) [http://www.plantontology.org/] and environment ontology (EO) [http://obo.cvs.sourceforge.net/viewvc/obo/obo/ontology/phenotype/environment/environment_ontology.obo]</p>
+
+<h2 id="filter_genes">filter_genes</h2>
+
+<pre><code>  $job_id = $obj-&gt;filter_genes($args)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$args is a FilterGenesParams
+$job_id is a reference to a list where each element is a string
+FilterGenesParams is a reference to a hash where the following keys are defined:
+	ws_id has a value which is a string
+	inobj_id has a value which is a string
+	outobj_id has a value which is a string
+	p_value has a value which is a string
+	method has a value which is a string
+	num_genes has a value which is a string</pre>
+
+</dd>
+<dt id="Description">Description</dt>
+<dd>
+
+<p>Description of filter_genes: filter_genes provides the function to identify differentially expressed genes given an expression series/experiment. An expression series/experiment contains a list of expression samples. A expression sample is the measurement of mRNA abundance in a biological sample. The design of expression profiling usually includes replicates. The replicates allows us to differ the non-relevent expression variation and the relevent expression variation. The replicate information is manully extracted by KBase developers. Only a part of samples has been assigned to a replicate group. For those samples without an assignment, the variation of its expression abundance is used directly. filter_genes now has two methods to identify differentially expressed genes: ANOVA and lor(from limma r package). The output of this function is a list of genes</p>
+
+</dd>
+</dl>
+
+<h2 id="const_coex_net_clust">const_coex_net_clust</h2>
+
+<pre><code>  $job_id = $obj-&gt;const_coex_net_clust($args)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types1">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$args is a ConstCoexNetClustParams
+$job_id is a reference to a list where each element is a string
+ConstCoexNetClustParams is a reference to a hash where the following keys are defined:
+	ws_id has a value which is a string
+	inobj_id has a value which is a string
+	outobj_id has a value which is a string
+	cut_off has a value which is a string
+	net_method has a value which is a string
+	clust_method has a value which is a string
+	num_modules has a value which is a string</pre>
+
+</dd>
+<dt id="Description1">Description</dt>
+<dd>
+
+<p>Description of const_coex_net_clust const_coex_net_clust provides the function to build coexpression network and identify the functional modules among it. A functional module is a network cluster with enrichment of certain biological function. const_coex_net_clust first construct coexpression network. Then, it identifys the clusters among the network. Finally, it identifys the GeneOntology enrichment for the genes in each cluster.</p>
+
+</dd>
+</dl>
+
+<h1 id="TYPES">TYPES</h1>
+
+<h2 id="FilterGenesParams">FilterGenesParams</h2>
+
+<dl>
+
+<dt id="Description2">Description</dt>
+<dd>
+
+<p>num_gene is user for specify how many differentially expressed genes are needed</p>
+
+</dd>
+<dt id="Definition">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+ws_id has a value which is a string
+inobj_id has a value which is a string
+outobj_id has a value which is a string
+p_value has a value which is a string
+method has a value which is a string
+num_genes has a value which is a string</pre>
+
+</dd>
+</dl>
+
+<h2 id="ConstCoexNetClustParams">ConstCoexNetClustParams</h2>
+
+<dl>
+
+<dt id="Description3">Description</dt>
+<dd>
+
+<p>num_modules is used to define the number of modules need to be identified from the network</p>
+
+</dd>
+<dt id="Definition1">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+ws_id has a value which is a string
+inobj_id has a value which is a string
+outobj_id has a value which is a string
+cut_off has a value which is a string
+net_method has a value which is a string
+clust_method has a value which is a string
+num_modules has a value which is a string</pre>
+
+</dd>
+</dl>
+
+
+</body>
+
+</html>
+
+

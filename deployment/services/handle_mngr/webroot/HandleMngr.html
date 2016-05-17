@@ -1,0 +1,114 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title></title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:root@localhost" />
+</head>
+
+<body style="background-color: white">
+
+
+
+<ul id="index">
+  <li><a href="#NAME">NAME</a></li>
+  <li><a href="#DESCRIPTION">DESCRIPTION</a>
+    <ul>
+      <li><a href="#is_readable">is_readable</a></li>
+      <li><a href="#add_read_acl">add_read_acl</a></li>
+    </ul>
+  </li>
+  <li><a href="#TYPES">TYPES</a>
+    <ul>
+      <li><a href="#HandleId">HandleId</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="NAME">NAME</h1>
+
+<p>Bio::KBase::HandleMngr::Client</p>
+
+<h1 id="DESCRIPTION">DESCRIPTION</h1>
+
+<p>The HandleMngr module provides an interface for the workspace service to make handles sharable. When the owner shares a workspace object that contains Handles, the underlying shock object is made readable to the person that the workspace object is being shared with.</p>
+
+<h2 id="is_readable">is_readable</h2>
+
+<pre><code>  $return = $obj-&gt;is_readable($token, $nodeurl)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$token is a string
+$nodeurl is a string
+$return is an int</pre>
+
+</dd>
+<dt id="Description">Description</dt>
+<dd>
+
+<p>The is_readable function will return true if the underlying shock object is readable by the owner of the token. The token is passed by the client.</p>
+
+</dd>
+</dl>
+
+<h2 id="add_read_acl">add_read_acl</h2>
+
+<pre><code>  $obj-&gt;add_read_acl($hids, $username)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types1">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$hids is a reference to a list where each element is a HandleId
+$username is a string
+HandleId is a string</pre>
+
+</dd>
+<dt id="Description1">Description</dt>
+<dd>
+
+</dd>
+</dl>
+
+<h1 id="TYPES">TYPES</h1>
+
+<h2 id="HandleId">HandleId</h2>
+
+<dl>
+
+<dt id="Description2">Description</dt>
+<dd>
+
+<p>The add_read_acl functions will update the acl of the shock node that the handle references. The function is only accessible to a specific list of users specified at startup time. The underlying shock node will be made readable to the user requested.</p>
+
+</dd>
+<dt id="Definition">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+
+</body>
+
+</html>
+
+

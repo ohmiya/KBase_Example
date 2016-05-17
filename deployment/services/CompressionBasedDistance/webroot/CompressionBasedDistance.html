@@ -1,0 +1,139 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>CompressionBasedDistance</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:root@localhost" />
+</head>
+
+<body style="background-color: white">
+
+
+
+<ul id="index">
+  <li><a href="#NAME">NAME</a></li>
+  <li><a href="#DESCRIPTION">DESCRIPTION</a>
+    <ul>
+      <li><a href="#version">version</a></li>
+      <li><a href="#build_matrix">build_matrix</a></li>
+    </ul>
+  </li>
+  <li><a href="#TYPES">TYPES</a>
+    <ul>
+      <li><a href="#BuildMatrixParams">BuildMatrixParams</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="NAME">NAME</h1>
+
+<p>Bio::KBase::CompressionBasedDistance::Client</p>
+
+<h1 id="DESCRIPTION">DESCRIPTION</h1>
+
+<p>Compression Based Distance (CBD) service</p>
+
+<p>Compression-based distance (CBD) is a simple, rapid, and accurate method to efficiently assess differences in microbiota samples. CBD characterizes the similarities between microbial communities via the amount of repetition or overlap in order to determine microbial community distance. CBD relies on the fact that more repetitive data is the more it can be compressed. By combining 16S rRNA hypervariable tag data from different samples and assessing the relative amounts of compression, there is a proxy for the similarities between the communities. The amount of compression is converted to a distance by taking compression gained by combining the datasets over the total compressed size of the individual datasets. The distance has a value with a minimum of 0 meaning the communities are the same and a maximum of 1 meaning the communities are completely different.</p>
+
+<h2 id="version">version</h2>
+
+<pre><code>  $return = $obj-&gt;version()</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$return is a reference to a list containing 2 items:
+	0: (name) a string
+	1: (ver) a string</pre>
+
+</dd>
+<dt id="Description">Description</dt>
+<dd>
+
+<p>Return the name and version number of the compression-based distance service.</p>
+
+</dd>
+</dl>
+
+<h2 id="build_matrix">build_matrix</h2>
+
+<pre><code>  $job_id = $obj-&gt;build_matrix($input)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types1">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$input is a BuildMatrixParams
+$job_id is a string
+BuildMatrixParams is a reference to a hash where the following keys are defined:
+	node_ids has a value which is a reference to a list where each element is a string
+	format has a value which is a string
+	scale has a value which is a string
+	sequence_length has a value which is an int
+	min_reads has a value which is an int
+	max_reads has a value which is an int
+	extreme has a value which is an int</pre>
+
+</dd>
+<dt id="Description1">Description</dt>
+<dd>
+
+<p>Build a distance matrix from a set of sequence files for microbiota comparisons. Compression based distance uses the relative compression of combined and individual datasets to quantify overlaps between microbial communities. Returns the job identifier of the job submitted to build the distance matrix.</p>
+
+</dd>
+</dl>
+
+<h1 id="TYPES">TYPES</h1>
+
+<h2 id="BuildMatrixParams">BuildMatrixParams</h2>
+
+<dl>
+
+<dt id="Description2">Description</dt>
+<dd>
+
+<p>Input parameters for build_matrix function</p>
+
+<pre><code>        list&lt;string&gt; node_ids - List of Shock node ids for input sequence files
+        string format - Format of input sequence files (&#39;fasta&#39;, &#39;fastq&#39;, etc.)
+        string scale - Scale for distance matrix values (&#39;std&#39; or &#39;inf&#39;)
+        int sequence_length - Length to trim sequence reads to (shorter reads are discarded)
+        int min_reads - Minimum number of reads a sequence file must contain
+        int max_reads - Maximum number of reads to use from a sequence file
+        int extreme - Set to true for extreme compression (slower but hopefully better ratio)</code></pre>
+
+</dd>
+<dt id="Definition">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+node_ids has a value which is a reference to a list where each element is a string
+format has a value which is a string
+scale has a value which is a string
+sequence_length has a value which is an int
+min_reads has a value which is an int
+max_reads has a value which is an int
+extreme has a value which is an int</pre>
+
+</dd>
+</dl>
+
+
+</body>
+
+</html>
+
+

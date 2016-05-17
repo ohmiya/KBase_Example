@@ -1,0 +1,341 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>ID Servicer API</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:root@localhost" />
+</head>
+
+<body style="background-color: white">
+
+
+
+<ul id="index">
+  <li><a href="#NAME">NAME</a></li>
+  <li><a href="#DESCRIPTION">DESCRIPTION</a></li>
+  <li><a href="#METHODS">METHODS</a>
+    <ul>
+      <li><a href="#kbase_ids_to_external_ids">kbase_ids_to_external_ids</a></li>
+      <li><a href="#external_ids_to_kbase_ids">external_ids_to_kbase_ids</a></li>
+      <li><a href="#register_ids">register_ids</a></li>
+      <li><a href="#allocate_id_range">allocate_id_range</a></li>
+      <li><a href="#register_allocated_ids">register_allocated_ids</a></li>
+      <li><a href="#get_identifier_prefix">get_identifier_prefix</a></li>
+      <li><a href="#version">version</a></li>
+    </ul>
+  </li>
+  <li><a href="#TYPES">TYPES</a>
+    <ul>
+      <li><a href="#kbase_id">kbase_id</a></li>
+      <li><a href="#external_db">external_db</a></li>
+      <li><a href="#external_id">external_id</a></li>
+      <li><a href="#kbase_id_prefix">kbase_id_prefix</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="NAME">NAME</h1>
+
+<p>IDServerAPI</p>
+
+<h1 id="DESCRIPTION">DESCRIPTION</h1>
+
+<p>The KBase ID server provides access to the mappings between KBase identifiers and external identifiers (the original identifiers for data that was migrated from other databases into KBase).</p>
+
+<h1 id="METHODS">METHODS</h1>
+
+<h2 id="kbase_ids_to_external_ids">kbase_ids_to_external_ids</h2>
+
+<pre><code>  $return = $obj-&gt;kbase_ids_to_external_ids($ids)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$ids is a reference to a list where each element is a kbase_id
+$return is a reference to a hash where the key is a kbase_id and the value is a reference to a list containing 2 items:
+	0: an external_db
+	1: an external_id
+kbase_id is a string
+external_db is a string
+external_id is a string</pre>
+
+</dd>
+<dt id="Description">Description</dt>
+<dd>
+
+<p>Given a set of KBase identifiers, look up the associated external identifiers. If no external ID is associated with the KBase id, no entry will be present in the return.</p>
+
+</dd>
+</dl>
+
+<h2 id="external_ids_to_kbase_ids">external_ids_to_kbase_ids</h2>
+
+<pre><code>  $return = $obj-&gt;external_ids_to_kbase_ids($external_db, $ext_ids)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types1">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$external_db is an external_db
+$ext_ids is a reference to a list where each element is an external_id
+$return is a reference to a hash where the key is an external_id and the value is a kbase_id
+external_db is a string
+external_id is a string
+kbase_id is a string</pre>
+
+</dd>
+<dt id="Description1">Description</dt>
+<dd>
+
+<p>Given a set of external identifiers, look up the associated KBase identifiers. If no KBase ID is associated with the external id, no entry will be present in the return.</p>
+
+</dd>
+</dl>
+
+<h2 id="register_ids">register_ids</h2>
+
+<pre><code>  $return = $obj-&gt;register_ids($prefix, $db_name, $ids)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types2">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$prefix is a kbase_id_prefix
+$db_name is an external_db
+$ids is a reference to a list where each element is an external_id
+$return is a reference to a hash where the key is an external_id and the value is a kbase_id
+kbase_id_prefix is a string
+external_db is a string
+external_id is a string
+kbase_id is a string</pre>
+
+</dd>
+<dt id="Description2">Description</dt>
+<dd>
+
+<p>Register a set of identifiers. All will be assigned identifiers with the given prefix.</p>
+
+<p>If an external ID has already been registered, the existing registration will be returned instead of a new ID being allocated.</p>
+
+</dd>
+</dl>
+
+<h2 id="allocate_id_range">allocate_id_range</h2>
+
+<pre><code>  $starting_value = $obj-&gt;allocate_id_range($kbase_id_prefix, $count)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types3">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$kbase_id_prefix is a kbase_id_prefix
+$count is an int
+$starting_value is an int
+kbase_id_prefix is a string</pre>
+
+</dd>
+<dt id="Description3">Description</dt>
+<dd>
+
+<p>Allocate a set of identifiers. This allows efficient registration of a large number of identifiers (e.g. several thousand features in a genome).</p>
+
+<p>The return is the first identifier allocated.</p>
+
+</dd>
+</dl>
+
+<h2 id="register_allocated_ids">register_allocated_ids</h2>
+
+<pre><code>  $obj-&gt;register_allocated_ids($prefix, $db_name, $assignments)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types4">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$prefix is a kbase_id_prefix
+$db_name is an external_db
+$assignments is a reference to a hash where the key is an external_id and the value is an int
+kbase_id_prefix is a string
+external_db is a string
+external_id is a string</pre>
+
+</dd>
+<dt id="Description4">Description</dt>
+<dd>
+
+<p>Register the mappings for a set of external identifiers. The KBase identifiers used here were previously allocated using allocate_id_range.</p>
+
+<p>Does not return a value.</p>
+
+</dd>
+</dl>
+
+<h2 id="get_identifier_prefix">get_identifier_prefix</h2>
+
+<pre><code>  $prefix = $obj-&gt;get_identifier_prefix()</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types5">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$prefix is a string</pre>
+
+</dd>
+<dt id="Description5">Description</dt>
+<dd>
+
+<p>Return the default prefix for new identifiers for this installation of the ID server.</p>
+
+</dd>
+</dl>
+
+<h2 id="version">version</h2>
+
+<pre><code>  $return = $obj-&gt;version()</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types6">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$return is a string
+</pre>
+
+</dd>
+<dt id="Description6">Description</dt>
+<dd>
+
+<p>Return the module version. This is a Semantic Versioning number.</p>
+
+</dd>
+</dl>
+
+<h1 id="TYPES">TYPES</h1>
+
+<h2 id="kbase_id">kbase_id</h2>
+
+<dl>
+
+<dt id="Description7">Description</dt>
+<dd>
+
+<p>A KBase ID is a string starting with the characters &quot;kb|&quot;.</p>
+
+<p>KBase IDs are typed. The types are designated using a short string. For instance, &quot;g&quot; denotes a genome, &quot;fp&quot; denotes a feature representing a protein-encoding gene, etc.</p>
+
+<p>KBase IDs may be hierarchical. If a KBase genome identifier is &quot;kb|g.1234&quot;, a protein within that genome may be represented as &quot;kb|g.1234.fp.771&quot;.</p>
+
+</dd>
+<dt id="Definition">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="external_db">external_db</h2>
+
+<dl>
+
+<dt id="Description8">Description</dt>
+<dd>
+
+<p>Each external database is represented using a short string. Microbes Online is &quot;MOL&quot;, the SEED is &quot;SEED&quot;, etc.</p>
+
+</dd>
+<dt id="Definition1">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="external_id">external_id</h2>
+
+<dl>
+
+<dt id="Description9">Description</dt>
+<dd>
+
+<p>External database identifiers are strings. They are the precise identifier used by that database. It is important to note that if a database uses the same identifier space for more than one data type (for instance, if integers are used for identifying both genomes and genes, and if the same number is valid for both a genome and a gene) then the distinction must be made by using separate exgternal database strings for the different types; e.g. DBNAME-GENE and DBNAME-GENOME for a database DBNAME that has overlapping namespace for genes and genomes).</p>
+
+</dd>
+<dt id="Definition2">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="kbase_id_prefix">kbase_id_prefix</h2>
+
+<dl>
+
+<dt id="Description10">Description</dt>
+<dd>
+
+<p>A KBase identifier prefix. This is a string that starts with &quot;kb|&quot; and includes either a single type designator (e.g. &quot;kb|g&quot;) or is a prefix for a hierarchical identifier (e.g. &quot;kb|g.1234.fp&quot;).</p>
+
+</dd>
+<dt id="Definition3">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+
+</body>
+
+</html>
+
+

@@ -1,0 +1,7 @@
+#!/bin/bash
+
+PID_FILE=/kb/deployment/services/shock_service/service.pid
+SHOCK_CONFIG=/kb/deployment/services/shock_service/conf/shock.cfg
+
+echo "/kb/deployment/bin/shock-server -conf $SHOCK_CONFIG"
+/kb/deployment/bin/shock-server -conf $SHOCK_CONFIG

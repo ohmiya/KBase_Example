@@ -1,0 +1,7 @@
+#!/bin/sh
+export KB_TOP=/kb/deployment
+export KB_RUNTIME=/kb/runtime
+export KB_PYTHON_PATH=/kb/deployment/lib
+export PATH=/kb/runtime/bin:/kb/deployment/bin:$PATH
+export PYTHONPATH=/kb/deployment/lib:$PYTHONPATH
+python /kb/deployment/pybin/probanno-ExtractorDriver.py "$@"

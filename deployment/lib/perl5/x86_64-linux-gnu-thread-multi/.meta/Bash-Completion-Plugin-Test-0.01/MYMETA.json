@@ -1,0 +1,47 @@
+{
+   "abstract" : "Module for testing Bash::Completion plugins",
+   "author" : [
+      "Rob Hoelz <rob@hoelz.ro>"
+   ],
+   "dynamic_config" : 0,
+   "generated_by" : "Module::Build version 0.4003, CPAN::Meta::Converter version 2.133380",
+   "license" : [
+      "perl_5"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "Bash-Completion-Plugin-Test",
+   "prereqs" : {
+      "build" : {
+         "requires" : {
+            "Module::Build" : "0.3601",
+            "Test::Exception" : "0",
+            "Test::Tester" : "0"
+         }
+      },
+      "configure" : {
+         "requires" : {
+            "Module::Build" : "0.3601"
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "Bash::Completion" : "0",
+            "perl" : "v5.8.8"
+         }
+      }
+   },
+   "release_status" : "stable",
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/hoelzro/bash-completion-plugin-test/issues"
+      },
+      "homepage" : "https://github.com/hoelzro/bash-completion-plugin-test",
+      "repository" : {
+         "url" : "https://github.com/hoelzro/bash-completion-plugin-test.git"
+      }
+   },
+   "version" : "0.01"
+}

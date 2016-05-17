@@ -1,0 +1,650 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title></title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:root@localhost" />
+</head>
+
+<body style="background-color: white">
+
+
+
+<ul id="index">
+  <li><a href="#NAME">NAME</a></li>
+  <li><a href="#DESCRIPTION">DESCRIPTION</a>
+    <ul>
+      <li><a href="#new_handle">new_handle</a></li>
+      <li><a href="#localize_handle">localize_handle</a></li>
+      <li><a href="#initialize_handle">initialize_handle</a></li>
+      <li><a href="#persist_handle">persist_handle</a></li>
+      <li><a href="#upload">upload</a></li>
+      <li><a href="#download">download</a></li>
+      <li><a href="#upload_metadata">upload_metadata</a></li>
+      <li><a href="#download_metadata">download_metadata</a></li>
+      <li><a href="#ids_to_handles">ids_to_handles</a></li>
+      <li><a href="#hids_to_handles">hids_to_handles</a></li>
+      <li><a href="#are_readable">are_readable</a></li>
+      <li><a href="#is_readable">is_readable</a></li>
+      <li><a href="#list_handles">list_handles</a></li>
+      <li><a href="#delete_handles">delete_handles</a></li>
+      <li><a href="#give">give</a></li>
+      <li><a href="#ids_to_handles1">ids_to_handles</a></li>
+    </ul>
+  </li>
+  <li><a href="#TYPES">TYPES</a>
+    <ul>
+      <li><a href="#HandleId">HandleId</a></li>
+      <li><a href="#NodeId">NodeId</a></li>
+      <li><a href="#Handle">Handle</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="NAME">NAME</h1>
+
+<p>Bio::KBase::AbstractHandle::Client</p>
+
+<h1 id="DESCRIPTION">DESCRIPTION</h1>
+
+<p>The AbstractHandle module provides a programmatic access to a remote file store.</p>
+
+<h2 id="new_handle">new_handle</h2>
+
+<pre><code>  $h = $obj-&gt;new_handle()</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$h is a Handle
+Handle is a reference to a hash where the following keys are defined:
+	hid has a value which is a HandleId
+	file_name has a value which is a string
+	id has a value which is a NodeId
+	type has a value which is a string
+	url has a value which is a string
+	remote_md5 has a value which is a string
+	remote_sha1 has a value which is a string
+HandleId is a string
+NodeId is a string</pre>
+
+</dd>
+<dt id="Description">Description</dt>
+<dd>
+
+<p>The new_handle function returns a Handle object with a url and a node id. The new_handle function invokes the localize_handle method first to set the url and then invokes the initialize_handle function to get an ID.</p>
+
+</dd>
+</dl>
+
+<h2 id="localize_handle">localize_handle</h2>
+
+<pre><code>  $h2 = $obj-&gt;localize_handle($h1, $service_name)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types1">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$h1 is a Handle
+$service_name is a string
+$h2 is a Handle
+Handle is a reference to a hash where the following keys are defined:
+	hid has a value which is a HandleId
+	file_name has a value which is a string
+	id has a value which is a NodeId
+	type has a value which is a string
+	url has a value which is a string
+	remote_md5 has a value which is a string
+	remote_sha1 has a value which is a string
+HandleId is a string
+NodeId is a string</pre>
+
+</dd>
+<dt id="Description1">Description</dt>
+<dd>
+
+<p>The localize_handle function attempts to locate a shock server near the service. The localize_handle function must be called before the Handle is initialized becuase when the handle is initialized, it is given a node id that maps to the shock server where the node was created. This function should not be called directly.</p>
+
+</dd>
+</dl>
+
+<h2 id="initialize_handle">initialize_handle</h2>
+
+<pre><code>  $h2 = $obj-&gt;initialize_handle($h1)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types2">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$h1 is a Handle
+$h2 is a Handle
+Handle is a reference to a hash where the following keys are defined:
+	hid has a value which is a HandleId
+	file_name has a value which is a string
+	id has a value which is a NodeId
+	type has a value which is a string
+	url has a value which is a string
+	remote_md5 has a value which is a string
+	remote_sha1 has a value which is a string
+HandleId is a string
+NodeId is a string</pre>
+
+</dd>
+<dt id="Description2">Description</dt>
+<dd>
+
+<p>The initialize_handle returns a Handle object with an ID. This function should not be called directly</p>
+
+</dd>
+</dl>
+
+<h2 id="persist_handle">persist_handle</h2>
+
+<pre><code>  $hid = $obj-&gt;persist_handle($h)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types3">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$h is a Handle
+$hid is a string
+Handle is a reference to a hash where the following keys are defined:
+	hid has a value which is a HandleId
+	file_name has a value which is a string
+	id has a value which is a NodeId
+	type has a value which is a string
+	url has a value which is a string
+	remote_md5 has a value which is a string
+	remote_sha1 has a value which is a string
+HandleId is a string
+NodeId is a string</pre>
+
+</dd>
+<dt id="Description3">Description</dt>
+<dd>
+
+<p>The persist_handle writes the handle to a persistent store that can be later retrieved using the list_handles function.</p>
+
+</dd>
+</dl>
+
+<h2 id="upload">upload</h2>
+
+<pre><code>  $h = $obj-&gt;upload($infile)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types4">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$infile is a string
+$h is a Handle
+Handle is a reference to a hash where the following keys are defined:
+	hid has a value which is a HandleId
+	file_name has a value which is a string
+	id has a value which is a NodeId
+	type has a value which is a string
+	url has a value which is a string
+	remote_md5 has a value which is a string
+	remote_sha1 has a value which is a string
+HandleId is a string
+NodeId is a string</pre>
+
+</dd>
+<dt id="Description4">Description</dt>
+<dd>
+
+<p>The upload and download functions provide an empty implementation that must be provided in a client. If a concrete implementation is not provided an error is thrown. These are the equivelant of abstract methods, with runtime rather than compile time inforcement.</p>
+
+<p>[client_implemented]</p>
+
+</dd>
+</dl>
+
+<h2 id="download">download</h2>
+
+<pre><code>  $obj-&gt;download($h, $outfile)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types5">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$h is a Handle
+$outfile is a string
+Handle is a reference to a hash where the following keys are defined:
+	hid has a value which is a HandleId
+	file_name has a value which is a string
+	id has a value which is a NodeId
+	type has a value which is a string
+	url has a value which is a string
+	remote_md5 has a value which is a string
+	remote_sha1 has a value which is a string
+HandleId is a string
+NodeId is a string</pre>
+
+</dd>
+<dt id="Description5">Description</dt>
+<dd>
+
+<p>The upload and download functions provide an empty implementation that must be provided in a client. If a concrete implementation is not provided an error is thrown. These are the equivelant of abstract methods, with runtime rather than compile time inforcement.</p>
+
+<p>[client_implemented]</p>
+
+</dd>
+</dl>
+
+<h2 id="upload_metadata">upload_metadata</h2>
+
+<pre><code>  $obj-&gt;upload_metadata($h, $infile)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types6">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$h is a Handle
+$infile is a string
+Handle is a reference to a hash where the following keys are defined:
+	hid has a value which is a HandleId
+	file_name has a value which is a string
+	id has a value which is a NodeId
+	type has a value which is a string
+	url has a value which is a string
+	remote_md5 has a value which is a string
+	remote_sha1 has a value which is a string
+HandleId is a string
+NodeId is a string</pre>
+
+</dd>
+<dt id="Description6">Description</dt>
+<dd>
+
+<p>The upload_metadata function uploads metadata to an existing handle. This means that the data that the handle represents has already been uploaded. Uploading meta data before the data has been uploaded is not currently supported.</p>
+
+<p>[client_implemented]</p>
+
+</dd>
+</dl>
+
+<h2 id="download_metadata">download_metadata</h2>
+
+<pre><code>  $obj-&gt;download_metadata($h, $outfile)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types7">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$h is a Handle
+$outfile is a string
+Handle is a reference to a hash where the following keys are defined:
+	hid has a value which is a HandleId
+	file_name has a value which is a string
+	id has a value which is a NodeId
+	type has a value which is a string
+	url has a value which is a string
+	remote_md5 has a value which is a string
+	remote_sha1 has a value which is a string
+HandleId is a string
+NodeId is a string</pre>
+
+</dd>
+<dt id="Description7">Description</dt>
+<dd>
+
+<p>The download_metadata function downloads metadata associated with the data handle and writes it to a file.</p>
+
+<p>[client_implemented]</p>
+
+</dd>
+</dl>
+
+<h2 id="ids_to_handles">ids_to_handles</h2>
+
+<pre><code>  $handles = $obj-&gt;ids_to_handles($ids)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types8">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$ids is a reference to a list where each element is a NodeId
+$handles is a reference to a list where each element is a Handle
+NodeId is a string
+Handle is a reference to a hash where the following keys are defined:
+	hid has a value which is a HandleId
+	file_name has a value which is a string
+	id has a value which is a NodeId
+	type has a value which is a string
+	url has a value which is a string
+	remote_md5 has a value which is a string
+	remote_sha1 has a value which is a string
+HandleId is a string</pre>
+
+</dd>
+<dt id="Description8">Description</dt>
+<dd>
+
+<p>Given a list of node ids, this function returns a list of handles.</p>
+
+</dd>
+</dl>
+
+<h2 id="hids_to_handles">hids_to_handles</h2>
+
+<pre><code>  $handles = $obj-&gt;hids_to_handles($hids)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types9">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$hids is a reference to a list where each element is a HandleId
+$handles is a reference to a list where each element is a Handle
+HandleId is a string
+Handle is a reference to a hash where the following keys are defined:
+	hid has a value which is a HandleId
+	file_name has a value which is a string
+	id has a value which is a NodeId
+	type has a value which is a string
+	url has a value which is a string
+	remote_md5 has a value which is a string
+	remote_sha1 has a value which is a string
+NodeId is a string</pre>
+
+</dd>
+<dt id="Description9">Description</dt>
+<dd>
+
+<p>Given a list of handle ids, this function returns a list of handles.</p>
+
+</dd>
+</dl>
+
+<h2 id="are_readable">are_readable</h2>
+
+<pre><code>  $return = $obj-&gt;are_readable($arg_1)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types10">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$arg_1 is a reference to a list where each element is a HandleId
+$return is an int
+HandleId is a string</pre>
+
+</dd>
+<dt id="Description10">Description</dt>
+<dd>
+
+<p>Given a list of handle ids, this function determines if the underlying data is readable by the caller. If any one of the handle ids reference unreadable data this function returns false.</p>
+
+</dd>
+</dl>
+
+<h2 id="is_readable">is_readable</h2>
+
+<pre><code>  $return = $obj-&gt;is_readable($id)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types11">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$id is a string
+$return is an int</pre>
+
+</dd>
+<dt id="Description11">Description</dt>
+<dd>
+
+<p>Given a handle id, this function queries the underlying data store to see if the data being referred to is readable to by the caller.</p>
+
+</dd>
+</dl>
+
+<h2 id="list_handles">list_handles</h2>
+
+<pre><code>  $l = $obj-&gt;list_handles()</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types12">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$l is a reference to a list where each element is a Handle
+Handle is a reference to a hash where the following keys are defined:
+	hid has a value which is a HandleId
+	file_name has a value which is a string
+	id has a value which is a NodeId
+	type has a value which is a string
+	url has a value which is a string
+	remote_md5 has a value which is a string
+	remote_sha1 has a value which is a string
+HandleId is a string
+NodeId is a string</pre>
+
+</dd>
+<dt id="Description12">Description</dt>
+<dd>
+
+<p>The list function returns the set of handles that were created by the user.</p>
+
+</dd>
+</dl>
+
+<h2 id="delete_handles">delete_handles</h2>
+
+<pre><code>  $obj-&gt;delete_handles($l)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types13">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$l is a reference to a list where each element is a Handle
+Handle is a reference to a hash where the following keys are defined:
+	hid has a value which is a HandleId
+	file_name has a value which is a string
+	id has a value which is a NodeId
+	type has a value which is a string
+	url has a value which is a string
+	remote_md5 has a value which is a string
+	remote_sha1 has a value which is a string
+HandleId is a string
+NodeId is a string</pre>
+
+</dd>
+<dt id="Description13">Description</dt>
+<dd>
+
+<p>The delete_handles function takes a list of handles and deletes them on the handle service server.</p>
+
+</dd>
+</dl>
+
+<h2 id="give">give</h2>
+
+<pre><code>  $obj-&gt;give($user, $perm, $h)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types14">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$user is a string
+$perm is a string
+$h is a Handle
+Handle is a reference to a hash where the following keys are defined:
+	hid has a value which is a HandleId
+	file_name has a value which is a string
+	id has a value which is a NodeId
+	type has a value which is a string
+	url has a value which is a string
+	remote_md5 has a value which is a string
+	remote_sha1 has a value which is a string
+HandleId is a string
+NodeId is a string</pre>
+
+</dd>
+<dt id="Description14">Description</dt>
+<dd>
+
+</dd>
+</dl>
+
+<h2 id="ids_to_handles1">ids_to_handles</h2>
+
+<pre><code>  $handles = $obj-&gt;ids_to_handles($ids)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types15">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$ids is a reference to a list where each element is a string
+$handles is a reference to a list where each element is a Handle
+Handle is a reference to a hash where the following keys are defined:
+	hid has a value which is a HandleId
+	file_name has a value which is a string
+	id has a value which is a NodeId
+	type has a value which is a string
+	url has a value which is a string
+	remote_md5 has a value which is a string
+	remote_sha1 has a value which is a string
+HandleId is a string
+NodeId is a string</pre>
+
+</dd>
+<dt id="Description15">Description</dt>
+<dd>
+
+<p>Given a list of ids, this function returns a list of handles. In case of Shock, the list of ids are shock node ids and this function the handles, which contains Shock url and related information.</p>
+
+</dd>
+</dl>
+
+<h1 id="TYPES">TYPES</h1>
+
+<h2 id="HandleId">HandleId</h2>
+
+<dl>
+
+<dt id="Description16">Description</dt>
+<dd>
+
+<p>Handle provides a unique reference that enables access to the data files through functions provided as part of the HandleService. In the case of using shock, the id is the node id. In the case of using shock the value of type is shock. In the future these values should enumerated. The value of url is the http address of the shock server, including the protocol (http or https) and if necessary the port. The values of remote_md5 and remote_sha1 are those computed on the file in the remote data store. These can be used to verify uploads and downloads.</p>
+
+</dd>
+<dt id="Definition">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="NodeId">NodeId</h2>
+
+<dl>
+
+<dt id="Definition1">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="Handle">Handle</h2>
+
+<dl>
+
+<dt id="Definition2">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+hid has a value which is a HandleId
+file_name has a value which is a string
+id has a value which is a NodeId
+type has a value which is a string
+url has a value which is a string
+remote_md5 has a value which is a string
+remote_sha1 has a value which is a string</pre>
+
+</dd>
+</dl>
+
+
+</body>
+
+</html>
+
+
